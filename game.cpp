@@ -1,11 +1,16 @@
 #include "game.h"
 #include "surface.h"
+#include "Button.h"
 
 #include <iostream> 
 #include <algorithm>
 
 namespace Tmpl8
 {
+	int Game::mousex = 0;
+	int Game::mousey = 0;
+	bool Game::mouseDown = 0;
+
 	void Game::Init() {}
 	
 	void Game::Shutdown() {}
@@ -26,4 +31,16 @@ namespace Tmpl8
 		// std::cout << "MouseX: " << mousex << " MouseY: " << mousey << std::endl;		// Mouse Position
 		/* ======================================================= */
 	}
+
+	void Game::MouseUp(int button) // Changes mouseDown to false if left mouse button is not being pressed.
+	{
+		if (button == 1) { Game::mouseDown = false; }
+	}
+
+	void Game::MouseDown(int button) // Changes mouseDown to true if left mouse button is being pressed.
+	{
+		if (button == 1) { Game::mouseDown = true; }
+	}
+
+	void Game::MouseMove(int x, int y) { mousex = x, mousey = y; } // Changes mousex and mousey to (current) absolute mouse position.
 };
