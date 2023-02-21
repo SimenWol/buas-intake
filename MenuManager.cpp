@@ -5,8 +5,9 @@ MenuManager::MenuManager(Tmpl8::Surface* screen_in)
 	:
 	screen(screen_in) {}
 
-void MenuManager::Draw() const
+void MenuManager::Draw() const // Function that draws the required menu to the screen.
 {
+
 	switch (state)
 	{
 	case Main:

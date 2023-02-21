@@ -1,6 +1,5 @@
 #include "game.h"
 #include "surface.h"
-#include "Button.h"
 
 #include <iostream> 
 #include <algorithm>
@@ -14,7 +13,6 @@ namespace Tmpl8
 	void Game::Init() {}
 	
 	void Game::Shutdown() {}
-
 
 	void Game::Tick(float deltaTime)
 	{
