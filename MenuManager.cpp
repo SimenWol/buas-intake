@@ -1,4 +1,9 @@
 #include "MenuManager.h"
+#include "surface.h"
+
+MenuManager::MenuManager(Tmpl8::Surface* screen_in)
+	:
+	screen(screen_in) {}
 
 void MenuManager::Draw() const
 {
