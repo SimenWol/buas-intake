@@ -34,6 +34,7 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
+	// MOUSE FUNCTIONS //
 	void Game::MouseUp(int button) // Changes mouseDown to false if left mouse button is not being pressed.
 	{
 		if (button == 1) { Game::mouseDown = false; }
@@ -45,4 +46,5 @@ namespace Tmpl8
 	}
 
 	void Game::MouseMove(int x, int y) { mousex = x, mousey = y; } // Changes mousex and mousey to (current) absolute mouse position.
+
 };
