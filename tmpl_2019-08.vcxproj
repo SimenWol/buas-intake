@@ -224,12 +224,15 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="LevelManager.cpp" />
+    <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Button.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="MenuManager.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
   </ItemGroup>
