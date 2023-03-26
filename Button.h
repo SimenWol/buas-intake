@@ -16,12 +16,12 @@ public:
 
 	bool isPressed() const
 	{
-		if (Tmpl8::Game::GetMouseDown() != true) { return false; }									// Check if left mouse button is used
-		if (Tmpl8::Game::GetMouseX() < x || Tmpl8::Game::GetMouseX() > (x + width)) { return false; }		// Check if mousex is in boundaries
+		if (Tmpl8::Game::GetMouseDown() != true) { return false; }										// Check if left mouse button is used
+		if (Tmpl8::Game::GetMouseX() < x || Tmpl8::Game::GetMouseX() > (x + width)) { return false; }	// Check if mousex is in boundaries
 		if (Tmpl8::Game::GetMouseY() < y || Tmpl8::Game::GetMouseY() > (y + height)) { return false; }	// Check if mousey is in boundaries
 		
 		/* ======================== DEBUG ======================== */
-		// std::cout << "Button has been pressed at " << x << "," << y <<  std::endl;
+		std::cout << "Button has been pressed at " << x << "," << y <<  std::endl;
 		/* ======================================================= */
 
 		return true; // Returns true if all of the above checks out

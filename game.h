@@ -14,9 +14,9 @@ public:
 	void MouseUp(int button);
 	void MouseDown(int button);
 	void MouseMove(int x, int y);
-	int GetMouseX() { return mousex; }
-	int GetMouseY() { return mousey; }
-	bool GetMouseDown() { return mouseDown; }
+	static int GetMouseX() { return mousex; }
+	static int GetMouseY() { return mousey; }
+	static bool GetMouseDown() { return mouseDown; }
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 private:
