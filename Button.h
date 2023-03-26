@@ -21,7 +21,7 @@ public:
 		if (Tmpl8::Game::mousey < y || Tmpl8::Game::mousey > (y + height)) { return false; }	// Check if mousey is in boundaries
 		
 		/* ======================== DEBUG ======================== */
-		// std::cout << "Button has been pressed" << std::endl;
+		// std::cout << "Button has been pressed at " << x << "," << y <<  std::endl;
 		/* ======================================================= */
 
 		return true; // Returns true if all of the above checks out

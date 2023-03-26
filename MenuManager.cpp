@@ -1,17 +1,17 @@
 #include "MenuManager.h"
 #include "surface.h"
 
-MenuManager::MenuManager(Tmpl8::Surface* screen_in)
-	:
-	screen(screen_in) {}
+// Sprites used (only) in this file
+Tmpl8::Sprite mainMenu(new Tmpl8::Surface("assets/Temp/GAME TITLE SCREEN.png"), 1);
 
-void MenuManager::Draw() const // Function that draws the required menu to the screen.
+
+void MenuManager::Draw(Tmpl8::Surface* screen_in) const // Function that draws the required menu to the screen.
 {
 
 	switch (state)
 	{
 	case Main:
-		// Draw & call actions that are needed
+		mainMenu.Draw(screen_in, 0, 0);
 		break;
 	case LevelSelect:
 		// Draw & call actions that are needed

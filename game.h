@@ -1,4 +1,5 @@
 #pragma once
+#include "MenuManager.h"
 
 namespace Tmpl8 {
 
@@ -21,6 +22,7 @@ public:
 	static bool mouseDown;
 private:
 	Surface* screen;
+	MenuManager menu;
 };
 
 }; // namespace Tmpl8

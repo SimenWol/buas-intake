@@ -13,10 +13,8 @@ public:
 		LevelComplete	// Menu that pops up after player completes a level
 	};
 public:
-	MenuManager(Tmpl8::Surface* screen_in);
-	void Draw() const;
+	void Draw(Tmpl8::Surface* screen_in) const;
 	// LoadMenu?
 private:
 	MenuState state = { MenuState::Main }; // <-- Is this needed?
-	Tmpl8::Surface* screen;
 };

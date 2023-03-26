@@ -1,5 +1,6 @@
 #include "game.h"
 #include "surface.h"
+#include "MenuManager.h"
 
 #include <iostream> 
 #include <algorithm>
@@ -22,6 +23,9 @@ namespace Tmpl8
 
 		// clear the graphics window
 		screen->Clear(0);
+
+		// mainMenu.Draw(screen, 0 ,0);
+		menu.Draw(screen);
 
 
 		/* ======================== DEBUG ======================== */
