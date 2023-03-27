@@ -233,6 +233,7 @@
     <ClInclude Include="Button.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="LevelManager.h" />
+    <ClInclude Include="Location.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="surface.h" />

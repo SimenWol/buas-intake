@@ -8,7 +8,7 @@ namespace Tmpl8
 
 	void Player::Draw(Surface* screen_in)
 	{
-		player.Draw(screen_in, x, y);
+		player.Draw(screen_in, static_cast<int>(loc.x), static_cast<int>(loc.y));
 	}
 
 	void Player::SetLoc()
@@ -16,9 +16,16 @@ namespace Tmpl8
 		// Set starting Location
 	}
 
-	void Player::Move()
+	void Player::Move(const float dt_in, const float screenHeight) // TODO: make sure that the ball ALWAYS bounces the same height.
 	{
-		// Move function
+		loc.y += speedY * dt_in;
+		speedY += (gravity * 1000.0f) * dt_in; // CHANGE Y SPEED
+
+		if (loc.y > (screenHeight - static_cast<float>(player.GetHeight())))
+		{
+			loc.y = (screenHeight - static_cast<float>(player.GetHeight()));
+			speedY = -(200.0f * bounceHeight);
+		}
 	}
 
 	void Player::Death()

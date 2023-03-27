@@ -22,8 +22,10 @@ namespace Tmpl8
 	void Game::Tick(float deltaTime)
 	{
 		// Multiply deltaTime by 0.001 to get deltaTime in seconds, much easier to work with
-		// By using std::min, you prevent long pauses messing up the physics
+		// By using std::min, you prevent long frame pauses messing up the physics
 		deltaTime = std::min(deltaTime * 0.001f, 0.05f);
+
+		const float screenHeight = static_cast<float>(screen->GetHeight());
 
 		// clear the graphics window
 		screen->Clear(0);
@@ -31,12 +33,23 @@ namespace Tmpl8
 		switch (state)
 		{
 		case MENU:
+			// Draw Functions //
 			menu->Draw(screen, *this);
+			
 			break;
 		case PLAYING:
+			// Game Logic //
+			player.Move(deltaTime, screenHeight);
+
+			// Draw Functions //
 			player.Draw(screen);
+
 			break;
 		case GAMEOVER:
+			// Draw Functions //
+			player.Draw(screen);
+			menu->Draw(screen, *this);
+			
 			break;
 		}
 
