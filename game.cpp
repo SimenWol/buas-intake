@@ -12,7 +12,10 @@ namespace Tmpl8
 	int Game::mousey = 0;
 	bool Game::mouseDown = 0;
 
-	void Game::Init() {}
+	void Game::Init()
+	{
+		menu = new MenuManager;
+	}
 	
 	void Game::Shutdown() {}
 
@@ -25,9 +28,17 @@ namespace Tmpl8
 		// clear the graphics window
 		screen->Clear(0);
 
-		menu.Draw(screen);
-		player.Draw(screen);
-
+		switch (state)
+		{
+		case MENU:
+			menu->Draw(screen, *this);
+			break;
+		case PLAYING:
+			player.Draw(screen);
+			break;
+		case GAMEOVER:
+			break;
+		}
 
 		/* ======================== DEBUG ======================== */
 		// std::cout << "Frametimer: " << deltaTime << std::endl;						// Frametimer
