@@ -24,6 +24,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Location.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

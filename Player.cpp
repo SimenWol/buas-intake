@@ -11,14 +11,19 @@ namespace Tmpl8
 		player.Draw(screen_in, x, y);
 	}
 
-	void Player::SetPos()
+	void Player::SetLoc()
 	{
-		// Starting Position Function
+		// Set starting Location
 	}
 
 	void Player::Move()
 	{
 		// Move function
+	}
+
+	void Player::Death()
+	{
+
 	}
 
 };
