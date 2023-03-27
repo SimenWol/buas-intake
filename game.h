@@ -1,5 +1,6 @@
 #pragma once
 #include "MenuManager.h"
+#include "Player.h"
 
 namespace Tmpl8 {
 
@@ -22,6 +23,7 @@ public:
 private:
 	Surface* screen;
 	MenuManager menu;
+	Player player;
 
 	static int mousex;
 	static int mousey;

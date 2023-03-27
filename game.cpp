@@ -1,6 +1,7 @@
 #include "game.h"
 #include "surface.h"
 #include "MenuManager.h"
+#include "Player.h"
 
 #include <iostream> 
 #include <algorithm>
@@ -25,6 +26,7 @@ namespace Tmpl8
 		screen->Clear(0);
 
 		menu.Draw(screen);
+		player.Draw(screen);
 
 
 		/* ======================== DEBUG ======================== */
