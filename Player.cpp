@@ -13,38 +13,40 @@ namespace Tmpl8
 		player.Draw(screen_in, static_cast<int>(loc.x), static_cast<int>(loc.y));
 	}
 
-	void Player::SetLoc()
+	void Player::SetLoc(const Location& loc_in)
 	{
-		// Set starting Location
+		loc.x = loc_in.x;
+		loc.y = loc_in.y;
 	}
 
 	void Player::Move(const float& deltaTime, const Location& delta_loc)
 	{
 		float screenHeight = 512.0f; // Temp
 
-		loc.x += speedX * deltaTime;
+		loc.x += speed.x * deltaTime;
 		float moveX = 1000.0f * deltaTime;
+
 		if (delta_loc.x == 0)
 		{
-			if ((speedX > -10.0f && speedX < 0) || (speedX < 10.0f && speedX > 0)) { speedX = 0; }
-			else if (speedX > 0) { speedX -= (moveX); }
-			else if (speedX < 0) { speedX += (moveX); }
+			if ((speed.x > -10.0f && speed.x < 0) || (speed.x < 10.0f && speed.x > 0)) { speed.x = 0; }
+			else if (speed.x > 0) { speed.x -= (moveX); }
+			else if (speed.x < 0) { speed.x += (moveX); }
 		}
-		else if (delta_loc.x == -1) { speedX -= moveX; }
-		else if (delta_loc.x == 1) { speedX += moveX; }
+		else if (delta_loc.x == -1) { speed.x -= moveX; }
+		else if (delta_loc.x == 1) { speed.x += moveX; }
 
-		if (speedX <= -5000.0f) { speedX = -5000.0f; }
-		else if (speedX >= 5000.0f) { speedX = 5000.0f; }
+		if (speed.x <= -5000.0f) { speed.x = -5000.0f; }
+		else if (speed.x >= 5000.0f) { speed.x = 5000.0f; }
 
-		std::cout << "speedX: " << speedX << "moveX: " << moveX << std::endl;
+		std::cout << "speed.x: " << speed.x << "moveX: " << moveX << std::endl;
 
-		loc.y += speedY * deltaTime;
-		speedY += (gravity * 1000.0f) * deltaTime; // CHANGE Y SPEED
+		loc.y += speed.y * deltaTime;
+		speed.y += (gravity * 1000.0f) * deltaTime; // CHANGE Y SPEED
 
 		if (loc.y > (screenHeight - static_cast<float>(player.GetHeight())))
 		{
 			loc.y = (screenHeight - static_cast<float>(player.GetHeight()));
-			speedY = -(200.0f * bounceHeight);
+			speed.y = -(200.0f * bounceHeight);
 		}
 	}
 
