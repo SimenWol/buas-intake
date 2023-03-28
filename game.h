@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "Location.h"
 
 namespace Tmpl8 {
 
@@ -36,18 +37,23 @@ public:
 	void MouseDown(int button);
 	void MouseMove(int x, int y);
 
-	void KeyUp( int key ) { /* implement if you want to handle keys */ }
-	void KeyDown( int key ) { /* implement if you want to handle keys */ }
+	void KeyUp(int key);
+	void KeyDown(int key);
 private:
 	Surface* screen;
 	MenuManager* menu;
 	Player player;
 
 	GameState state = GameState::MENU;
+	
+	Location delta_loc;
 
 	static int mousex;
 	static int mousey;
 	static bool mouseDown;
+
+	static bool movingLeft;
+	static bool movingRight;
 };
 
 }; // namespace Tmpl8

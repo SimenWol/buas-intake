@@ -2,15 +2,21 @@
 #include "surface.h"
 #include "MenuManager.h"
 #include "Player.h"
+#include "Location.h"
 
 #include <iostream> 
 #include <algorithm>
+#include <SDL_scancode.h>
 
 namespace Tmpl8
 {
+	// Initialise static variables //
 	int Game::mousex = 0;
 	int Game::mousey = 0;
-	bool Game::mouseDown = 0;
+	bool Game::mouseDown = false;
+
+	bool Game::movingLeft = false;
+	bool Game::movingRight = false;
 
 	void Game::Init()
 	{
@@ -35,11 +41,14 @@ namespace Tmpl8
 		case MENU:
 			// Draw Functions //
 			menu->Draw(screen, *this);
-			
 			break;
 		case PLAYING:
 			// Game Logic //
-			player.Move(deltaTime, screenHeight);
+			// Define moving direction from keyboard inputs
+			if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0, 0 }; }
+			else if (movingLeft) { delta_loc = { -1, 0 }; }
+			else if (movingRight) { delta_loc = { 1,0 }; }
+			player.Move(deltaTime, delta_loc);
 
 			// Draw Functions //
 			player.Draw(screen);
@@ -56,6 +65,7 @@ namespace Tmpl8
 		/* ======================== DEBUG ======================== */
 		// std::cout << "Frametimer: " << deltaTime << std::endl;						// Frametimer
 		// std::cout << "MouseX: " << mousex << " MouseY: " << mousey << std::endl;		// Mouse Position
+		// std::cout << "DeltaLoc: " << delta_loc.x << "," << delta_loc.y << std::endl; // Delta Location
 		/* ======================================================= */
 	}
 
@@ -71,5 +81,49 @@ namespace Tmpl8
 	}
 
 	void Game::MouseMove(int x, int y) { mousex = x, mousey = y; } // Changes mousex and mousey to (current) absolute mouse position.
+
+	// KEYBOARD FUNCTIONS //
+	// https://wiki.libsdl.org/SDL2/SDL_Scancode
+	void Game::KeyUp(int key)
+	{
+		switch (key)
+		{
+		case(SDL_SCANCODE_LEFT):
+			movingLeft = false;
+			break;
+		case(SDL_SCANCODE_A):
+			movingLeft = false;
+			break;
+		case(SDL_SCANCODE_RIGHT):
+			movingRight = false;
+			break;
+		case(SDL_SCANCODE_D):
+			movingRight = false;
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Game::KeyDown(int key)
+	{
+		switch (key)
+		{
+		case(SDL_SCANCODE_LEFT):
+			movingLeft = true;
+			break;
+		case(SDL_SCANCODE_A):
+			movingLeft = true;
+			break;
+		case(SDL_SCANCODE_RIGHT):
+			movingRight = true;
+			break;
+		case(SDL_SCANCODE_D):
+			movingRight = true;
+			break;
+		default:
+			break;
+		}
+	}
 
 };
