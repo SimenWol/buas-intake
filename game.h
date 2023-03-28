@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "Location.h"
+#include "LevelManager.h"
 
 namespace Tmpl8 {
 
@@ -42,6 +43,7 @@ public:
 private:
 	Surface* screen;
 	MenuManager* menu;
+	LevelManager level;
 	Player player;
 
 	GameState state = GameState::MENU;

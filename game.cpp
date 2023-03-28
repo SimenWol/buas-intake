@@ -3,6 +3,7 @@
 #include "MenuManager.h"
 #include "Player.h"
 #include "Location.h"
+#include "LevelManager.h"
 
 #include <iostream> 
 #include <algorithm>
@@ -51,6 +52,7 @@ namespace Tmpl8
 			player.Move(deltaTime, delta_loc);
 
 			// Draw Functions //
+			level.DrawLevel(screen, 1);
 			player.Draw(screen);
 
 			break;
