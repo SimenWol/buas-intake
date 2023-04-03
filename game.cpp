@@ -11,16 +11,17 @@
 
 namespace Tmpl8
 {
+	// Initialise Static Member Variables //
+	int Game::mousex = 0;
+	int Game::mousey = 0;
+	bool Game::mouseDown = false;
+
+	bool Game::movingLeft = false;
+	bool Game::movingRight = false;
+
+
 	void Game::Init()
 	{
-		// Initialise static variables //
-		int mousex = 0;
-		int mousey = 0;
-		bool mouseDown = false;
-
-		bool movingLeft = false;
-		bool movingRight = false;
-
 		// Menu //
 		menu = new MenuManager;
 	}
