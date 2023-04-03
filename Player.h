@@ -8,6 +8,7 @@ namespace Tmpl8
 	class Player
 	{
 	public:
+		Player();
 		void Draw(Surface* screen_in);								// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
 		void Move(const float& dt_in, const Location& delta_loc);	// Move Player
@@ -22,6 +23,9 @@ namespace Tmpl8
 		static constexpr float bounceHeight = 1.0f;		// Level of bounce height
 		static constexpr float playerSpeed = 1.0f;		// Level of player speed
 		static constexpr float maxPlayerSpeed = 500.0f;	// Maximum allowed player speed (X direction only)
+
+		// Sprites //
+		Sprite player;
 	};
 
 };

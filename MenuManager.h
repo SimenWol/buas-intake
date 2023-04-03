@@ -2,6 +2,7 @@
 
 #include "surface.h"
 #include "game.h"
+#include "Button.h"
 
 namespace Tmpl8
 {
@@ -16,11 +17,21 @@ namespace Tmpl8
 			LevelComplete	// Menu that pops up after player completes a level
 		};
 	public:
+		MenuManager();
 		void Draw(Surface* screen_in, Game& game_in);
 		void SetMenuState(MenuState state_in);
 		// LoadMenu?
 	private:
 		MenuState menuState = MenuState::Main;
+
+
+		// Sprites //
+		Sprite mainMenu;
+		Sprite levelSelection;
+
+		// Buttons //
+		Button startButton;
+		Button levelOneButton;
 	};
 
 };

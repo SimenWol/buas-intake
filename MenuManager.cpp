@@ -5,13 +5,12 @@
 
 namespace Tmpl8
 {
-	// Sprites used (only) in this file
-	Sprite mainMenu(new Surface("assets/Temp/GAME TITLE SCREEN.png"), 1);
-	Sprite levelSelection(new Surface("assets/Temp/LEVEL SELECTION SCREEN.png"), 1);
-
-	// Buttons used (only) in this file
-	Button startButton(128, 373, 127, 71);
-	Button levelOneButton(176, 227, 55, 57);
+	MenuManager::MenuManager()
+		:mainMenu(new Surface("assets/Temp/GAME TITLE SCREEN.png"), 1)
+		,levelSelection(new Surface("assets/Temp/LEVEL SELECTION SCREEN.png"), 1)
+		,startButton(128, 373, 127, 71)
+		,levelOneButton(176, 227, 55, 57)
+	{}
 
 	void MenuManager::Draw(Surface* screen_in, Game& game_in) // Function that draws the required menu to the screen.
 	{
