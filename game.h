@@ -24,9 +24,9 @@ public:
 	void SetState(GameState state_in) { state = state_in; }
 
 	// Getters //
-	static int GetMouseX() { return mousex; }
-	static int GetMouseY() { return mousey; }
-	static bool GetMouseDown() { return mouseDown; }
+	int GetMouseX() { return mousex; }
+	int GetMouseY() { return mousey; }
+	bool GetMouseDown() { return mouseDown; }
 
 	// Main Game Functions //
 	void Init();
@@ -51,12 +51,12 @@ private:
 	Location delta_loc;
 
 	// TODO: REMOVE STATICS AND UPDATE BUTTON CLASS!! --> Proper Button Calls
-	static int mousex;
-	static int mousey;
-	static bool mouseDown;
+	int mousex = 0;
+	int mousey = 0;
+	bool mouseDown = false;
 
-	static bool movingLeft;
-	static bool movingRight;
+	bool movingLeft = false;
+	bool movingRight = false;
 };
 
 }; // namespace Tmpl8

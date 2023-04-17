@@ -16,11 +16,11 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 			width(width_in),
 			height(height_in) {};
 
-		bool isPressed() const
+		bool isPressed(Game& game) const
 		{
-			if (Game::GetMouseDown() != true) { return false; }									// Check if left mouse button is used
-			if (Game::GetMouseX() < x || Game::GetMouseX() > (x + width)) { return false; }		// Check if mousex is in boundaries
-			if (Game::GetMouseY() < y || Game::GetMouseY() > (y + height)) { return false; }	// Check if mousey is in boundaries
+			if (game.GetMouseDown() != true) { return false; }								// Check if left mouse button is used
+			if (game.GetMouseX() < x || game.GetMouseX() > (x + width)) { return false; }	// Check if mousex is in boundaries
+			if (game.GetMouseY() < y || game.GetMouseY() > (y + height)) { return false; }	// Check if mousey is in boundaries
 
 			/* ======================== DEBUG ======================== */
 			std::cout << "Button has been pressed at " << x << "," << y << std::endl;

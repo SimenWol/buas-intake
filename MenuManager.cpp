@@ -22,7 +22,7 @@ namespace Tmpl8
 			mainMenu.Draw(screen_in, 0, 0);
 
 			// Button Logic
-			if (startButton.isPressed()) { SetMenuState(LevelSelect); }
+			if (startButton.isPressed(game_in)) { SetMenuState(LevelSelect); }
 
 			/* ======================== DEBUG ======================== */
 			// startButton.Draw(screen_in);
@@ -33,7 +33,7 @@ namespace Tmpl8
 			levelSelection.Draw(screen_in, 0, 0);
 
 			// Button Logic
-			if (levelOneButton.isPressed()) { game_in.SetState(game_in.PLAYING); }
+			if (levelOneButton.isPressed(game_in)) { game_in.SetState(game_in.PLAYING); }
 
 			/* ======================== DEBUG ======================== */
 			// levelOneButton.Draw(screen_in);

@@ -11,15 +11,6 @@
 
 namespace Tmpl8
 {
-	// Initialise Static Member Variables //
-	int Game::mousex = 0;
-	int Game::mousey = 0;
-	bool Game::mouseDown = false;
-
-	bool Game::movingLeft = false;
-	bool Game::movingRight = false;
-
-
 	void Game::Init()
 	{
 		// Menu //
@@ -37,7 +28,7 @@ namespace Tmpl8
 		const float screenHeight = static_cast<float>(screen->GetHeight());
 
 		// clear the graphics window
-		screen->Clear(200);
+		screen->Clear(200); // BLUE BG COLOUR FOR NOW!
 
 		switch (state)
 		{
@@ -48,9 +39,9 @@ namespace Tmpl8
 		case PLAYING:
 			// Game Logic //
 			// Define moving direction from keyboard inputs
-			if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0, 0 }; }
-			else if (movingLeft) { delta_loc = { -1, 0 }; }
-			else if (movingRight) { delta_loc = { 1,0 }; }
+			if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0.0f, 0.0f }; }
+			else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
+			else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
 			player.Move(deltaTime, delta_loc);
 
 			// Draw Functions //
