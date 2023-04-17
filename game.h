@@ -50,6 +50,7 @@ private:
 	
 	Location delta_loc;
 
+	// TODO: REMOVE STATICS AND UPDATE BUTTON CLASS!! --> Proper Button Calls
 	static int mousex;
 	static int mousey;
 	static bool mouseDown;

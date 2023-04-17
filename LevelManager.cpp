@@ -5,6 +5,9 @@ namespace Tmpl8
 {
 	Surface tiles("assets/Temp/tileset_forest.png");
 
+	// TODO: https://github.com/nlohmann/json JSON LEVEL LOADING --> level definitions --> Data Driven!!
+	// ASEPRITE? -> SPRITE DRAWIN
+
 	char map[5][21] = {
 		"cbcbcbcbcbcbcbcbcbcb",
 		"cbcbcbcbcbcbcbcbcbcb",

@@ -4,7 +4,7 @@
 #include "surface.h"
 #include <iostream>
 
-namespace Tmpl8
+namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FOR EACH CHECK --> UPDATE SPRITES
 {
 	class Button
 	{
