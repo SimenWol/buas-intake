@@ -20,7 +20,6 @@ namespace Tmpl8
 		MenuManager();
 		void Draw(Surface* screen_in, Game& game_in);
 		void SetMenuState(MenuState state_in);
-		// LoadMenu?
 	private:
 		MenuState menuState = MenuState::Main;
 
