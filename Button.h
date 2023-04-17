@@ -16,14 +16,14 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 			width(width_in),
 			height(height_in) {};
 
-		bool isPressed(Game& game)
+		bool IsPressed(Game& game)
 		{
-			if (checkMousePos(game) == false)
+			if (CheckMousePos(game) == false)
 			{
 				prevMouseDown = false;
 				return false;
 			}
-			if (isPressed(game.GetMouseDown()) == false) { return false; }
+			if (CheckMouseDown(game) == false) { return false; }
 
 			/* ======================== DEBUG ======================== */
 			std::cout << "Button has been pressed at " << x << "," << y << std::endl;
@@ -38,7 +38,7 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 		}
 
 	private:
-		bool checkMousePos(Game& game) const // Checks if mouse is in boundaries
+		bool CheckMousePos(Game& game) const // Checks if mouse is in boundaries
 		{
 			if (game.GetMouseX() < x || game.GetMouseX() > (x + width)) { return false; }
 			if (game.GetMouseY() < y || game.GetMouseY() > (y + height)) { return false; }
@@ -46,14 +46,14 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 			return true;
 		}
 
-		bool isPressed(bool mouseDown)
+		bool CheckMouseDown(Game& game)
 		{
-			if (mouseDown == true)
+			if (game.GetMouseDown() == true)
 			{
 				prevMouseDown = true;
 				return false;
 			}
-			else if (mouseDown == false)
+			else if (game.GetMouseDown() == false)
 			{
 				if (prevMouseDown == true)
 				{
