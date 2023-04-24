@@ -5,8 +5,9 @@
 
 namespace Tmpl8
 {
-	// Sprites used (only) in this file
-	Sprite player(new Surface("assets/Temp/Ball.png"), 1);
+	Player::Player()
+		:player(new Surface("assets/Temp/Ball.png"), 1)
+	{}
 
 	void Player::Draw(Surface* screen_in)
 	{

@@ -1,5 +1,8 @@
 #pragma once
 
+#include "surface.h"
+#include "Location.h"
+
 namespace Tmpl8
 {
 	class LevelManager
@@ -11,11 +14,12 @@ namespace Tmpl8
 			Open,		// Able to play level, never completed it
 			Completed	// Completed the level at least once, still able to play level
 		};
-	private:
 	public:
-		// void LoadLevel(const int level) const;		// TODO: Check LDTK implementation
-		// void DrawLevel(const int level) const;
+		// void LoadLevel(const int level) const;
+		void DrawLevel(Surface* screen, const int level);
 		LevelState GetLevelState(const int level) const;
+	private:
+		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
 	private:
 		// int currentLevel = 0;
 
