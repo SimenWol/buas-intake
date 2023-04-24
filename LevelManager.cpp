@@ -8,7 +8,10 @@ namespace Tmpl8
 	// TODO: https://github.com/nlohmann/json JSON LEVEL LOADING --> level definitions --> Data Driven!!
 	// ASEPRITE? -> SPRITE DRAWIN
 
-	char map[5][21] = {
+	char map[8][21] = {
+		"cbcbcbcbcbcbcbcbcbcb",
+		"cbcbcbcbcbcbcbcbcbcb",
+		"cbcbcbcbcbcbcbcbcbcb",
 		"cbcbcbcbcbcbcbcbcbcb",
 		"cbcbcbcbcbcbcbcbcbcb",
 		"cbcbcbcbcbcbcbcbcbcb",
@@ -18,7 +21,7 @@ namespace Tmpl8
 
 	void LevelManager::DrawLevel(Surface* screen, const int level)
 	{
-		for (int y = 0; y < 5; y++)
+		for (int y = 0; y < 8; y++)
 		{
 			for (int x = 0; x < 10; x++)
 			{
@@ -39,7 +42,10 @@ namespace Tmpl8
 
 		for (int i = 0; i < 64; i++, src += 768, dst += 800)
 		{
-			for (int j = 0; j < 64; j++) { dst[j] = src[j]; }
+			for (int j = 0; j < 64; j++)
+			{
+				dst[j] = src[j];
+			}
 		}
 	}
 

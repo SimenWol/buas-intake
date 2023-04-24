@@ -13,6 +13,8 @@ namespace Tmpl8
 		{
 			Main,			// Main Menu
 			LevelSelect,	// Level Selection Menu
+			Playing,		// Playing UI (pause button, etc.)
+			Paused,			// Pause menu
 			LevelFailed,	// Menu that pops up after player fails a level
 			LevelComplete	// Menu that pops up after player completes a level
 		};
