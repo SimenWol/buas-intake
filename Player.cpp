@@ -56,13 +56,6 @@ namespace Tmpl8
 		// Calculate new Y speed //
 		speed.y += (gravity * 1000.0f) * deltaTime;
 
-		//// Make sure the player bounces on the bottom of the screen
-		//if (loc.y > (screenHeight - static_cast<float>(player.GetHeight())))
-		//{
-		//	loc.y = (screenHeight - static_cast<float>(player.GetHeight()));
-		//	speed.y = -(200.0f * bounceHeight);
-		//}
-
 		CheckCollision(levelmanager);
 
 		/* ======================== DEBUG ======================== */
@@ -77,25 +70,58 @@ namespace Tmpl8
 
 	}
 
+	// Thanks to Jeremiah for giving the idea how to solve circle to square collision.
 	void Player::CheckCollision(const LevelManager& levelmanager)
 	{
+		//float leftX = loc.x - radius;
+		//float rightX = loc.x + radius + 1;
+		//float upperY = loc.y - radius;
+		//float lowerY = loc.y + radius + 1;
+
+		//levelmanager.GetContents({ leftX, upperY, }); // DOWN,RIGHT CHECK!
+		//levelmanager.GetContents({ leftX, lowerY, }); // UP,RIGHT CHECK!
+		//levelmanager.GetContents({ rightX, upperY, }); // DOWN,LEFT CHECK!
+		//levelmanager.GetContents({ rightX, lowerY, }); // UP,LEFT CHECK!
+
+		// Ball 'Extremes'
+		int leftX = static_cast<int>(loc.x - radius) / levelmanager.tileSize;
+		int rightX = (static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize;
+		int upperY = static_cast<int>(loc.y - radius) / levelmanager.tileSize;
+		int lowerY = (static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize;
+
+		// TopLeft
+		if (loc.x <= (leftX * levelmanager.tileSize + radius) && loc.y <= (upperY * levelmanager.tileSize + radius))
+		{
+			levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) });
+		}
+
+		// BottomLeft
+		if (loc.x <= (leftX * levelmanager.tileSize + radius) && loc.y >= (lowerY * levelmanager.tileSize + radius))
+		{
+			levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) });
+		}
+
+		// TopRight
+		if (loc.x >= (rightX * levelmanager.tileSize + radius) && loc.y >= (upperY * levelmanager.tileSize + radius))
+		{
+			levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) });
+		}
+
+		// BottomRight
+		if (loc.x >= (rightX * levelmanager.tileSize + radius) && loc.y <= (lowerY * levelmanager.tileSize + radius))
+		{
+			levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) });
+		}
+
+		// std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
+
 		float screenHeight = 512.0f; // Temp
-
-		//int leftX = static_cast<int>(loc.x);
-		//int rightX = leftX + radius * 2 + 1;
-		//int upperY = static_cast<int>(loc.y);
-		//int lowerY = upperY + radius * 2 + 1;
-		//
-		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
-
 		// Make sure the player bounces on the bottom of the screen
 		if (loc.y > (screenHeight - radius))
 		{
 			loc.y = (screenHeight - radius);
 			speed.y = -(200.0f * bounceHeight);
 		}
-
-		// levelmanager.GetContents(loc);
 	}
 
 };

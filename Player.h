@@ -19,7 +19,7 @@ namespace Tmpl8
 		// DeflectX
 		// DeflectY
 	private:
-		Location loc = { 20.0f, 400.0f };			// Current location of the player
+		Location loc = { 22.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player
 
 		float radius;
