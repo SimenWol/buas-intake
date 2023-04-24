@@ -19,6 +19,18 @@ namespace Tmpl8
 		"cbcbcbcbcbcbcbcbcbcb",
 	};
 
+	char map[8][11] = {
+	"oooooooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"oo-ooooooo",
+	};
+
+
 	void LevelManager::DrawLevel(Surface* screen, const int level)
 	{
 		for (int y = 0; y < 8; y++)

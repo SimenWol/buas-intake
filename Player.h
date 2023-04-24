@@ -27,5 +27,4 @@ namespace Tmpl8
 		// Sprites //
 		Sprite player;
 	};
-
 };

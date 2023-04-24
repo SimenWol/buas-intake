@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "surface.h"
+#include "template.h"
 
 #include <iostream>
 
@@ -12,6 +13,16 @@ namespace Tmpl8
 	void Player::Draw(Surface* screen_in)
 	{
 		player.Draw(screen_in, static_cast<int>(loc.x), static_cast<int>(loc.y));
+
+		/* ======================== DEBUG ======================== */
+		int radius = player.GetWidth() / 2;
+		for (int i = 0; i < 64; i++)
+		{
+			float r1 = (float)i * PI / 32, r2 = (float)(i + 1) * PI / 32;
+			screen_in->Line((loc.x + radius) - radius * sinf(r1), (loc.y + radius) - radius * cosf(r1),
+				(loc.x + radius) - radius * sinf(r2), (loc.y + radius) - radius * cosf(r2), 0xff0000);
+		}
+		/* ======================================================= */
 	}
 
 	void Player::SetLoc(const Location& loc_in)

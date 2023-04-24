@@ -14,6 +14,11 @@ namespace Tmpl8
 			Open,		// Able to play level, never completed it
 			Completed	// Completed the level at least once, still able to play level
 		};
+		enum class TileContents
+		{
+			Empty,
+			Obstacle
+		};
 	public:
 		// void LoadLevel(const int level) const;
 		void DrawLevel(Surface* screen, const int level);
