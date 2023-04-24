@@ -26,6 +26,8 @@ namespace Tmpl8
 		TileContents GetContents(const Location& loc) const;
 	private:
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
+	public:
+		static constexpr int tileSize = 64; // Width & Height for each tile
 	private:
 		// int currentLevel = 0;
 

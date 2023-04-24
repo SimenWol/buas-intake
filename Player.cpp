@@ -64,7 +64,7 @@ namespace Tmpl8
 			speed.y = -(200.0f * bounceHeight);
 		}
 
-		levelmanager.GetContents(loc);
+		CheckCollision(levelmanager);
 
 		/* ======================== DEBUG ======================== */
 		//std::cout << "Player Location: " << loc.x << ", " << loc.y << std::endl;	// Player Location
@@ -78,4 +78,18 @@ namespace Tmpl8
 
 	}
 
+	void Player::CheckCollision(const LevelManager& levelmanager)
+	{
+
+
+		levelmanager.GetContents(loc);
+	}
+
 };
+
+//for (int i = 0; i < 64; i++)
+//{
+//	float r1 = (float)i * PI / 32, r2 = (float)(i + 1) * PI / 32;
+//	screen_in->Line((loc.x + radius) - radius * sinf(r1), (loc.y + radius) - radius * cosf(r1),
+//		(loc.x + radius) - radius * sinf(r2), (loc.y + radius) - radius * cosf(r2), 0xff0000);
+//}

@@ -15,6 +15,7 @@ namespace Tmpl8
 		void Move(const float& dt_in, const Location& delta_loc, const LevelManager& levelmanager);	// Move Player
 	private:
 		void Death();	// Runs everything necessary on death
+		void CheckCollision(const LevelManager& levelmanager);
 		// CheckCollision, etc.
 	private:
 		Location loc = { 20.0f, 400.0f };			// Current location of the player
