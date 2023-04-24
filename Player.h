@@ -16,8 +16,8 @@ namespace Tmpl8
 	private:
 		void Death();	// Runs everything necessary on death
 		void CheckCollision(const LevelManager& levelmanager);
-		// DeflectX
-		// DeflectY
+		void DeflectX();
+		void DeflectY();
 	private:
 		Location loc = { 22.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player
