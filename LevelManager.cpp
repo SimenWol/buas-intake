@@ -19,7 +19,7 @@ namespace Tmpl8
 		"cbcbcbcbcbcbcbcbcbcb",
 	};
 
-	char map[8][11] = {
+	char collisionMap[8][11] = {
 	"oooooooooo",
 	"oooooooooo",
 	"oooooooooo",
