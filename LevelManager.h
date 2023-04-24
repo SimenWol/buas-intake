@@ -23,6 +23,7 @@ namespace Tmpl8
 		// void LoadLevel(const int level) const;
 		void DrawLevel(Surface* screen, const int level);
 		LevelState GetLevelState(const int level) const;
+		TileContents GetContents(const Location& loc) const;
 	private:
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
 	private:

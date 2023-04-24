@@ -31,7 +31,7 @@ namespace Tmpl8
 		loc.y = loc_in.y;
 	}
 
-	void Player::Move(const float& deltaTime, const Location& delta_loc)
+	void Player::Move(const float& deltaTime, const Location& delta_loc, const LevelManager& levelmanager)
 	{
 		float screenHeight = 512.0f; // Temp
 
@@ -63,6 +63,8 @@ namespace Tmpl8
 			loc.y = (screenHeight - static_cast<float>(player.GetHeight()));
 			speed.y = -(200.0f * bounceHeight);
 		}
+
+		levelmanager.GetContents(loc);
 
 		/* ======================== DEBUG ======================== */
 		//std::cout << "Player Location: " << loc.x << ", " << loc.y << std::endl;	// Player Location

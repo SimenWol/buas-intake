@@ -1,6 +1,8 @@
 #include "LevelManager.h"
 #include "surface.h"
 
+#include <iostream>
+
 namespace Tmpl8
 {
 	Surface tiles("assets/Temp/tileset_forest.png");
@@ -27,7 +29,7 @@ namespace Tmpl8
 	"oooooooooo",
 	"oooooooooo",
 	"oooooooooo",
-	"oo-ooooooo",
+	"ooo-oooooo",
 	};
 
 
@@ -46,6 +48,28 @@ namespace Tmpl8
 
 	// Sends the state of the specified level
 	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level]; }
+
+	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
+	{
+		char content = collisionMap[int(loc.y) / 64][int(loc.x) / 64];
+		std::cout << "TileContent: " << content << std::endl;
+
+		switch (content)
+		{
+		case'-':
+			return TileContents::Obstacle;
+			break;
+		case 'o':
+			return TileContents::Empty;
+			break;
+		default:
+			std::cout << "Unknown content declaration, returned empty." << std::endl;
+			return TileContents::Empty;
+			break;
+		}
+
+		return TileContents::Empty;
+	}
 
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
