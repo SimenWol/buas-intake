@@ -70,7 +70,7 @@ namespace Tmpl8
 
 	}
 
-	// Thanks to Jeremiah for giving the idea how to solve circle to square collision.
+	// Thanks to Jeremiah for giving the idea how to solve circle to rectangle collision.
 	void Player::CheckCollision(const LevelManager& levelmanager)
 	{
 		//float leftX = loc.x - radius;
@@ -83,37 +83,37 @@ namespace Tmpl8
 		//levelmanager.GetContents({ rightX, upperY, }); // DOWN,LEFT CHECK!
 		//levelmanager.GetContents({ rightX, lowerY, }); // UP,LEFT CHECK!
 
-		// Ball 'Extremes'
+		// Ball 'Extremes' WORKS AS INTENDED
 		int leftX = static_cast<int>(loc.x - radius) / levelmanager.tileSize;
 		int rightX = (static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize;
 		int upperY = static_cast<int>(loc.y - radius) / levelmanager.tileSize;
 		int lowerY = (static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize;
 
 		// TopLeft
-		if (loc.x <= (leftX * levelmanager.tileSize + radius) && loc.y <= (upperY * levelmanager.tileSize + radius))
+		if ((loc.x <= ((leftX + 1) * levelmanager.tileSize + radius)) && (loc.y <= ((upperY + 1) * levelmanager.tileSize + radius)))
 		{
 			levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) });
 		}
 
 		// BottomLeft
-		if (loc.x <= (leftX * levelmanager.tileSize + radius) && loc.y >= (lowerY * levelmanager.tileSize + radius))
+		if ((loc.x <= ((leftX + 1) * levelmanager.tileSize + radius)) && (loc.y >= (lowerY * levelmanager.tileSize + radius)))
 		{
 			levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) });
 		}
 
 		// TopRight
-		if (loc.x >= (rightX * levelmanager.tileSize + radius) && loc.y >= (upperY * levelmanager.tileSize + radius))
+		if ((loc.x >= (rightX * levelmanager.tileSize - radius)) && (loc.y <= ((upperY + 1) * levelmanager.tileSize + radius)))
 		{
 			levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) });
 		}
 
 		// BottomRight
-		if (loc.x >= (rightX * levelmanager.tileSize + radius) && loc.y <= (lowerY * levelmanager.tileSize + radius))
+		if ((loc.x >= (rightX * levelmanager.tileSize - radius)) && (loc.y >= (lowerY * levelmanager.tileSize + radius)))
 		{
 			levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) });
 		}
 
-		// std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
+		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
 
 		float screenHeight = 512.0f; // Temp
 		// Make sure the player bounces on the bottom of the screen
