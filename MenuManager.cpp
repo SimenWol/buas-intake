@@ -7,14 +7,15 @@ namespace Tmpl8
 {
 	MenuManager::MenuManager()
 		:mainMenu(new Surface("assets/Menus/Title Screen.png"), 1)
-		,levelSelection(new Surface("assets/Temp/LEVEL SELECTION SCREEN.png"), 1)
+		,levelSelection(new Surface("assets/Menus/Level Selection Screen.png"), 1)
 		,startButtonSprite(new Surface("assets/Buttons/StartButton.png"), 3)
 		,settingsButtonSprite(new Surface("assets/Buttons/SettingsButton.png"), 3)
 		,quitButtonSprite(new Surface("assets/Buttons/QuitButton.png"), 3)
+		,levelOneButtonSprite(new Surface("assets/Buttons/LevelOneButton.png"), 3)
 		,startButton(35, 312, startButtonSprite)
 		,settingsButton(35, 402, settingsButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
-		,levelOneButton(176, 227, startButtonSprite)
+		,levelOneButton(362, 218, levelOneButtonSprite)
 	{}
 
 	void MenuManager::Draw(Surface* screen_in, Game& game_in) // Function that draws the required menu to the screen.
@@ -34,6 +35,9 @@ namespace Tmpl8
 		case LevelSelect:
 			// Draw UI Elements
 			levelSelection.Draw(screen_in, 0, 0);
+			levelOneButton.Draw(screen_in, game_in);
+			// More Level Buttons
+			// Back Button
 
 			// Button Logic
 			if (levelOneButton.IsPressed(game_in)) { game_in.SetState(game_in.PLAYING); }
