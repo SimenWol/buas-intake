@@ -11,12 +11,12 @@ namespace Tmpl8
 	public:
 		enum MenuState
 		{
-			Main,			// Main Menu
-			LevelSelect,	// Level Selection Menu
-			Playing,		// Playing UI (pause button, etc.)
-			Paused,			// Pause menu
+			LevelComplete,	// Menu that pops up after player completes a level
 			LevelFailed,	// Menu that pops up after player fails a level
-			LevelComplete	// Menu that pops up after player completes a level
+			LevelSelect,	// Level Selection Menu
+			Main,			// Main Menu
+			Paused,			// Pause menu
+			Playing,		// Playing UI (pause button, etc.)
 		};
 	public:
 		MenuManager();
@@ -29,6 +29,8 @@ namespace Tmpl8
 		// Sprites //
 		Sprite mainMenu;
 		Sprite levelSelection;
+
+		Sprite startButtonSprite;
 
 		// Buttons //
 		Button startButton;

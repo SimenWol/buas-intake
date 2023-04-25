@@ -9,12 +9,15 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 	class Button
 	{
 	public:
-		Button(int x_in, int y_in, int width_in, int height_in) // Button Constructor
+		Button(int x_in, int y_in, Sprite& sprite_in) // Button Constructor
 			:
-			x(x_in),
-			y(y_in),
-			width(width_in),
-			height(height_in) {};
+			x(x_in)
+			,y(y_in)
+			,sprite(sprite_in)
+		{
+			height = sprite.GetHeight();
+			width = sprite.GetWidth();
+		};
 
 		bool IsPressed(Game& game)
 		{
@@ -32,9 +35,17 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 			return true; // Returns true if all of the above checks out
 		};
 
-		void Draw(Surface* screen) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
+		void Draw(Surface* screen, Game& game) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
 		{
-			screen->Box(x, y, x + width, y + height, 0x00ff00);
+			if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(2); }
+			else if (CheckMousePos(game)) { sprite.SetFrame(1); }
+			else { sprite.SetFrame(0); }
+
+			sprite.Draw(screen, x, y);
+
+			/* ======================== DEBUG ======================== */
+			//screen->Box(x, y, x + width, y + height, 0x00ff00);
+			/* ======================================================= */
 		}
 
 	private:
@@ -74,6 +85,7 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 		int x, y;
 		int width, height;
 		bool prevMouseDown = false;
+		Sprite& sprite;
 	};
 
 };
