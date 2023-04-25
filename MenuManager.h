@@ -31,9 +31,14 @@ namespace Tmpl8
 		Sprite levelSelection;
 
 		Sprite startButtonSprite;
+		Sprite settingsButtonSprite;
+		Sprite quitButtonSprite;
 
 		// Buttons //
 		Button startButton;
+		Button settingsButton;
+		Button quitButton;
+
 		Button levelOneButton;
 	};
 

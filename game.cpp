@@ -7,7 +7,7 @@
 
 #include <iostream> 
 #include <algorithm>
-#include <SDL_scancode.h>
+#include <SDL.h>
 
 namespace Tmpl8
 {
@@ -17,7 +17,14 @@ namespace Tmpl8
 		menu = new MenuManager;
 	}
 	
-	void Game::Shutdown() {}
+	void Game::Shutdown()
+	{
+		// Thanks to MAX in the 3dgep.com discord for sharing this code snippet.
+		// https://discord.com/channels/515453022097244160/686661689894240277/1095673953734901761
+		SDL_Event user_event;
+		user_event.type = SDL_QUIT;
+		SDL_PushEvent(&user_event);
+	}
 
 	void Game::Tick(float deltaTime)
 	{

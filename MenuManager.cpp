@@ -9,7 +9,11 @@ namespace Tmpl8
 		:mainMenu(new Surface("assets/Menus/Title Screen.png"), 1)
 		,levelSelection(new Surface("assets/Temp/LEVEL SELECTION SCREEN.png"), 1)
 		,startButtonSprite(new Surface("assets/Buttons/StartButton.png"), 3)
-		,startButton(35, 402, startButtonSprite)
+		,settingsButtonSprite(new Surface("assets/Buttons/SettingsButton.png"), 3)
+		,quitButtonSprite(new Surface("assets/Buttons/QuitButton.png"), 3)
+		,startButton(35, 312, startButtonSprite)
+		,settingsButton(35, 402, settingsButtonSprite)
+		,quitButton(665, 402, quitButtonSprite)
 		,levelOneButton(176, 227, startButtonSprite)
 	{}
 
@@ -42,9 +46,13 @@ namespace Tmpl8
 			// Draw UI Elements
 			mainMenu.Draw(screen_in, 0, 0);
 			startButton.Draw(screen_in, game_in);
+			settingsButton.Draw(screen_in, game_in);
+			quitButton.Draw(screen_in, game_in);
 
 			// Button Logic
 			if (startButton.IsPressed(game_in)) { SetMenuState(LevelSelect); }
+			if (settingsButton.IsPressed(game_in)) { std::cout << "Settings Button" << std::endl; }
+			if (quitButton.IsPressed(game_in)) { game_in.Shutdown(); }
 			break;
 		case Paused:
 			// Quit Level
