@@ -1,5 +1,6 @@
 #pragma once
 
+// The idea for a Location class (& the code for it) from https://www.youtube.com/@ChiliTomatoNoodle
 namespace Tmpl8
 {
 	// An all purpose location class //

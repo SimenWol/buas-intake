@@ -2,6 +2,7 @@
 
 #include "surface.h"
 #include "Location.h"
+#include "LevelManager.h"
 
 namespace Tmpl8
 {
@@ -11,13 +12,21 @@ namespace Tmpl8
 		Player();
 		void Draw(Surface* screen_in);								// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
-		void Move(const float& dt_in, const Location& delta_loc);	// Move Player
+		void Move(const float& dt_in, const Location& delta_loc, const LevelManager& levelmanager);	// Move Player
 	private:
 		void Death();	// Runs everything necessary on death
-		// CheckCollision, etc.
+		void CheckCollision(const LevelManager& levelmanager);
+		void CallType(const LevelManager::TileContents& content, const Location& tile, const LevelManager& levelmanager);
+		void Obstacle(const Location& tile, const LevelManager& levelmanager);
+		void DeflectX(const float offset);
+		void DeflectY(const float offset);
 	private:
-		Location loc = { 20.0f, 400.0f };			// Current location of the player
+		bool CircleToAABBCollision(const Location& tile, const float half);
+	private:
+		Location loc = { 220.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player
+
+		float radius;
 
 		static constexpr float gravity = 1.0f;			// Level of gravity
 		static constexpr float bounceHeight = 1.0f;		// Level of bounce height
@@ -27,5 +36,4 @@ namespace Tmpl8
 		// Sprites //
 		Sprite player;
 	};
-
 };
