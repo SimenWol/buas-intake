@@ -56,8 +56,10 @@ namespace Tmpl8
 		// Calculate new Y speed //
 		speed.y += (gravity * 1000.0f) * deltaTime;
 
+		speed.y = 0.0f;
+
 		CheckCollision(levelmanager);
-		DeflectY();
+		// DeflectY();
 
 		/* ======================== DEBUG ======================== */
 		//std::cout << "Player Location: " << loc.x << ", " << loc.y << std::endl;	// Player Location
@@ -85,59 +87,68 @@ namespace Tmpl8
 		if (CircleToAABBCollision({ leftX, upperY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) }), 
-				{ (loc.x - radius), (loc.y - radius) });
+				{ (loc.x - radius), (loc.y - radius) }, levelmanager);
 		}
 
 		// BottomLeft
 		if (CircleToAABBCollision({ leftX, lowerY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) }), 
-				{ (loc.x - radius), (loc.y + radius) });
+				{ (loc.x - radius), (loc.y + radius) }, levelmanager);
 		}
 
 		// TopRight
 		if (CircleToAABBCollision({ rightX, upperY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) }), 
-				{ (loc.x + radius), (loc.y - radius) });
+				{ (loc.x + radius), (loc.y - radius) }, levelmanager);
 		}
 
 		// BottomRight
 		if (CircleToAABBCollision({ rightX, lowerY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) }), 
-				{ (loc.x + radius), (loc.y + radius) });
+				{ (loc.x + radius), (loc.y + radius) }, levelmanager);
 		}
 
 		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
 	}
 
-	void Player::CallType(const LevelManager::TileContents& content, const Location& tile)
+	void Player::CallType(const LevelManager::TileContents& content, const Location& tile, const LevelManager& levelmanager)
 	{
 		switch (content)
 		{
 		case LevelManager::TileContents::Empty:
 			break;
 		case LevelManager::TileContents::Obstacle:
-			Obstacle(tile);
+			Obstacle(tile, levelmanager);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void Player::Obstacle(const Location& tile)
+	void Player::Obstacle(const Location& tile, const LevelManager& levelmanager)
 	{
-		std::cout << "Obstacle called" << std::endl;
+		// THIS WON't WORK!!
+		float half = levelmanager.tileSize / 2;
+		if ((tile.x - loc.x) <= (radius + half)) { DeflectX(); }
+		else if ((tile.y - loc.y) <= (radius + half)) { DeflectY(); }
+
+
+		// std::cout << "Obstacle called" << std::endl;
 	}
 
 	void Player::DeflectX()
 	{
+		std::cout << "DeflectX called." << std::endl;
 	}
 
 	void Player::DeflectY()
 	{
+		std::cout << "DeflectY called." << std::endl;
 		float screenHeight = 512.0f; // Temp
+
 		// Make sure the player bounces on the bottom of the screen
 		if (loc.y > (screenHeight - radius))
 		{

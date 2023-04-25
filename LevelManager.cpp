@@ -52,6 +52,8 @@ namespace Tmpl8
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
+		if ((int(loc.x) > 10 * tileSize) || (int(loc.y) > 8 * tileSize)) { return TileContents::Empty; }
+
 		char content = collisionMap[int(loc.y) / tileSize][int(loc.x) / tileSize];
 		// std::cout << "TileContent: " << content << std::endl;
 
