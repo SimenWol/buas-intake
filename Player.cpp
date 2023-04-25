@@ -74,32 +74,38 @@ namespace Tmpl8
 	// Thanks to Jeremiah for giving the idea how to solve circle to rectangle collision.
 	void Player::CheckCollision(const LevelManager& levelmanager)
 	{
-		// Ball 'Extremes' WORKS AS INTENDED
-		int leftX = static_cast<int>(loc.x - radius) / levelmanager.tileSize;
-		int rightX = (static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize;
-		int upperY = static_cast<int>(loc.y - radius) / levelmanager.tileSize;
-		int lowerY = (static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize;
+		// https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
+
+		float half = 0.5 * levelmanager.tileSize;
+
+		// Calculate center of which tiles to check
+		float leftX = (static_cast<int>(loc.x - radius) / levelmanager.tileSize) * half * 2 + 32;
+		float rightX = ((static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize) * half * 2 + 32;
+		float upperY = (static_cast<int>(loc.y - radius) / levelmanager.tileSize) * half * 2 + 32;
+		float lowerY = ((static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize) * half * 2 + 32;
+
+		// std::cout << leftX << " " << rightX << " " << upperY << " " << lowerY << std::endl;
 
 		// TopLeft
-		if ((loc.x <= ((leftX + 1) * levelmanager.tileSize + radius)) && (loc.y <= ((upperY + 1) * levelmanager.tileSize + radius)))
+		if (CircleToAABBCollision({ leftX, upperY }, half))
 		{
 			levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) });
 		}
 
 		// BottomLeft
-		if ((loc.x <= ((leftX + 1) * levelmanager.tileSize + radius)) && (loc.y >= (lowerY * levelmanager.tileSize + radius)))
+		if (CircleToAABBCollision({ leftX, lowerY }, half))
 		{
 			levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) });
 		}
 
 		// TopRight
-		if ((loc.x >= (rightX * levelmanager.tileSize - radius)) && (loc.y <= ((upperY + 1) * levelmanager.tileSize + radius)))
+		if (CircleToAABBCollision({ rightX, upperY }, half))
 		{
 			levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) });
 		}
 
 		// BottomRight
-		if ((loc.x >= (rightX * levelmanager.tileSize - radius)) && (loc.y >= (lowerY * levelmanager.tileSize + radius)))
+		if (CircleToAABBCollision({ rightX, lowerY }, half))
 		{
 			levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) });
 		}
@@ -120,5 +126,23 @@ namespace Tmpl8
 			loc.y = (screenHeight - radius);
 			speed.y = -(200.0f * bounceHeight);
 		}
+	}
+
+	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
+	bool Player::CircleToAABBCollision(const Location& tile, const float half)
+	{
+		// Get distance vector between both centers
+		Location distance = { (loc.x - tile.x), (loc.y - tile.y) };
+
+
+		if (distance.x > (half + radius)) { return false; }
+		if (distance.y > (half + radius)) { return false; }
+
+		if (distance.x <= half) { return true; }
+		if (distance.y <= half) { return true; }
+
+		float cDist_sq = (distance.x - half) * (distance.x - half) + (distance.y - half) * (distance.y - half);
+
+		return (cDist_sq <= (radius * radius));
 	}
 };

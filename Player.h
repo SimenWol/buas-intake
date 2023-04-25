@@ -19,6 +19,8 @@ namespace Tmpl8
 		void DeflectX();
 		void DeflectY();
 	private:
+		bool CircleToAABBCollision(const Location& tile, const float half);
+	private:
 		Location loc = { 22.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player
 
