@@ -16,6 +16,8 @@ namespace Tmpl8
 	private:
 		void Death();	// Runs everything necessary on death
 		void CheckCollision(const LevelManager& levelmanager);
+		void CallType(const LevelManager::TileContents& content, const Location& tile);
+		void Obstacle(const Location& tile);
 		void DeflectX();
 		void DeflectY();
 	private:

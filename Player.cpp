@@ -71,46 +71,64 @@ namespace Tmpl8
 
 	}
 
-	// Thanks to Jeremiah for giving the idea how to solve circle to rectangle collision.
 	void Player::CheckCollision(const LevelManager& levelmanager)
 	{
-		// https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
-
+		// Calculate center of which tiles to check
 		float half = 0.5 * levelmanager.tileSize;
 
-		// Calculate center of which tiles to check
 		float leftX = (static_cast<int>(loc.x - radius) / levelmanager.tileSize) * half * 2 + 32;
 		float rightX = ((static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize) * half * 2 + 32;
 		float upperY = (static_cast<int>(loc.y - radius) / levelmanager.tileSize) * half * 2 + 32;
 		float lowerY = ((static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize) * half * 2 + 32;
 
-		// std::cout << leftX << " " << rightX << " " << upperY << " " << lowerY << std::endl;
-
 		// TopLeft
 		if (CircleToAABBCollision({ leftX, upperY }, half))
 		{
-			levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) });
+			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) }), 
+				{ (loc.x - radius), (loc.y - radius) });
 		}
 
 		// BottomLeft
 		if (CircleToAABBCollision({ leftX, lowerY }, half))
 		{
-			levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) });
+			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) }), 
+				{ (loc.x - radius), (loc.y + radius) });
 		}
 
 		// TopRight
 		if (CircleToAABBCollision({ rightX, upperY }, half))
 		{
-			levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) });
+			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) }), 
+				{ (loc.x + radius), (loc.y - radius) });
 		}
 
 		// BottomRight
 		if (CircleToAABBCollision({ rightX, lowerY }, half))
 		{
-			levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) });
+			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) }), 
+				{ (loc.x + radius), (loc.y + radius) });
 		}
 
 		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
+	}
+
+	void Player::CallType(const LevelManager::TileContents& content, const Location& tile)
+	{
+		switch (content)
+		{
+		case LevelManager::TileContents::Empty:
+			break;
+		case LevelManager::TileContents::Obstacle:
+			Obstacle(tile);
+			break;
+		default:
+			break;
+		}
+	}
+
+	void Player::Obstacle(const Location& tile)
+	{
+		std::cout << "Obstacle called" << std::endl;
 	}
 
 	void Player::DeflectX()

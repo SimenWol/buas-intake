@@ -26,10 +26,10 @@ namespace Tmpl8
 	"oooooooooo",
 	"oooooooooo",
 	"oooooooooo",
-	"jjjjoooooo",
-	"abcjoooooo",
-	"defjoooooo",
-	"ghijoooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"oooooooooo",
+	"ooo-oooooo",
 	};
 
 
@@ -53,7 +53,7 @@ namespace Tmpl8
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
 		char content = collisionMap[int(loc.y) / tileSize][int(loc.x) / tileSize];
-		std::cout << "TileContent: " << content << std::endl;
+		// std::cout << "TileContent: " << content << std::endl;
 
 		switch (content)
 		{
