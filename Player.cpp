@@ -56,10 +56,7 @@ namespace Tmpl8
 		// Calculate new Y speed //
 		speed.y += (gravity * 1000.0f) * deltaTime;
 
-		speed.y = 0.0f;
-
 		CheckCollision(levelmanager);
-		// DeflectY();
 
 		/* ======================== DEBUG ======================== */
 		//std::cout << "Player Location: " << loc.x << ", " << loc.y << std::endl;	// Player Location
@@ -87,28 +84,28 @@ namespace Tmpl8
 		if (CircleToAABBCollision({ leftX, upperY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) }), 
-				{ (loc.x - radius), (loc.y - radius) }, levelmanager);
+				{ leftX, upperY }, levelmanager);
 		}
 
 		// BottomLeft
 		if (CircleToAABBCollision({ leftX, lowerY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) }), 
-				{ (loc.x - radius), (loc.y + radius) }, levelmanager);
+				{ leftX, lowerY }, levelmanager);
 		}
 
 		// TopRight
 		if (CircleToAABBCollision({ rightX, upperY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) }), 
-				{ (loc.x + radius), (loc.y - radius) }, levelmanager);
+				{ rightX, upperY }, levelmanager);
 		}
 
 		// BottomRight
 		if (CircleToAABBCollision({ rightX, lowerY }, half))
 		{
 			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) }), 
-				{ (loc.x + radius), (loc.y + radius) }, levelmanager);
+				{ rightX, lowerY }, levelmanager);
 		}
 
 		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
@@ -130,31 +127,40 @@ namespace Tmpl8
 
 	void Player::Obstacle(const Location& tile, const LevelManager& levelmanager)
 	{
-		// THIS WON't WORK!!
-		float half = levelmanager.tileSize / 2;
-		if ((tile.x - loc.x) <= (radius + half)) { DeflectX(); }
-		else if ((tile.y - loc.y) <= (radius + half)) { DeflectY(); }
+		float offX = tile.x - loc.x;
+		float offY = tile.y - loc.y;
 
+		float offsetX = offX;
+		float offsetY = offY;
+		if (offsetX < 0) { offsetX += levelmanager.tileSize / 2 + radius; }
+		else { offsetX -= levelmanager.tileSize / 2 + radius; }
+		if (offsetY < 0) { offsetY += levelmanager.tileSize / 2 + radius; }
+		else { offsetY -= levelmanager.tileSize / 2 + radius; }
 
+		if (offX < 0) { offX = -offX; }
+		if (offY < 0) { offY = -offY; }
+
+		// std::cout << offX << " " << offY << std::endl;
 		// std::cout << "Obstacle called" << std::endl;
+
+		if (offY > offX) { DeflectY(offsetY); }
+		else if (offX > offY) { DeflectX(offsetX); }
 	}
 
-	void Player::DeflectX()
+	void Player::DeflectX(const float offset)
 	{
 		std::cout << "DeflectX called." << std::endl;
+
+		loc.x = (loc.x + offset);
+		speed.x = -(speed.x * bounceHeight);
 	}
 
-	void Player::DeflectY()
+	void Player::DeflectY(const float offset)
 	{
 		std::cout << "DeflectY called." << std::endl;
-		float screenHeight = 512.0f; // Temp
 
-		// Make sure the player bounces on the bottom of the screen
-		if (loc.y > (screenHeight - radius))
-		{
-			loc.y = (screenHeight - radius);
-			speed.y = -(200.0f * bounceHeight);
-		}
+		loc.y = (loc.y + offset);
+		speed.y = -(200.0f * bounceHeight);
 	}
 
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/

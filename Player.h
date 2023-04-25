@@ -18,12 +18,12 @@ namespace Tmpl8
 		void CheckCollision(const LevelManager& levelmanager);
 		void CallType(const LevelManager::TileContents& content, const Location& tile, const LevelManager& levelmanager);
 		void Obstacle(const Location& tile, const LevelManager& levelmanager);
-		void DeflectX();
-		void DeflectY();
+		void DeflectX(const float offset);
+		void DeflectY(const float offset);
 	private:
 		bool CircleToAABBCollision(const Location& tile, const float half);
 	private:
-		Location loc = { 22.0f, 480.0f };			// Current location of the player
+		Location loc = { 220.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player
 
 		float radius;

@@ -28,8 +28,8 @@ namespace Tmpl8
 	"oooooooooo",
 	"oooooooooo",
 	"oooooooooo",
-	"oooooooooo",
-	"ooo-oooooo",
+	"-oooo-oooo",
+	"----------",
 	};
 
 
