@@ -33,6 +33,11 @@ namespace Tmpl8
 	};
 
 
+	LevelManager::LevelManager()
+	{
+		state[1] = LevelState::Open;
+	}
+
 	void LevelManager::DrawLevel(Surface* screen, const int level)
 	{
 		for (int y = 0; y < 8; y++)

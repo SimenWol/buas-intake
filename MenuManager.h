@@ -20,7 +20,7 @@ namespace Tmpl8
 		};
 	public:
 		MenuManager();
-		void Draw(Surface* screen_in, Game& game_in);
+		void Draw(Surface* screen_in, Game& game_in, LevelManager& level);
 		void SetMenuState(MenuState state_in);
 	private:
 		MenuState menuState = MenuState::Main;

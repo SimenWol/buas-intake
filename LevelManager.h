@@ -20,6 +20,7 @@ namespace Tmpl8
 			Obstacle
 		};
 	public:
+		LevelManager();
 		// void LoadLevel(const int level) const;
 		void DrawLevel(Surface* screen, const int level);
 		LevelState GetLevelState(const int level) const;
@@ -28,10 +29,9 @@ namespace Tmpl8
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
 	public:
 		static constexpr int tileSize = 64; // Width & Height for each tile
+		static constexpr int numLevels = 1;
 	private:
 		// int currentLevel = 0;
-
-		static constexpr int numLevels = 1;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 	};
 

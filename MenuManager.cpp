@@ -11,14 +11,14 @@ namespace Tmpl8
 		,startButtonSprite(new Surface("assets/Buttons/StartButton.png"), 3)
 		,settingsButtonSprite(new Surface("assets/Buttons/SettingsButton.png"), 3)
 		,quitButtonSprite(new Surface("assets/Buttons/QuitButton.png"), 3)
-		,levelOneButtonSprite(new Surface("assets/Buttons/LevelOneButton.png"), 3)
+		,levelOneButtonSprite(new Surface("assets/Buttons/LevelOneButton.png"), 7)
 		,startButton(35, 312, startButtonSprite)
 		,settingsButton(35, 402, settingsButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
 		,levelOneButton(362, 218, levelOneButtonSprite)
 	{}
 
-	void MenuManager::Draw(Surface* screen_in, Game& game_in) // Function that draws the required menu to the screen.
+	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in) // Function that draws the required menu to the screen.
 	{
 
 		switch (menuState)
@@ -35,12 +35,19 @@ namespace Tmpl8
 		case LevelSelect:
 			// Draw UI Elements
 			levelSelection.Draw(screen_in, 0, 0);
-			levelOneButton.Draw(screen_in, game_in);
 			// More Level Buttons
 			// Back Button
+			
+			//for (int i = 0; i < LevelManager::numLevels; i++)
+			//{
+
+			//}
+			
+			levelOneButton.Draw(screen_in, game_in, level_in.GetLevelState(1));
 
 			// Button Logic
-			if (levelOneButton.IsPressed(game_in)) { game_in.SetState(game_in.PLAYING); }
+			if (level_in.GetLevelState(1) != LevelManager::LevelState::Closed 
+				&& levelOneButton.IsPressed(game_in)) { game_in.SetState(game_in.PLAYING); }
 
 			/* ======================== DEBUG ======================== */
 			// levelOneButton.Draw(screen_in);

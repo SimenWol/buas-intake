@@ -2,6 +2,8 @@
 
 #include "game.h"
 #include "surface.h"
+#include "LevelManager.h"
+
 #include <iostream>
 
 namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FOR EACH CHECK --> UPDATE SPRITES
@@ -37,9 +39,41 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 
 		void Draw(Surface* screen, Game& game) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
 		{
-			if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(2); }
-			else if (CheckMousePos(game)) { sprite.SetFrame(1); }
-			else { sprite.SetFrame(0); }
+			if (sprite.Frames() == 3)
+			{
+				if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(2); }
+				else if (CheckMousePos(game)) { sprite.SetFrame(1); }
+				else { sprite.SetFrame(0); }
+			}
+
+			sprite.Draw(screen, x, y);
+
+			/* ======================== DEBUG ======================== */
+			//screen->Box(x, y, x + width, y + height, 0x00ff00);
+			/* ======================================================= */
+		}
+
+		void Draw(Surface* screen, Game& game, LevelManager::LevelState state) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
+		{
+			if (sprite.Frames() == 7) // Level Buttons
+			{
+				if (state == LevelManager::LevelState::Closed)
+				{
+					sprite.SetFrame(0);
+				}
+				else if (state == LevelManager::LevelState::Open)
+				{
+					if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(3); }
+					else if (CheckMousePos(game)) { sprite.SetFrame(2); }
+					else { sprite.SetFrame(1); }
+				}
+				else if (state == LevelManager::LevelState::Completed)
+				{
+					if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(6); }
+					else if (CheckMousePos(game)) { sprite.SetFrame(5); }
+					else { sprite.SetFrame(4); }
+				}
+			}
 
 			sprite.Draw(screen, x, y);
 
