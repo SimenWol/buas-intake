@@ -108,7 +108,9 @@ namespace Tmpl8
 				{ rightX, lowerY }, levelmanager);
 		}
 
+		/* ======================== DEBUG ======================== */
 		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
+		/* ======================================================= */
 	}
 
 	void Player::CallType(const LevelManager::TileContents& content, const Location& tile, const LevelManager& levelmanager)
@@ -140,8 +142,10 @@ namespace Tmpl8
 		if (offX < 0) { offX = -offX; }
 		if (offY < 0) { offY = -offY; }
 
+		/* ======================== DEBUG ======================== */
 		// std::cout << offX << " " << offY << std::endl;
 		// std::cout << "Obstacle called" << std::endl;
+		/* ======================================================= */
 
 		if (offY > offX) { DeflectY(offsetY); }
 		else if (offX > offY) { DeflectX(offsetX); }
@@ -149,18 +153,22 @@ namespace Tmpl8
 
 	void Player::DeflectX(const float offset)
 	{
-		std::cout << "DeflectX called." << std::endl;
-
 		loc.x = (loc.x + offset);
 		speed.x = -(speed.x * bounceHeight);
+
+		/* ======================== DEBUG ======================== */
+		// std::cout << "DeflectX called." << std::endl;
+		/* ======================================================= */
 	}
 
 	void Player::DeflectY(const float offset)
 	{
-		std::cout << "DeflectY called." << std::endl;
-
 		loc.y = (loc.y + offset);
 		speed.y = -(200.0f * bounceHeight);
+
+		/* ======================== DEBUG ======================== */
+		// std::cout << "DeflectY called." << std::endl;
+		/* ======================================================= */
 	}
 
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
@@ -168,7 +176,6 @@ namespace Tmpl8
 	{
 		// Get distance vector between both centers
 		Location distance = { (loc.x - tile.x), (loc.y - tile.y) };
-
 
 		if (distance.x > (half + radius)) { return false; }
 		if (distance.y > (half + radius)) { return false; }

@@ -66,7 +66,7 @@ namespace Tmpl8
 			return TileContents::Obstacle;
 			break;
 		default:
-			// std::cout << "Unknown content declaration, returned empty." << std::endl;
+			std::cout << "Unknown content declaration, returned empty." << std::endl;
 			return TileContents::Empty;
 			break;
 		}

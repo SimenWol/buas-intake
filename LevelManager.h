@@ -31,9 +31,8 @@ namespace Tmpl8
 	private:
 		// int currentLevel = 0;
 
-		// Using an array to store level states. Defaults to closed.
 		static constexpr int numLevels = 1;
-		LevelState state[numLevels] = { LevelState::Closed };
+		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 	};
 
 };
