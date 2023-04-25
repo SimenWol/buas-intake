@@ -15,6 +15,7 @@ namespace Tmpl8
 	{
 		// Menu //
 		menu = new MenuManager;
+		// level.LoadLevel(1);
 	}
 	
 	void Game::Shutdown() {}

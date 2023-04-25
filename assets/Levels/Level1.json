@@ -1,0 +1,24 @@
+{
+  "happy": true,
+  "pi": 3.141,
+  "map": [
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb",
+    "cbcbcbcbcbcbcbcbcbcb"
+  ],
+  "collisionMap": [
+    "oooooooooo",
+    "oooooooooo",
+    "oooooooooo",
+    "oooooooooo",
+    "oooooooooo",
+    "oooooooooo",
+    "-oooo-oooo",
+    "----------"
+  ]
+}

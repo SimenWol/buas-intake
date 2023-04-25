@@ -20,7 +20,7 @@ namespace Tmpl8
 			Obstacle
 		};
 	public:
-		// void LoadLevel(const int level) const;
+		void LoadLevel(const int level);
 		void DrawLevel(Surface* screen, const int level);
 		LevelState GetLevelState(const int level) const;
 		TileContents GetContents(const Location& loc) const;

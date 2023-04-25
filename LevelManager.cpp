@@ -2,6 +2,9 @@
 #include "surface.h"
 
 #include <iostream>
+#include <fstream>
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 namespace Tmpl8
 {
@@ -32,6 +35,27 @@ namespace Tmpl8
 	"----------",
 	};
 
+
+	void LevelManager::LoadLevel(const int level)
+	{
+		//std::ifstream f("assets/Levels/Level1.json");
+		//json data = json::parse(f);
+
+		//std::cout << data.dump(4) << std::endl;
+
+		//// std::array < charm;
+
+		//std::vector<std::array<char,4>> v =
+		//{
+		//	{'h','e','l','p'},
+		//	{'h','e','l','p'}
+		//};
+
+		//std::vector<char> vv = { 'h','e','l','p' };
+		//json j = json::parse(vv.begin(), vv.end());
+
+		//// std::cout << j.dump(4) << std::endl;
+	}
 
 	void LevelManager::DrawLevel(Surface* screen, const int level)
 	{
