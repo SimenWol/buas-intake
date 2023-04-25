@@ -15,13 +15,15 @@ namespace Tmpl8
 			LevelFailed,	// Menu that pops up after player fails a level
 			LevelSelect,	// Level Selection Menu
 			Main,			// Main Menu
-			Paused,			// Pause menu
+			Paused,			// Pause Menu
 			Playing,		// Playing UI (pause button, etc.)
+			Settings		// Settings Menu
 		};
 	public:
 		MenuManager();
 		void Draw(Surface* screen_in, Game& game_in, LevelManager& level);
 		void SetMenuState(MenuState state_in);
+		MenuState GetMenuState();
 	private:
 		MenuState menuState = MenuState::Main;
 
@@ -36,12 +38,16 @@ namespace Tmpl8
 
 		Sprite levelOneButtonSprite;
 
+		Sprite pauseButtonSprite;
+
 		// Buttons //
 		Button startButton;
 		Button settingsButton;
 		Button quitButton;
 
 		Button levelOneButton;
+
+		Button pauseButton;
 	};
 
 };

@@ -45,18 +45,17 @@ namespace Tmpl8
 			break;
 		case PLAYING:
 			// Game Logic //
-			// Define moving direction from keyboard inputs
-			if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0.0f, 0.0f }; }
-			else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
-			else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
-			player.Move(deltaTime, delta_loc, level);
+			if (menu->GetMenuState() == MenuManager::MenuState::Playing)
+			{
+				// Define moving direction from keyboard inputs
+				if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0.0f, 0.0f }; }
+				else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
+				else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
+				player.Move(deltaTime, delta_loc, level);
+			}
 
 			// Draw Functions //
 			level.DrawLevel(screen, 1);
-			player.Draw(screen);
-			break;
-		case GAMEOVER:
-			// Draw Functions //
 			player.Draw(screen);
 			menu->Draw(screen, *this, level);
 			break;

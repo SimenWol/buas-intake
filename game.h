@@ -15,8 +15,7 @@ public:
 	enum GameState
 	{
 		MENU,
-		PLAYING,
-		GAMEOVER
+		PLAYING
 	};
 public:
 	// Setters //

@@ -35,7 +35,7 @@ namespace Tmpl8
 
 	LevelManager::LevelManager()
 	{
-		state[1] = LevelState::Open;
+		state[1] = LevelState::Completed;
 	}
 
 	void LevelManager::DrawLevel(Surface* screen, const int level)
