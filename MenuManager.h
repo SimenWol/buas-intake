@@ -30,7 +30,10 @@ namespace Tmpl8
 
 		// Sprites //
 		Sprite mainMenu;
+		Sprite settingsMenu;
 		Sprite levelSelectionMenu;
+		Sprite levelCompletedMenu;
+		Sprite levelFailedMenu;
 		Sprite pauseMenu;
 
 		Sprite startButtonSprite;
@@ -55,6 +58,8 @@ namespace Tmpl8
 		Button levelOneButton;
 
 		Button pauseButton;
+		Button pauseButton2;
+		Button pauseButton3;
 
 		Button continueButton;
 		Button menuButton;
