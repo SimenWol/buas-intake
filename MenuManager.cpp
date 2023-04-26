@@ -12,15 +12,21 @@ namespace Tmpl8
 		,startButtonSprite(new Surface("assets/Buttons/StartButton.png"), 3)
 		,settingsButtonSprite(new Surface("assets/Buttons/SettingsButton.png"), 3)
 		,quitButtonSprite(new Surface("assets/Buttons/QuitButton.png"), 3)
+		,backButtonSprite(new Surface("assets/Buttons/BackButton.png"), 3)
 		,levelOneButtonSprite(new Surface("assets/Buttons/LevelOneButton.png"), 7)
 		,pauseButtonSprite(new Surface("assets/Buttons/PauseButton.png"), 3)
 		,continueButtonSprite(new Surface("assets/Buttons/ContinueButton.png"), 3)
+		,menuButtonSprite(new Surface("assets/Buttons/MenuButton.png"), 3)
+		,restartButtonSprite(new Surface("assets/Buttons/RestartButton.png"), 3)
 		,startButton(35, 312, startButtonSprite)
 		,settingsButton(35, 402, settingsButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
+		,backButton(25, 412, backButtonSprite)
 		,levelOneButton(362, 218, levelOneButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
-		,continueButton(312, 219, continueButtonSprite)
+		,continueButton(312, 181, continueButtonSprite)
+		,menuButton(312, 385, menuButtonSprite)
+		,restartButton(312, 283, restartButtonSprite)
 	{}
 
 	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in) // Function that draws the required menu to the screen.
@@ -39,22 +45,19 @@ namespace Tmpl8
 			break;
 		case LevelSelect:
 			// Draw UI Elements
-			levelSelectionMenu.Draw(screen_in, 0, 0);		
+			levelSelectionMenu.Draw(screen_in, 0, 0);
+			backButton.Draw(screen_in, game_in);
 			levelOneButton.Draw(screen_in, game_in, level_in.GetLevelState(1));
 			// More Level Buttons
-			// Back Button	
 
 			// Button Logic
+			if (backButton.IsPressed(game_in)) { SetMenuState(Main); }
 			if (level_in.GetLevelState(1) != LevelManager::LevelState::Closed 
 				&& levelOneButton.IsPressed(game_in))
 			{
 				game_in.SetState(game_in.PLAYING);
 				SetMenuState(Playing);
 			}
-
-			/* ======================== DEBUG ======================== */
-			// levelOneButton.Draw(screen_in);
-			/* ======================================================= */
 			break;
 		case Main:
 			// Draw UI Elements
@@ -72,12 +75,17 @@ namespace Tmpl8
 			// Draw UI Elements
 			pauseMenu.Draw(screen_in, 0, 0);
 			continueButton.Draw(screen_in, game_in);
-			// Quit Level
-			// Continue
-			// Restart Level
+			menuButton.Draw(screen_in, game_in);
+			restartButton.Draw(screen_in, game_in);
 
 			// Button Logic
 			if (continueButton.IsPressed(game_in)) { SetMenuState(Playing); }
+			if (menuButton.IsPressed(game_in))
+			{
+				SetMenuState(Main);
+				game_in.SetState(Game::GameState::MENU);
+			}
+			if (restartButton.IsPressed(game_in)) { std::cout << "Restart Button" << std::endl; }
 			break;
 		case Playing:
 			pauseButton.Draw(screen_in, game_in);

@@ -37,22 +37,28 @@ namespace Tmpl8
 		Sprite settingsButtonSprite;
 		Sprite quitButtonSprite;
 
+		Sprite backButtonSprite;
 		Sprite levelOneButtonSprite;
 
 		Sprite pauseButtonSprite;
 
 		Sprite continueButtonSprite;
+		Sprite menuButtonSprite;
+		Sprite restartButtonSprite;
 
 		// Buttons //
 		Button startButton;
 		Button settingsButton;
 		Button quitButton;
 
+		Button backButton;
 		Button levelOneButton;
 
 		Button pauseButton;
 
 		Button continueButton;
+		Button menuButton;
+		Button restartButton;
 	};
 
 };
