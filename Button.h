@@ -21,6 +21,12 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 			width = sprite.GetWidth();
 		};
 
+		void SetLocation(int x_in, int y_in)
+		{
+			x = x_in;
+			y = y_in;
+		}
+
 		bool IsPressed(Game& game)
 		{
 			if (CheckMousePos(game) == false)
