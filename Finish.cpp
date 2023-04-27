@@ -15,11 +15,13 @@ namespace Tmpl8
 		finishSprite.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
 	}
 
-	void Tmpl8::Finish::Trigger(MenuManager& menu)
+	void Tmpl8::Finish::Trigger(MenuManager& menu, LevelManager& level)
 	{
-		std::cout << "Finish!" << std::endl;
+		level.SetLevelState(level.GetCurrentLevel(), LevelManager::LevelState::Completed);
 		menu.SetMenuState(MenuManager::MenuState::LevelComplete);
 		// End Timer
+		
+		//std::cout << "Finish triggered!" << std::endl;
 	}
 
 	void Finish::UpdateFrame(const float& dt)

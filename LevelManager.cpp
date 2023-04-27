@@ -63,7 +63,7 @@ namespace Tmpl8
 			obstacle.Trigger(tile, player);
 			break;
 		case LevelManager::TileContents::Finish:
-			finish->Trigger(menu);
+			finish->Trigger(menu, *this);
 			break;
 		default:
 			break;
@@ -72,6 +72,8 @@ namespace Tmpl8
 
 	// Sends the state of the specified level
 	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level - 1]; }
+
+	void LevelManager::SetLevelState(const int level, const LevelState state_in) { state[level - 1] = state_in; }
 
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const

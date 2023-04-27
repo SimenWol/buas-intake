@@ -30,6 +30,7 @@ namespace Tmpl8
 		void DrawLevel(Surface* screen, const int level, const float& dt);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		LevelState GetLevelState(const int level) const;
+		void SetLevelState(const int level, const LevelState state_in);
 		TileContents GetContents(const Location& loc) const;
 		TileContents GetContents(const int x, const int y) const;
 		int GetCurrentLevel() const;
