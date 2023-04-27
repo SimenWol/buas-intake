@@ -13,7 +13,7 @@ namespace Tmpl8
 		void Draw(Surface* screen_in);								// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
 		void Move(const float& dt_in, const Location& delta_loc, const LevelManager& levelmanager);	// Move Player
-		// void Reset();
+		void Reset();
 	private:
 		void Death();	// Runs everything necessary on death
 		void CheckCollision(const LevelManager& levelmanager);

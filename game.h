@@ -1,7 +1,6 @@
 #pragma once
 #include "Player.h"
 #include "Location.h"
-#include "LevelManager.h"
 
 namespace Tmpl8 {
 

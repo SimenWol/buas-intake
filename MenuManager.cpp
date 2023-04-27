@@ -57,7 +57,11 @@ namespace Tmpl8
 			selectLevelButton.Draw(screen_in, game_in);
 
 			// Button Logic
-			if (retryButton.IsPressed(game_in)) { SetMenuState(Playing); } // TODO: RETRY!
+			if (retryButton.IsPressed(game_in))
+			{
+				level_in.LoadLevel(level_in.GetCurrentLevel(), player);
+				SetMenuState(Playing);
+			}
 			if (nextLevelButton.IsPressed(game_in)) { std::cout << "Next Level!" << std::endl; } // TODO: NEXT LEVEL!
 			if (selectLevelButton.IsPressed(game_in))
 			{
@@ -74,7 +78,11 @@ namespace Tmpl8
 			menuSmallButton.Draw(screen_in, game_in);
 
 			// Button Logic
-			if (retryButton.IsPressed(game_in)) { SetMenuState(Playing); } // TODO: RETRY!
+			if (retryButton.IsPressed(game_in))
+			{
+				level_in.LoadLevel(level_in.GetCurrentLevel(), player);
+				SetMenuState(Playing);
+			}
 			if (menuSmallButton.IsPressed(game_in))
 			{
 				SetMenuState(Main);
@@ -95,6 +103,7 @@ namespace Tmpl8
 			if (level_in.GetLevelState(1) != LevelManager::LevelState::Closed 
 				&& levelOneButton.IsPressed(game_in))
 			{
+				level_in.LoadLevel(1, player);
 				game_in.SetState(game_in.PLAYING);
 				SetMenuState(Playing);
 			}
@@ -125,7 +134,12 @@ namespace Tmpl8
 				SetMenuState(Main);
 				game_in.SetState(Game::GameState::MENU);
 			}
-			if (restartButton.IsPressed(game_in)) { std::cout << "Restart Button" << std::endl; } // TODO: RESTART!
+			if (restartButton.IsPressed(game_in))
+			{
+				level_in.LoadLevel(level_in.GetCurrentLevel(), player);
+				SetMenuState(Playing);
+			}
+			if (restartButton.IsPressed(game_in)) { level_in.LoadLevel(level_in.GetCurrentLevel(), player); }
 			break;
 		case Playing:
 			// Draw UI Elements

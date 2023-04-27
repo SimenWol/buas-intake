@@ -5,6 +5,9 @@
 
 namespace Tmpl8
 {
+	// Forward Declaration //
+	class Player;
+
 	class LevelManager
 	{
 	public:
@@ -21,18 +24,19 @@ namespace Tmpl8
 		};
 	public:
 		LevelManager();
-		// void LoadLevel(const int level, Player& player);
+		void LoadLevel(const int level, class Player& player);
 		void DrawLevel(Surface* screen, const int level);
 		LevelState GetLevelState(const int level) const;
 		TileContents GetContents(const Location& loc) const;
+		int GetCurrentLevel() const;
 	private:
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
-		// void Reset(const int level, Player& player);
+		void Reset(const int level, class Player& player);
 	public:
 		static constexpr int tileSize = 64; // Width & Height for each tile
 		static constexpr int numLevels = 1;
 	private:
-		// int currentLevel = 0;
+		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 
 		Location startLoc1 = {220.0f, 400.0f};

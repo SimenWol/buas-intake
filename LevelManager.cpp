@@ -39,14 +39,17 @@ namespace Tmpl8
 		state[0] = LevelState::Open;
 	}
 
-	//void LevelManager::LoadLevel(const int level, Player& player)
-	//{
-	//	if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
-	//	else
-	//	{
-	//		Reset(level, player);
-	//	}
-	//}
+	void LevelManager::LoadLevel(const int level, Player& player)
+	{
+		currentLevel = level;
+		std::cout << level << " " << numLevels << std::endl;
+
+		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
+		else
+		{
+			Reset(level, player);
+		}
+	}
 
 	void LevelManager::DrawLevel(Surface* screen, const int level)
 	{
@@ -87,6 +90,8 @@ namespace Tmpl8
 		}
 	}
 
+	int LevelManager::GetCurrentLevel() const { return currentLevel; }
+
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
 		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * 768;
@@ -101,20 +106,20 @@ namespace Tmpl8
 		}
 	}
 
-	//void LevelManager::Reset(const int level, Player& player)
-	//{
-	//	switch (level)
-	//	{
-	//	case 1:
-	//		//player.Reset();
-	//		player.SetLoc(startLoc1);
-	//		break;
-	//	default:
-	//		std::cout << "Cannot reset specified level." << std::endl;
-	//		break;
-	//	}
-	//	// Reset Timer
-	//	// Reset whatever else needed
-	//}
+	void LevelManager::Reset(const int level, Player& player)
+	{
+		switch (level)
+		{
+		case 1:
+			player.Reset();
+			player.SetLoc(startLoc1);
+			break;
+		default:
+			std::cout << "Cannot reset specified level." << std::endl;
+			break;
+		}
+		// Reset Timer
+		// Reset whatever else needed
+	}
 
 };
