@@ -47,6 +47,7 @@ namespace Tmpl8
 			{
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
+					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y); }
 					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt); }
 				}
 			}
@@ -57,17 +58,27 @@ namespace Tmpl8
 	{
 		switch (content)
 		{
-		case LevelManager::TileContents::Empty:
+		case TileContents::Empty:
 			break;
-		case LevelManager::TileContents::Obstacle:
+		case TileContents::Obstacle:
 			obstacle.Trigger(tile, player);
 			break;
-		case LevelManager::TileContents::Finish:
+		case TileContents::Finish:
 			finish->Trigger(menu, *this);
+			break;
+		case TileContents::WoodStakes:
+			woodstakes.Trigger(*this, player);
 			break;
 		default:
 			break;
 		}
+	}
+
+	void LevelManager::Death(Player& player)
+	{
+		// player.Death();
+		// Stop Timer
+		// Show Death Screen
 	}
 
 	// Sends the state of the specified level
@@ -94,6 +105,9 @@ namespace Tmpl8
 		case 'F':
 			return TileContents::Finish;
 			break;
+		case 'X':
+			return TileContents::WoodStakes;
+			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;
 			return TileContents::Empty;
@@ -118,6 +132,9 @@ namespace Tmpl8
 			break;
 		case 'F':
 			return TileContents::Finish;
+			break;
+		case 'X':
+			return TileContents::WoodStakes;
 			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;

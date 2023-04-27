@@ -13,6 +13,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Finish.cpp" />
+    <ClCompile Include="WoodStakes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -29,6 +30,7 @@
     <ClInclude Include="Location.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Finish.h" />
+    <ClInclude Include="WoodStakes.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

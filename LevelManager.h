@@ -4,6 +4,7 @@
 #include "Location.h"
 #include "Player.h"
 #include "Obstacle.h"
+#include "WoodStakes.h"
 
 namespace Tmpl8
 {
@@ -12,7 +13,7 @@ namespace Tmpl8
 	class LevelManager
 	{
 	public:
-		enum LevelState
+		enum class LevelState
 		{
 			Closed,		// Unable to play level
 			Open,		// Able to play level, never completed it
@@ -22,31 +23,35 @@ namespace Tmpl8
 		{
 			Empty,
 			Obstacle,
-			Finish
+			Finish,
+			WoodStakes,
 		};
-	public:
+	public: // PUblic Functions //
 		LevelManager();
 		void LoadLevel(const int level, Player& player);
 		void DrawLevel(Surface* screen, const int level, const float& dt);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
+		void Death(Player& player);
+	public: // Getters & Setters //
 		LevelState GetLevelState(const int level) const;
 		void SetLevelState(const int level, const LevelState state_in);
 		TileContents GetContents(const Location& loc) const;
 		TileContents GetContents(const int x, const int y) const;
 		int GetCurrentLevel() const;
-	private:
+	private: // Private Functions //
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
 		void Reset(const int level, Player& player);
-	public:
+	public: // Public Variables //
 		static constexpr int tileSize = 48; // Width & Height for each tile
 		static constexpr int numLevels = 1;
-	private:
+	private: // Private Variables //
 		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 
 		Location startLoc1 = {220.0f, 0.0f};
 
 		Obstacle obstacle;
+		WoodStakes woodstakes;
 		Finish* finish;
 
 		char map[8][81] = {
@@ -56,7 +61,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"--cbcbcbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
@@ -67,7 +72,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"-ooooooooooFoooooooooooooooooooooooooooo",
+			"XooooooooooFoooooooooooooooooooooooooooo",
 			"----------------------------------------",
 		};
 	};

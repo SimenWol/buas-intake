@@ -19,6 +19,6 @@ namespace Tmpl8
 		float timer = 0.1f;
 		float frameTime = 0.1f;
 
-		Sprite finishSprite;
+		Sprite flag;
 	};
 };

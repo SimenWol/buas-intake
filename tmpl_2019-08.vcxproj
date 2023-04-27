@@ -230,6 +230,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
+    <ClCompile Include="WoodStakes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
@@ -242,6 +243,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
+    <ClInclude Include="WoodStakes.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="_readme.txt" />
