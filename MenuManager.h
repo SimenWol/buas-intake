@@ -67,8 +67,6 @@ namespace Tmpl8
 		Button levelOneButton;
 		// Playing UI
 		Button pauseButton;
-		Button pauseButton2;
-		Button pauseButton3;
 		// Pause Menu
 		Button continueButton;
 		Button menuButton;

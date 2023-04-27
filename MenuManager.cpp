@@ -32,8 +32,6 @@ namespace Tmpl8
 		,quitButton(665, 402, quitButtonSprite)
 		,levelOneButton(362, 218, levelOneButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
-		,pauseButton2(760, 100, pauseButtonSprite)
-		,pauseButton3(760, 140, pauseButtonSprite)
 		,continueButton(312, 181, continueButtonSprite)
 		,menuButton(312, 385, menuButtonSprite)
 		,restartButton(312, 283, restartButtonSprite)
@@ -149,13 +147,6 @@ namespace Tmpl8
 
 			// Button Logic
 			if (pauseButton.IsPressed(game_in)) { SetMenuState(Paused);  }
-
-			// TEMP //
-			pauseButton2.Draw(screen_in, game_in);
-			pauseButton3.Draw(screen_in, game_in);
-			if (pauseButton2.IsPressed(game_in)) { SetMenuState(LevelComplete); }
-			if (pauseButton3.IsPressed(game_in)) { SetMenuState(LevelFailed); }
-
 			break;
 		case Settings:
 			// Set UI Elements
