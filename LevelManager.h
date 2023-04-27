@@ -40,6 +40,28 @@ namespace Tmpl8
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 
 		Location startLoc1 = {220.0f, 400.0f};
+
+		char map[8][21] = {
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcb",
+		};
+
+		char collisionMap[8][11] = {
+			"oooooooooo",
+			"oooooooooo",
+			"oooooooooo",
+			"oooooooooo",
+			"oooooooooo",
+			"oooooooooo",
+			"-oooo-oooo",
+			"----------",
+		};
 	};
 
 };

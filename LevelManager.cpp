@@ -11,29 +11,6 @@ namespace Tmpl8
 	// TODO: https://github.com/nlohmann/json JSON LEVEL LOADING --> level definitions --> Data Driven!!
 	// ASEPRITE? -> SPRITE DRAWIN
 
-	char map[8][21] = {
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-		"cbcbcbcbcbcbcbcbcbcb",
-	};
-
-	char collisionMap[8][11] = {
-	"oooooooooo",
-	"oooooooooo",
-	"oooooooooo",
-	"oooooooooo",
-	"oooooooooo",
-	"oooooooooo",
-	"-oooo-oooo",
-	"----------",
-	};
-
-
 	LevelManager::LevelManager()
 	{
 		state[0] = LevelState::Open;
