@@ -71,10 +71,10 @@ namespace Tmpl8
 
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
-		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * 768;
-		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * 800;
+		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * tiles.GetWidth();
+		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * screen->GetWidth();
 
-		for (int i = 0; i < tileSize; i++, src += 768, dst += 800)
+		for (int i = 0; i < tileSize; i++, src += tiles.GetWidth(), dst += screen->GetWidth())
 		{
 			for (int j = 0; j < tileSize; j++)
 			{

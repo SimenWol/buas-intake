@@ -33,13 +33,13 @@ namespace Tmpl8
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
 		void Reset(const int level, class Player& player);
 	public:
-		static constexpr int tileSize = 64; // Width & Height for each tile
+		static constexpr int tileSize = 48; // Width & Height for each tile
 		static constexpr int numLevels = 1;
 	private:
 		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 
-		Location startLoc1 = {220.0f, 400.0f};
+		Location startLoc1 = {220.0f, 0.0f};
 
 		char map[8][21] = {
 			"cbcbcbcbcbcbcbcbcbcb",

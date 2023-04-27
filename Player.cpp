@@ -80,10 +80,10 @@ namespace Tmpl8
 		// Calculate center of which tiles to check
 		float half = 0.5 * levelmanager.tileSize;
 
-		float leftX = (static_cast<int>(loc.x - radius) / levelmanager.tileSize) * half * 2 + 32;
-		float rightX = ((static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize) * half * 2 + 32;
-		float upperY = (static_cast<int>(loc.y - radius) / levelmanager.tileSize) * half * 2 + 32;
-		float lowerY = ((static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize) * half * 2 + 32;
+		float leftX = (static_cast<int>(loc.x - radius) / levelmanager.tileSize) * half * 2 + half;
+		float rightX = ((static_cast<int>(loc.x + radius) + 1) / levelmanager.tileSize) * half * 2 + half;
+		float upperY = (static_cast<int>(loc.y - radius) / levelmanager.tileSize) * half * 2 + half;
+		float lowerY = ((static_cast<int>(loc.y + radius) + 1) / levelmanager.tileSize) * half * 2 + half;
 
 		// TopLeft
 		if (CircleToAABBCollision({ leftX, upperY }, half))
