@@ -2,7 +2,6 @@
 
 #include "surface.h"
 #include "Location.h"
-#include "LevelManager.h"
 
 namespace Tmpl8
 {
@@ -12,16 +11,15 @@ namespace Tmpl8
 		Player();
 		void Draw(Surface* screen_in);								// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
-		void Move(const float& dt_in, const Location& delta_loc, LevelManager& levelmanager);	// Move Player
+		void Move(const float& dt_in, const Location& delta_loc, class LevelManager& levelmanager);	// Move Player
 		void Reset();
-
-		// TEMP
-		void Obstacle(const Location& tile, const LevelManager& levelmanager);
-	private:
-		void Death();	// Runs everything necessary on death
-		void CheckCollision(LevelManager& levelmanager);
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
+		Location GetLoc();
+		float GetRadius();
+	private:
+		void Death();	// Runs everything necessary on death
+		void CheckCollision(class LevelManager& levelmanager);
 	private:
 		bool CircleToAABBCollision(const Location& tile, const float half);
 	private:

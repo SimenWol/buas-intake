@@ -225,6 +225,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />

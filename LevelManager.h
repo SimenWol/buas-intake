@@ -2,12 +2,11 @@
 
 #include "surface.h"
 #include "Location.h"
+#include "Player.h"
+#include "Obstacle.h"
 
 namespace Tmpl8
 {
-	// Forward Declaration //
-	class Player;
-
 	class LevelManager
 	{
 	public:
@@ -25,7 +24,7 @@ namespace Tmpl8
 		};
 	public:
 		LevelManager();
-		void LoadLevel(const int level, class Player& player);
+		void LoadLevel(const int level, Player& player);
 		void DrawLevel(Surface* screen, const int level);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player);
 		LevelState GetLevelState(const int level) const;
@@ -33,7 +32,7 @@ namespace Tmpl8
 		int GetCurrentLevel() const;
 	private:
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
-		void Reset(const int level, class Player& player);
+		void Reset(const int level, Player& player);
 	public:
 		static constexpr int tileSize = 48; // Width & Height for each tile
 		static constexpr int numLevels = 1;
@@ -43,27 +42,7 @@ namespace Tmpl8
 
 		Location startLoc1 = {220.0f, 0.0f};
 
-		//char map[8][21] = {
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//	"cbcbcbcbcbcbcbcbcbcb",
-		//};
-
-		//char collisionMap[8][11] = {
-		//	"oooooooooo",
-		//	"oooooooooo",
-		//	"oooooooooo",
-		//	"oooooooooo",
-		//	"oooooooooo",
-		//	"oooooooooo",
-		//	"-oooo-oooo",
-		//	"----------",
-		//};
+		Obstacle obstacle;
 
 		char map[8][81] = {
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",

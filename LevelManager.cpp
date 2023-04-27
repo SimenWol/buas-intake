@@ -51,7 +51,7 @@ namespace Tmpl8
 		case LevelManager::TileContents::Empty:
 			break;
 		case LevelManager::TileContents::Obstacle:
-			player.Obstacle(tile, *this);
+			obstacle.Trigger(tile, player);
 			break;
 		case LevelManager::TileContents::Finish:
 			std::cout << "Finish!" << std::endl;

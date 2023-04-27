@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "surface.h"
 #include "template.h"
+#include "LevelManager.h"
 
 #include <iostream>
 
@@ -118,30 +119,6 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
-	void Player::Obstacle(const Location& tile, const LevelManager& levelmanager)
-	{
-		float offX = tile.x - loc.x;
-		float offY = tile.y - loc.y;
-
-		float offsetX = offX;
-		float offsetY = offY;
-		if (offsetX < 0) { offsetX += levelmanager.tileSize / 2 + radius; }
-		else { offsetX -= levelmanager.tileSize / 2 + radius; }
-		if (offsetY < 0) { offsetY += levelmanager.tileSize / 2 + radius; }
-		else { offsetY -= levelmanager.tileSize / 2 + radius; }
-
-		if (offX < 0) { offX = -offX; }
-		if (offY < 0) { offY = -offY; }
-
-		/* ======================== DEBUG ======================== */
-		// std::cout << offX << " " << offY << std::endl;
-		// std::cout << "Obstacle called" << std::endl;
-		/* ======================================================= */
-
-		if (offY > offX) { DeflectY(offsetY); }
-		else if (offX > offY) { DeflectX(offsetX); }
-	}
-
 	void Player::DeflectX(const float offset)
 	{
 		loc.x = (loc.x + offset);
@@ -161,6 +138,10 @@ namespace Tmpl8
 		// std::cout << "DeflectY called." << std::endl;
 		/* ======================================================= */
 	}
+
+	Location Player::GetLoc() { return loc; }
+
+	float Player::GetRadius() { return radius; }
 
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
 	bool Player::CircleToAABBCollision(const Location& tile, const float half)
