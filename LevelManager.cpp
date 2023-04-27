@@ -1,5 +1,6 @@
 #include "LevelManager.h"
 #include "surface.h"
+#include "Player.h"
 
 #include <iostream>
 
@@ -35,8 +36,17 @@ namespace Tmpl8
 
 	LevelManager::LevelManager()
 	{
-		state[1] = LevelState::Open;
+		state[0] = LevelState::Open;
 	}
+
+	//void LevelManager::LoadLevel(const int level, Player& player)
+	//{
+	//	if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
+	//	else
+	//	{
+	//		Reset(level, player);
+	//	}
+	//}
 
 	void LevelManager::DrawLevel(Surface* screen, const int level)
 	{
@@ -52,7 +62,7 @@ namespace Tmpl8
 	}
 
 	// Sends the state of the specified level
-	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level]; }
+	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level - 1]; }
 
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
@@ -90,5 +100,21 @@ namespace Tmpl8
 			}
 		}
 	}
+
+	//void LevelManager::Reset(const int level, Player& player)
+	//{
+	//	switch (level)
+	//	{
+	//	case 1:
+	//		//player.Reset();
+	//		player.SetLoc(startLoc1);
+	//		break;
+	//	default:
+	//		std::cout << "Cannot reset specified level." << std::endl;
+	//		break;
+	//	}
+	//	// Reset Timer
+	//	// Reset whatever else needed
+	//}
 
 };

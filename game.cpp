@@ -41,7 +41,7 @@ namespace Tmpl8
 		{
 		case MENU:
 			// Draw Functions //
-			menu->Draw(screen, *this, level);
+			menu->Draw(screen, *this, level, player);
 			break;
 		case PLAYING:
 			// Game Logic //
@@ -57,7 +57,7 @@ namespace Tmpl8
 			// Draw Functions //
 			level.DrawLevel(screen, 1);
 			player.Draw(screen);
-			menu->Draw(screen, *this, level);
+			menu->Draw(screen, *this, level, player);
 			break;
 		}
 

@@ -42,7 +42,7 @@ namespace Tmpl8
 		,menuSmallButton(225, 219, menuSmallButtonSprite)
 	{}
 
-	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in) // Function that draws the required menu to the screen.
+	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in, Player& player) // Function that draws the required menu to the screen.
 	{
 
 		switch (menuState)
