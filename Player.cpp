@@ -2,6 +2,7 @@
 #include "surface.h"
 #include "template.h"
 #include "LevelManager.h"
+#include "MenuManager.h"
 
 #include <iostream>
 
@@ -33,7 +34,7 @@ namespace Tmpl8
 		loc.y = loc_in.y;
 	}
 
-	void Player::Move(const float& deltaTime, const Location& delta_loc, LevelManager& levelmanager)
+	void Player::Move(const float& deltaTime, const Location& delta_loc, LevelManager& levelmanager, MenuManager& menu)
 	{
 		// Update player location //
 		loc.x += speed.x * deltaTime;
@@ -57,7 +58,7 @@ namespace Tmpl8
 		// Calculate new Y speed //
 		speed.y += (gravity * 1000.0f) * deltaTime;
 
-		CheckCollision(levelmanager);
+		CheckCollision(levelmanager, menu);
 
 		/* ======================== DEBUG ======================== */
 		//std::cout << "Player Location: " << loc.x << ", " << loc.y << std::endl;	// Player Location
@@ -76,7 +77,7 @@ namespace Tmpl8
 
 	}
 
-	void Player::CheckCollision(LevelManager& levelmanager)
+	void Player::CheckCollision(LevelManager& levelmanager, MenuManager& menu)
 	{
 		// Calculate center of which tiles to check
 		float half = 0.5 * levelmanager.tileSize;
@@ -90,28 +91,28 @@ namespace Tmpl8
 		if (CircleToAABBCollision({ leftX, upperY }, half))
 		{
 			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) }), 
-				{ leftX, upperY }, *this);
+				{ leftX, upperY }, *this, menu);
 		}
 
 		// BottomLeft
 		if (CircleToAABBCollision({ leftX, lowerY }, half))
 		{
 			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) }),
-				{ leftX, lowerY }, *this);
+				{ leftX, lowerY }, *this, menu);
 		}
 
 		// TopRight
 		if (CircleToAABBCollision({ rightX, upperY }, half))
 		{
 			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) }),
-				{ rightX, upperY }, *this);
+				{ rightX, upperY }, *this, menu);
 		}
 
 		// BottomRight
 		if (CircleToAABBCollision({ rightX, lowerY }, half))
 		{
 			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) }),
-				{ rightX, lowerY }, *this);
+				{ rightX, lowerY }, *this, menu);
 		}
 
 		/* ======================== DEBUG ======================== */

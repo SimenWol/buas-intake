@@ -51,7 +51,7 @@ namespace Tmpl8
 				if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0.0f, 0.0f }; }
 				else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
 				else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
-				player.Move(deltaTime, delta_loc, level);
+				player.Move(deltaTime, delta_loc, level, *menu);
 			}
 
 			// Draw Functions //

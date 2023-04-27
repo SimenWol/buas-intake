@@ -4,10 +4,11 @@
 #include "Location.h"
 #include "Player.h"
 #include "Obstacle.h"
-#include "Finish.h"
 
 namespace Tmpl8
 {
+	class Finish;
+
 	class LevelManager
 	{
 	public:
@@ -27,7 +28,7 @@ namespace Tmpl8
 		LevelManager();
 		void LoadLevel(const int level, Player& player);
 		void DrawLevel(Surface* screen, const int level, const float& dt);
-		void CallTrigger(const TileContents& content, const Location& tile, Player& player);
+		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		LevelState GetLevelState(const int level) const;
 		TileContents GetContents(const Location& loc) const;
 		TileContents GetContents(const int x, const int y) const;
@@ -45,7 +46,7 @@ namespace Tmpl8
 		Location startLoc1 = {220.0f, 0.0f};
 
 		Obstacle obstacle;
-		Finish finish;
+		Finish* finish;
 
 		char map[8][81] = {
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",

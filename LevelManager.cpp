@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 #include "surface.h"
 #include "Player.h"
+#include "Finish.h"
 
 #include <iostream>
 
@@ -13,13 +14,13 @@ namespace Tmpl8
 
 	LevelManager::LevelManager()
 	{
+		finish = new Finish;
 		state[0] = LevelState::Open;
 	}
 
 	void LevelManager::LoadLevel(const int level, Player& player)
 	{
 		currentLevel = level;
-		std::cout << level << " " << numLevels << std::endl;
 
 		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
 		else
@@ -46,13 +47,13 @@ namespace Tmpl8
 			{
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
-					if (GetContents(x, y) == TileContents::Finish) { finish.Draw(screen, x, y, dt); }
+					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt); }
 				}
 			}
 		}
 	}
 
-	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player)
+	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu)
 	{
 		switch (content)
 		{
@@ -62,8 +63,7 @@ namespace Tmpl8
 			obstacle.Trigger(tile, player);
 			break;
 		case LevelManager::TileContents::Finish:
-			//finish.Trigger();
-			std::cout << "Finish!" << std::endl;
+			finish->Trigger(menu);
 			break;
 		default:
 			break;

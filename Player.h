@@ -11,7 +11,7 @@ namespace Tmpl8
 		Player();
 		void Draw(Surface* screen_in);								// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
-		void Move(const float& dt_in, const Location& delta_loc, class LevelManager& levelmanager);	// Move Player
+		void Move(const float& dt_in, const Location& delta_loc, class LevelManager& levelmanager, class MenuManager& menu);	// Move Player
 		void Reset();
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
@@ -19,7 +19,7 @@ namespace Tmpl8
 		float GetRadius();
 	private:
 		void Death();	// Runs everything necessary on death
-		void CheckCollision(class LevelManager& levelmanager);
+		void CheckCollision(class LevelManager& levelmanager, class MenuManager& menu);
 	private:
 		bool CircleToAABBCollision(const Location& tile, const float half);
 	private:

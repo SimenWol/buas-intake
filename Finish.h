@@ -2,6 +2,7 @@
 
 #include "Location.h"
 #include "surface.h"
+#include "MenuManager.h"
 
 namespace Tmpl8
 {
@@ -10,7 +11,7 @@ namespace Tmpl8
 	public:
 		Finish();
 		void Draw(Surface* screen, const int tilex, const int tiley, const float& dt);
-		void Trigger();
+		void Trigger(MenuManager& menu);
 	private:
 		void UpdateFrame(const float& dt);
 	private:
