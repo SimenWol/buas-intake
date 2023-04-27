@@ -2,6 +2,8 @@
 
 #include "game.h"
 #include "surface.h"
+#include "LevelManager.h"
+
 #include <iostream>
 
 namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FOR EACH CHECK --> UPDATE SPRITES
@@ -9,12 +11,21 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 	class Button
 	{
 	public:
-		Button(int x_in, int y_in, int width_in, int height_in) // Button Constructor
+		Button(int x_in, int y_in, Sprite& sprite_in) // Button Constructor
 			:
-			x(x_in),
-			y(y_in),
-			width(width_in),
-			height(height_in) {};
+			x(x_in)
+			,y(y_in)
+			,sprite(sprite_in)
+		{
+			height = sprite.GetHeight();
+			width = sprite.GetWidth();
+		};
+
+		void SetLocation(int x_in, int y_in)
+		{
+			x = x_in;
+			y = y_in;
+		}
 
 		bool IsPressed(Game& game)
 		{
@@ -32,9 +43,49 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 			return true; // Returns true if all of the above checks out
 		};
 
-		void Draw(Surface* screen) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
+		void Draw(Surface* screen, Game& game) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
 		{
-			screen->Box(x, y, x + width, y + height, 0x00ff00);
+			if (sprite.Frames() == 3)
+			{
+				if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(2); }
+				else if (CheckMousePos(game)) { sprite.SetFrame(1); }
+				else { sprite.SetFrame(0); }
+			}
+
+			sprite.Draw(screen, x, y);
+
+			/* ======================== DEBUG ======================== */
+			//screen->Box(x, y, x + width, y + height, 0x00ff00);
+			/* ======================================================= */
+		}
+
+		void Draw(Surface* screen, Game& game, LevelManager::LevelState state) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
+		{
+			if (sprite.Frames() == 7) // Level Buttons
+			{
+				if (state == LevelManager::LevelState::Closed)
+				{
+					sprite.SetFrame(0);
+				}
+				else if (state == LevelManager::LevelState::Open)
+				{
+					if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(3); }
+					else if (CheckMousePos(game)) { sprite.SetFrame(2); }
+					else { sprite.SetFrame(1); }
+				}
+				else if (state == LevelManager::LevelState::Completed)
+				{
+					if (CheckMousePos(game) && prevMouseDown) { sprite.SetFrame(6); }
+					else if (CheckMousePos(game)) { sprite.SetFrame(5); }
+					else { sprite.SetFrame(4); }
+				}
+			}
+
+			sprite.Draw(screen, x, y);
+
+			/* ======================== DEBUG ======================== */
+			//screen->Box(x, y, x + width, y + height, 0x00ff00);
+			/* ======================================================= */
 		}
 
 	private:
@@ -74,6 +125,7 @@ namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FO
 		int x, y;
 		int width, height;
 		bool prevMouseDown = false;
+		Sprite& sprite;
 	};
 
 };

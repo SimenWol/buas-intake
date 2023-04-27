@@ -1,7 +1,6 @@
 #pragma once
 #include "Player.h"
 #include "Location.h"
-#include "LevelManager.h"
 
 namespace Tmpl8 {
 
@@ -15,8 +14,7 @@ public:
 	enum GameState
 	{
 		MENU,
-		PLAYING,
-		GAMEOVER
+		PLAYING
 	};
 public:
 	// Setters //

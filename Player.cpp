@@ -65,6 +65,11 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
+	void Player::Reset()
+	{
+		speed = { 0.0f, 0.0f };
+	}
+
 	void Player::Death()
 	{
 

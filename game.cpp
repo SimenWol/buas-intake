@@ -7,7 +7,7 @@
 
 #include <iostream> 
 #include <algorithm>
-#include <SDL_scancode.h>
+#include <SDL.h>
 
 namespace Tmpl8
 {
@@ -17,7 +17,14 @@ namespace Tmpl8
 		menu = new MenuManager;
 	}
 	
-	void Game::Shutdown() {}
+	void Game::Shutdown()
+	{
+		// Thanks to MAX in the 3dgep.com discord for sharing this code snippet.
+		// https://discord.com/channels/515453022097244160/686661689894240277/1095673953734901761
+		SDL_Event user_event;
+		user_event.type = SDL_QUIT;
+		SDL_PushEvent(&user_event);
+	}
 
 	void Game::Tick(float deltaTime)
 	{
@@ -34,26 +41,23 @@ namespace Tmpl8
 		{
 		case MENU:
 			// Draw Functions //
-			menu->Draw(screen, *this);
+			menu->Draw(screen, *this, level, player);
 			break;
 		case PLAYING:
 			// Game Logic //
-			// Define moving direction from keyboard inputs
-			if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0.0f, 0.0f }; }
-			else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
-			else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
-			player.Move(deltaTime, delta_loc, level);
+			if (menu->GetMenuState() == MenuManager::MenuState::Playing)
+			{
+				// Define moving direction from keyboard inputs
+				if (movingLeft && movingRight || (!movingLeft && !movingRight)) { delta_loc = { 0.0f, 0.0f }; }
+				else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
+				else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
+				player.Move(deltaTime, delta_loc, level);
+			}
 
 			// Draw Functions //
 			level.DrawLevel(screen, 1);
 			player.Draw(screen);
-
-			break;
-		case GAMEOVER:
-			// Draw Functions //
-			player.Draw(screen);
-			menu->Draw(screen, *this);
-			
+			menu->Draw(screen, *this, level, player);
 			break;
 		}
 
