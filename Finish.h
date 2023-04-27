@@ -13,7 +13,7 @@ namespace Tmpl8
 		void Draw(Surface* screen, const int tilex, const int tiley, const float& dt);
 		void Trigger(MenuManager& menu, class LevelManager& level);
 	private:
-		void UpdateFrame(const float& dt);
+		void UpdateFrame(const float& deltaTime);
 	private:
 		int frame = 0;
 		float timer = 0.1f;

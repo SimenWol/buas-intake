@@ -10,6 +10,7 @@ namespace Tmpl8
 {
 	Player::Player()
 		:player(new Surface("assets/Player/Basketball.png"), 1)
+		,deathFX(new Surface("assets/FX/hit.png"), 5)
 	{
 		radius = static_cast<float>(player.GetWidth()) / 2.0f;
 	}
@@ -72,9 +73,16 @@ namespace Tmpl8
 		speed = { 0.0f, 0.0f };
 	}
 
-	void Player::Death()
+	void Player::Death(Surface* screen, const float& deltaTime)
 	{
-
+			timer -= deltaTime;
+			if (timer < 0)
+			{
+				timer += frameTime;
+				if (++frame > 4) { frame = 0; timer += 1; }
+				deathFX.SetFrame(frame);
+			}
+		deathFX.Draw(screen, static_cast<int>(loc.x - radius - 13.5f), static_cast<int>(loc.y - radius - 13.5f));
 	}
 
 	void Player::CheckCollision(LevelManager& levelmanager, MenuManager& menu)

@@ -24,9 +24,9 @@ namespace Tmpl8
 		//std::cout << "Finish triggered!" << std::endl;
 	}
 
-	void Finish::UpdateFrame(const float& dt)
+	void Finish::UpdateFrame(const float& deltaTime)
 	{
-		timer -= dt;
+		timer -= deltaTime;
 		if (timer < 0) {
 			timer += frameTime;
 			if (++frame > 8) { frame = 0; }

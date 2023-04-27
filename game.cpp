@@ -56,6 +56,7 @@ namespace Tmpl8
 
 			// Draw Functions //
 			level.DrawLevel(screen, 1, deltaTime);
+			if (level.GetIsDead()) { player.Death(screen, deltaTime); }
 			player.Draw(screen);
 			menu->Draw(screen, *this, level, player);
 			break;

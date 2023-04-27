@@ -14,9 +14,9 @@ namespace Tmpl8
 		stakes.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
 	}
 
-	void WoodStakes::Trigger(LevelManager& level, Player& player)
+	void WoodStakes::Trigger(LevelManager& level, Player& player, MenuManager& menu)
 	{
-		level.Death();
+		level.Death(player, menu);
 		// Call Death Function
 		// End Timer
 

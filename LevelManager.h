@@ -30,14 +30,15 @@ namespace Tmpl8
 		LevelManager();
 		void LoadLevel(const int level, Player& player);
 		void DrawLevel(Surface* screen, const int level, const float& dt);
-		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
-		void Death(Player& player);
+		void CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu);
+		void Death(Player& player, MenuManager& menu);
 	public: // Getters & Setters //
 		LevelState GetLevelState(const int level) const;
 		void SetLevelState(const int level, const LevelState state_in);
 		TileContents GetContents(const Location& loc) const;
 		TileContents GetContents(const int x, const int y) const;
 		int GetCurrentLevel() const;
+		bool GetIsDead() const;
 	private: // Private Functions //
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
 		void Reset(const int level, Player& player);
@@ -47,6 +48,8 @@ namespace Tmpl8
 	private: // Private Variables //
 		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
+
+		bool isDead = false;
 
 		Location startLoc1 = {220.0f, 0.0f};
 
@@ -61,7 +64,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"--cbcbcbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"----cbcbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
@@ -72,7 +75,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"XooooooooooFoooooooooooooooooooooooooooo",
+			"XXoooooooooFoooooooooooooooooooooooooooo",
 			"----------------------------------------",
 		};
 	};

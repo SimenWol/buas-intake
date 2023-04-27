@@ -67,16 +67,17 @@ namespace Tmpl8
 			finish->Trigger(menu, *this);
 			break;
 		case TileContents::WoodStakes:
-			woodstakes.Trigger(*this, player);
+			woodstakes.Trigger(*this, player, menu);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void LevelManager::Death(Player& player)
+	void LevelManager::Death(Player& player, MenuManager& menu)
 	{
-		// player.Death();
+		isDead = true;
+		menu.SetMenuState(MenuManager::MenuState::LevelFailed);
 		// Stop Timer
 		// Show Death Screen
 	}
@@ -145,6 +146,8 @@ namespace Tmpl8
 
 	int LevelManager::GetCurrentLevel() const { return currentLevel; }
 
+	bool LevelManager::GetIsDead() const { return isDead; }
+
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
 		if (loc.x > screen->GetWidth()) { return; }
@@ -176,9 +179,11 @@ namespace Tmpl8
 			player.SetLoc(startLoc1);
 			break;
 		default:
-			std::cout << "Cannot reset specified level." << std::endl;
+			std::cout << "Unable to reset specified level." << std::endl;
 			break;
 		}
+
+		isDead = false;
 		// Reset Timer
 		// Reset whatever else needed
 	}
