@@ -41,26 +41,48 @@ namespace Tmpl8
 
 		Location startLoc1 = {220.0f, 0.0f};
 
-		char map[8][21] = {
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcb",
+		//char map[8][21] = {
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//	"cbcbcbcbcbcbcbcbcbcb",
+		//};
+
+		//char collisionMap[8][11] = {
+		//	"oooooooooo",
+		//	"oooooooooo",
+		//	"oooooooooo",
+		//	"oooooooooo",
+		//	"oooooooooo",
+		//	"oooooooooo",
+		//	"-oooo-oooo",
+		//	"----------",
+		//};
+
+		char map[8][81] = {
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
-		char collisionMap[8][11] = {
-			"oooooooooo",
-			"oooooooooo",
-			"oooooooooo",
-			"oooooooooo",
-			"oooooooooo",
-			"oooooooooo",
-			"-oooo-oooo",
-			"----------",
+		char collisionMap[8][41] = {
+			"oooooooooooooooooooooooooooooooooooooooo",
+			"oooooooooooooooooooooooooooooooooooooooo",
+			"oooooooooooooooooooooooooooooooooooooooo",
+			"oooooooooooooooooooooooooooooooooooooooo",
+			"oooooooooooooooooooooooooooooooooooooooo",
+			"oooooooooooooooooooooooooooooooooooooooo",
+			"-ooooooooooooooooooooooooooooooooooooooo",
+			"----------------------------------------",
 		};
 	};
 

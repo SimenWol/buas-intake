@@ -32,11 +32,11 @@ namespace Tmpl8
 	{
 		for (int y = 0; y < 8; y++)
 		{
-			for (int x = 0; x < 10; x++)
+			for (int x = 0; x < 80; x++)
 			{
 				float tx = static_cast<float>(map[y][x * 2] - 'a');
 				float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
-				DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, {tx, ty});
+				DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, { tx, ty });
 			}
 		}
 	}
@@ -47,7 +47,7 @@ namespace Tmpl8
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
-		if ((int(loc.x) > 10 * tileSize) || (int(loc.y) > 8 * tileSize)) { return TileContents::Empty; }
+		if ((int(loc.x) > 40 * tileSize) || (int(loc.y) > 8 * tileSize)) { return TileContents::Empty; }
 
 		char content = collisionMap[int(loc.y) / tileSize][int(loc.x) / tileSize];
 		// std::cout << "TileContent: " << content << std::endl;
@@ -71,14 +71,22 @@ namespace Tmpl8
 
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
+		if (loc.x > screen->GetWidth()) { return; }
+		if (loc.y > screen->GetHeight()) { return; }
+
 		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * tiles.GetWidth();
 		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * screen->GetWidth();
 
-		for (int i = 0; i < tileSize; i++, src += tiles.GetWidth(), dst += screen->GetWidth())
+		for (int i = 0; i < tileSize; i++, src += tiles.GetWidth(), dst += screen->GetWidth()) // y
 		{
-			for (int j = 0; j < tileSize; j++)
+			if (loc.y + i > screen->GetHeight()) { return; } // Stop drawing off-screen.
+
+			for (int j = 0; j < tileSize; j++) // x
 			{
-				dst[j] = src[j];
+				if ((loc.x + j + 1) <= screen->GetWidth()) // Stop drawing off-screen.
+				{
+					dst[j] = src[j];
+				}
 			}
 		}
 	}
