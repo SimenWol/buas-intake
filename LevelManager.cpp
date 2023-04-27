@@ -28,7 +28,7 @@ namespace Tmpl8
 		}
 	}
 
-	void LevelManager::DrawLevel(Surface* screen, const int level)
+	void LevelManager::DrawLevel(Surface* screen, const int level, const float& dt)
 	{
 		for (int y = 0; y < 8; y++)
 		{
@@ -39,6 +39,14 @@ namespace Tmpl8
 					float tx = static_cast<float>(map[y][x * 2] - 'a');
 					float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
 					DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, { tx, ty });
+				}
+			}
+
+			for (int x = 0; x < 40; x++)
+			{
+				if (!(GetContents(x, y) == TileContents::Empty))
+				{
+					if (GetContents(x, y) == TileContents::Finish) { finish.Draw(screen, x, y, dt); }
 				}
 			}
 		}
@@ -54,6 +62,7 @@ namespace Tmpl8
 			obstacle.Trigger(tile, player);
 			break;
 		case LevelManager::TileContents::Finish:
+			//finish.Trigger();
 			std::cout << "Finish!" << std::endl;
 			break;
 		default:
@@ -70,6 +79,31 @@ namespace Tmpl8
 		if ((int(loc.x) > 40 * tileSize) || (int(loc.y) > 8 * tileSize)) { return TileContents::Empty; }
 
 		char content = collisionMap[int(loc.y) / tileSize][int(loc.x) / tileSize];
+		// std::cout << "TileContent: " << content << std::endl;
+
+		switch (content)
+		{
+		case 'o':
+			return TileContents::Empty;
+			break;
+		case '-':
+			return TileContents::Obstacle;
+			break;
+		case 'F':
+			return TileContents::Finish;
+			break;
+		default:
+			std::cout << "Unknown content declaration, returned empty." << std::endl;
+			return TileContents::Empty;
+			break;
+		}
+	}
+
+	LevelManager::TileContents LevelManager::GetContents(const int x, const int y) const
+	{
+		if ((x > 40) || (y > 8)) { return TileContents::Empty; }
+
+		char content = collisionMap[y][x];
 		// std::cout << "TileContent: " << content << std::endl;
 
 		switch (content)

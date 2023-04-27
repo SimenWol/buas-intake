@@ -222,6 +222,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Finish.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MenuManager.cpp" />
@@ -232,6 +233,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Finish.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Location.h" />

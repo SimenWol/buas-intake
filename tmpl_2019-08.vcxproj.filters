@@ -12,6 +12,7 @@
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Finish.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Finish.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

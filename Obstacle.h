@@ -10,4 +10,4 @@ namespace Tmpl8
 	public:
 		void Trigger(const Location& tile, Player& player);
 	};
-}
+};

@@ -30,4 +30,4 @@ namespace Tmpl8
 		if (offY > offX) { player.DeflectY(offsetY); }
 		else if (offX > offY) { player.DeflectX(offsetX); }
 	}
-}
+};

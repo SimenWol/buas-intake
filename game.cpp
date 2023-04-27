@@ -55,7 +55,7 @@ namespace Tmpl8
 			}
 
 			// Draw Functions //
-			level.DrawLevel(screen, 1);
+			level.DrawLevel(screen, 1, deltaTime);
 			player.Draw(screen);
 			menu->Draw(screen, *this, level, player);
 			break;
