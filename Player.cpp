@@ -11,6 +11,7 @@ namespace Tmpl8
 	Player::Player()
 		:player(new Surface("assets/Player/Basketball.png"), 1)
 		,deathFX(new Surface("assets/FX/hit.png"), 5)
+		,bounceFX(new Surface("assets/FX/dust.png"), 8)
 	{
 		radius = static_cast<float>(player.GetWidth()) / 2.0f;
 	}
@@ -73,14 +74,26 @@ namespace Tmpl8
 		speed = { 0.0f, 0.0f };
 	}
 
+	void Player::BounceFX(Surface* screen, const float& deltaTime)
+	{
+		bounceTimer -= deltaTime;
+		if (bounceTimer < 0)
+		{
+			bounceTimer += frameTime;
+			bounceFX.SetFrame(bounceFrame);
+			if (++bounceFrame == 8) { bounceFrame = 0; playBounceFX = false; }
+		}
+		bounceFX.Draw(screen, static_cast<int>(bounceLoc.x), static_cast<int>(bounceLoc.y));
+	}
+
 	void Player::Death(Surface* screen, const float& deltaTime)
 	{
-			timer -= deltaTime;
-			if (timer < 0)
+			deathTimer -= deltaTime;
+			if (deathTimer < 0)
 			{
-				timer += frameTime;
-				if (++frame > 4) { frame = 0; timer += 1; }
-				deathFX.SetFrame(frame);
+				deathTimer += frameTime;
+				if (++deathFrame > 4) { deathFrame = 0; deathTimer += 1; }
+				deathFX.SetFrame(deathFrame);
 			}
 		deathFX.Draw(screen, static_cast<int>(loc.x - radius - 13.5f), static_cast<int>(loc.y - radius - 13.5f));
 	}
@@ -143,6 +156,9 @@ namespace Tmpl8
 		loc.y = (loc.y + offset);
 		speed.y = -(200.0f * bounceHeight);
 
+		playBounceFX = true;
+		bounceLoc = { loc.x - bounceFX.GetWidth() / 2, loc.y - bounceFX.GetHeight() / 2 };
+
 		/* ======================== DEBUG ======================== */
 		// std::cout << "DeflectY called." << std::endl;
 		/* ======================================================= */
@@ -151,6 +167,8 @@ namespace Tmpl8
 	Location Player::GetLoc() { return loc; }
 
 	float Player::GetRadius() { return radius; }
+
+	bool Player::GetBounceFX() { return playBounceFX; }
 
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
 	bool Player::CircleToAABBCollision(const Location& tile, const float half)

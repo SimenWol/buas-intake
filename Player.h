@@ -13,12 +13,14 @@ namespace Tmpl8
 		void SetLoc(const Location& loc_in);						// Set player starting position
 		void Move(const float& dt_in, const Location& delta_loc, class LevelManager& levelmanager, class MenuManager& menu);	// Move Player
 		void Reset();
+		void BounceFX(Surface* screen, const float& deltaTime);
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
 		void Death(Surface* screen, const float& deltaTime);
 	public: // Getters & Setters //
 		Location GetLoc();
 		float GetRadius();
+		bool GetBounceFX();
 	private: // Private Functions //
 		void CheckCollision(class LevelManager& levelmanager, class MenuManager& menu);
 	private: // Other Functions //
@@ -34,12 +36,18 @@ namespace Tmpl8
 		static constexpr float playerSpeed = 1.0f;		// Level of player speed
 		static constexpr float maxPlayerSpeed = 500.0f;	// Maximum allowed player speed (X direction only)
 
-		int frame = 0;
-		float timer = 0.1f;
-		float frameTime = 0.1f;
+		bool playBounceFX = false;
+		Location bounceLoc = { 0.0f, 0.0f };
+
+		int deathFrame = 0;
+		float deathTimer = 0.1f;
+		int bounceFrame = 0;
+		float bounceTimer = 0.05f;
+		float frameTime = 0.05f;
 
 		// Sprites //
 		Sprite player;
 		Sprite deathFX;
+		Sprite bounceFX;
 	};
 };
