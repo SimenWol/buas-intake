@@ -48,6 +48,9 @@ namespace Tmpl8
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
 					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y); }
+					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big); }
+					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium); }
+					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small); }
 					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt); }
 				}
 			}
@@ -68,6 +71,15 @@ namespace Tmpl8
 			break;
 		case TileContents::WoodStakes:
 			woodstakes.Trigger(*this, player, menu);
+			break;
+		case TileContents::SpikesBig:
+			spikes.Trigger(*this, player, menu, Spikes::Type::Big);
+			break;
+		case TileContents::SpikesMedium:
+			spikes.Trigger(*this, player, menu, Spikes::Type::Medium);
+			break;
+		case TileContents::SpikesSmall:
+			spikes.Trigger(*this, player, menu, Spikes::Type::Small);
 			break;
 		default:
 			break;
@@ -109,6 +121,15 @@ namespace Tmpl8
 		case 'X':
 			return TileContents::WoodStakes;
 			break;
+		case 'S':
+			return TileContents::SpikesBig;
+			break;
+		case 's':
+			return TileContents::SpikesMedium;
+			break;
+		case 'c':
+			return TileContents::SpikesSmall;
+			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;
 			return TileContents::Empty;
@@ -136,6 +157,15 @@ namespace Tmpl8
 			break;
 		case 'X':
 			return TileContents::WoodStakes;
+			break;
+		case 'S':
+			return TileContents::SpikesBig;
+			break;
+		case 's':
+			return TileContents::SpikesMedium;
+			break;
+		case 'c':
+			return TileContents::SpikesSmall;
 			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;

@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Obstacle.h"
 #include "WoodStakes.h"
+#include "Spikes.h"
 
 namespace Tmpl8
 {
@@ -25,6 +26,9 @@ namespace Tmpl8
 			Obstacle,
 			Finish,
 			WoodStakes,
+			SpikesBig,
+			SpikesMedium,
+			SpikesSmall,
 		};
 	public: // PUblic Functions //
 		LevelManager();
@@ -55,6 +59,7 @@ namespace Tmpl8
 
 		Obstacle obstacle;
 		WoodStakes woodstakes;
+		Spikes spikes;
 		Finish* finish;
 
 		char map[8][81] = {
@@ -64,7 +69,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"----cbcbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"------cbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
@@ -75,7 +80,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"XXoooooooooFoooooooooooooooooooooooooooo",
+			"SscooooooooFoooooooooooooooooooooooooooo",
 			"----------------------------------------",
 		};
 	};
