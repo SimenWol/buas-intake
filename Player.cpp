@@ -7,7 +7,7 @@
 namespace Tmpl8
 {
 	Player::Player()
-		:player(new Surface("assets/Temp/Ball.png"), 1)
+		:player(new Surface("assets/Player/Basketball.png"), 1)
 	{
 		radius = static_cast<float>(player.GetWidth()) / 2.0f;
 	}

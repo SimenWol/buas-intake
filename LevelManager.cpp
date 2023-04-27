@@ -6,7 +6,7 @@
 
 namespace Tmpl8
 {
-	Surface tiles("assets/Temp/tileset_forest.png");
+	Surface tiles("assets/Tilesets/tileset_forest.png");
 
 	// TODO: https://github.com/nlohmann/json JSON LEVEL LOADING --> level definitions --> Data Driven!!
 	// ASEPRITE? -> SPRITE DRAWIN
