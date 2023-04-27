@@ -34,9 +34,12 @@ namespace Tmpl8
 		{
 			for (int x = 0; x < 80; x++)
 			{
-				float tx = static_cast<float>(map[y][x * 2] - 'a');
-				float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
-				DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, { tx, ty });
+				if (!(map[y][x * 2] == '-') || !(map[y][x * 2 + 1] == '-'))
+				{
+					float tx = static_cast<float>(map[y][x * 2] - 'a');
+					float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
+					DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, { tx, ty });
+				}
 			}
 		}
 	}
@@ -79,11 +82,11 @@ namespace Tmpl8
 
 		for (int i = 0; i < tileSize; i++, src += tiles.GetWidth(), dst += screen->GetWidth()) // y
 		{
-			if (loc.y + i > screen->GetHeight()) { return; } // Stop drawing off-screen.
+			if (loc.y + i > screen->GetHeight()) { return; } // Stop drawing offscreen.
 
 			for (int j = 0; j < tileSize; j++) // x
 			{
-				if ((loc.x + j + 1) <= screen->GetWidth()) // Stop drawing off-screen.
+				if ((loc.x + j + 1) <= screen->GetWidth()) // Stop drawing offscreen.
 				{
 					dst[j] = src[j];
 				}
