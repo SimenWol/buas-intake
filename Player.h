@@ -12,13 +12,14 @@ namespace Tmpl8
 		Player();
 		void Draw(Surface* screen_in);								// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
-		void Move(const float& dt_in, const Location& delta_loc, const LevelManager& levelmanager);	// Move Player
+		void Move(const float& dt_in, const Location& delta_loc, LevelManager& levelmanager);	// Move Player
 		void Reset();
+
+		// TEMP
+		void Obstacle(const Location& tile, const LevelManager& levelmanager);
 	private:
 		void Death();	// Runs everything necessary on death
-		void CheckCollision(const LevelManager& levelmanager);
-		void CallType(const LevelManager::TileContents& content, const Location& tile, const LevelManager& levelmanager);
-		void Obstacle(const Location& tile, const LevelManager& levelmanager);
+		void CheckCollision(LevelManager& levelmanager);
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
 	private:

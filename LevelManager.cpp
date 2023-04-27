@@ -44,6 +44,23 @@ namespace Tmpl8
 		}
 	}
 
+	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player)
+	{
+		switch (content)
+		{
+		case LevelManager::TileContents::Empty:
+			break;
+		case LevelManager::TileContents::Obstacle:
+			player.Obstacle(tile, *this);
+			break;
+		case LevelManager::TileContents::Finish:
+			std::cout << "Finish!" << std::endl;
+			break;
+		default:
+			break;
+		}
+	}
+
 	// Sends the state of the specified level
 	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level - 1]; }
 
@@ -60,8 +77,11 @@ namespace Tmpl8
 		case 'o':
 			return TileContents::Empty;
 			break;
-		case'-':
+		case '-':
 			return TileContents::Obstacle;
+			break;
+		case 'F':
+			return TileContents::Finish;
 			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;

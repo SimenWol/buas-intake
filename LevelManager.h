@@ -20,12 +20,14 @@ namespace Tmpl8
 		enum class TileContents
 		{
 			Empty,
-			Obstacle
+			Obstacle,
+			Finish
 		};
 	public:
 		LevelManager();
 		void LoadLevel(const int level, class Player& player);
 		void DrawLevel(Surface* screen, const int level);
+		void CallTrigger(const TileContents& content, const Location& tile, Player& player);
 		LevelState GetLevelState(const int level) const;
 		TileContents GetContents(const Location& loc) const;
 		int GetCurrentLevel() const;
@@ -81,7 +83,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"-ooooooooooooooooooooooooooooooooooooooo",
+			"-ooooooooooFoooooooooooooooooooooooooooo",
 			"----------------------------------------",
 		};
 	};

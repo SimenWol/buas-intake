@@ -32,7 +32,7 @@ namespace Tmpl8
 		loc.y = loc_in.y;
 	}
 
-	void Player::Move(const float& deltaTime, const Location& delta_loc, const LevelManager& levelmanager)
+	void Player::Move(const float& deltaTime, const Location& delta_loc, LevelManager& levelmanager)
 	{
 		// Update player location //
 		loc.x += speed.x * deltaTime;
@@ -75,7 +75,7 @@ namespace Tmpl8
 
 	}
 
-	void Player::CheckCollision(const LevelManager& levelmanager)
+	void Player::CheckCollision(LevelManager& levelmanager)
 	{
 		// Calculate center of which tiles to check
 		float half = 0.5 * levelmanager.tileSize;
@@ -88,48 +88,34 @@ namespace Tmpl8
 		// TopLeft
 		if (CircleToAABBCollision({ leftX, upperY }, half))
 		{
-			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) }), 
-				{ leftX, upperY }, levelmanager);
+			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x - radius), (loc.y - radius) }), 
+				{ leftX, upperY }, *this);
 		}
 
 		// BottomLeft
 		if (CircleToAABBCollision({ leftX, lowerY }, half))
 		{
-			CallType(levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) }), 
-				{ leftX, lowerY }, levelmanager);
+			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x - radius), (loc.y + radius) }),
+				{ leftX, lowerY }, *this);
 		}
 
 		// TopRight
 		if (CircleToAABBCollision({ rightX, upperY }, half))
 		{
-			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) }), 
-				{ rightX, upperY }, levelmanager);
+			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x + radius), (loc.y - radius) }),
+				{ rightX, upperY }, *this);
 		}
 
 		// BottomRight
 		if (CircleToAABBCollision({ rightX, lowerY }, half))
 		{
-			CallType(levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) }), 
-				{ rightX, lowerY }, levelmanager);
+			levelmanager.CallTrigger(levelmanager.GetContents({ (loc.x + radius), (loc.y + radius) }),
+				{ rightX, lowerY }, *this);
 		}
 
 		/* ======================== DEBUG ======================== */
 		//std::cout << "Collision checks: " << leftX << " " << rightX << " " << upperY << " " << lowerY << " " << std::endl;
 		/* ======================================================= */
-	}
-
-	void Player::CallType(const LevelManager::TileContents& content, const Location& tile, const LevelManager& levelmanager)
-	{
-		switch (content)
-		{
-		case LevelManager::TileContents::Empty:
-			break;
-		case LevelManager::TileContents::Obstacle:
-			Obstacle(tile, levelmanager);
-			break;
-		default:
-			break;
-		}
 	}
 
 	void Player::Obstacle(const Location& tile, const LevelManager& levelmanager)
