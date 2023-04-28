@@ -6,6 +6,7 @@
 #include "Obstacle.h"
 #include "WoodStakes.h"
 #include "Spikes.h"
+#include "Water.h"
 
 namespace Tmpl8
 {
@@ -26,6 +27,7 @@ namespace Tmpl8
 			ArrowSign,
 			Obstacle,
 			Finish,
+			Water,
 			WoodStakes,
 			SpikesBig,
 			SpikesMedium,
@@ -59,6 +61,7 @@ namespace Tmpl8
 		Location startLoc1 = {220.0f, 0.0f};
 
 		Obstacle obstacle;
+		Water water;
 		WoodStakes woodstakes;
 		Spikes spikes;
 		Finish* finish;
@@ -73,7 +76,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"------cbcb--cbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcb----cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
 		char collisionMap[8][41] = {
@@ -84,7 +87,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"SscooAoooooFoooooooooooooooooooooooooooo",
-			"----------------------------------------",
+			"-------WW-------------------------------",
 		};
 	};
 

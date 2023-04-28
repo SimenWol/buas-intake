@@ -49,6 +49,7 @@ namespace Tmpl8
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
 					if (GetContents(x, y) == TileContents::ArrowSign) { arrowSign.Draw(screen, x * tileSize, y * tileSize); }
+					if (GetContents(x, y) == TileContents::Water) { water.Draw(screen, x, y, dt); }
 					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y); }
 					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big); }
 					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium); }
@@ -70,6 +71,9 @@ namespace Tmpl8
 			break;
 		case TileContents::Finish:
 			finish->Trigger(menu, *this);
+			break;
+		case TileContents::Water:
+			water.Trigger(*this, player, menu);
 			break;
 		case TileContents::WoodStakes:
 			woodstakes.Trigger(*this, player, menu);
@@ -93,7 +97,6 @@ namespace Tmpl8
 		isDead = true;
 		menu.SetMenuState(MenuManager::MenuState::LevelFailed);
 		// Stop Timer
-		// Show Death Screen
 	}
 
 	// Sends the state of the specified level
@@ -122,6 +125,9 @@ namespace Tmpl8
 			break;
 		case 'F':
 			return TileContents::Finish;
+			break;
+		case 'W':
+			return TileContents::Water;
 			break;
 		case 'X':
 			return TileContents::WoodStakes;
@@ -162,6 +168,9 @@ namespace Tmpl8
 			break;
 		case 'F':
 			return TileContents::Finish;
+			break;
+		case 'W':
+			return TileContents::Water;
 			break;
 		case 'X':
 			return TileContents::WoodStakes;
