@@ -49,14 +49,12 @@ private:
 	Camera camera;
 
 	GameState state = GameState::MENU;
-	
-	Location delta_loc;
 
-	// TODO: REMOVE STATICS AND UPDATE BUTTON CLASS!! --> Proper Button Calls
 	int mousex = 0;
 	int mousey = 0;
 	bool mouseDown = false;
 
+	Location delta_loc;
 	bool movingLeft = false;
 	bool movingRight = false;
 };

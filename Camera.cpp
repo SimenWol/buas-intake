@@ -15,6 +15,14 @@ namespace Tmpl8
 			offset.x = 0.0f;
 		}
 
+		//if (playerLoc.y > (screen->GetHeight() / 2.0f))
+		//{
+		//	offset.y = playerLoc.x - screen->GetHeight() / 2.0f;
+		//}
+		//else
+		//{
+		//	offset.y = 0.0f;
+		//}
 
 		//std::cout << "Offset: " << offset.x << ", " << offset.y << std::endl;
 	}

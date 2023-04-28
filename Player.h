@@ -32,7 +32,7 @@ namespace Tmpl8
 		float radius; // Radius of the player ball
 
 		static constexpr float gravity = 1.0f;			// Level of gravity
-		static constexpr float bounceHeight = 1.0f;		// Level of bounce height
+		static constexpr float bounceHeight = 2.0f;		// Level of bounce height
 		static constexpr float playerSpeed = 1.0f;		// Level of player speed
 		static constexpr float maxPlayerSpeed = 500.0f;	// Maximum allowed player speed (X direction only)
 

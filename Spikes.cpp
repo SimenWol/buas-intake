@@ -37,7 +37,6 @@ namespace Tmpl8
 	void Spikes::Trigger(LevelManager& level, Player& player, MenuManager& menu, const Type type)
 	{
 		level.Death(player, menu);
-		// End Timer
 
 		std::cout << "Spikes triggered!" << std::endl;
 	}

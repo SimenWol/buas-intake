@@ -18,7 +18,6 @@ namespace Tmpl8
 	void WoodStakes::Trigger(LevelManager& level, Player& player, MenuManager& menu)
 	{
 		level.Death(player, menu);
-		// End Timer
 
 		std::cout << "WoodStakes triggered!" << std::endl;
 	}

@@ -20,9 +20,8 @@ namespace Tmpl8
 	{
 		level.SetLevelState(level.GetCurrentLevel(), LevelManager::LevelState::Completed);
 		menu.SetMenuState(MenuManager::MenuState::LevelComplete);
-		// End Timer
 		
-		//std::cout << "Finish triggered!" << std::endl;
+		std::cout << "Finish triggered!" << std::endl;
 	}
 
 	void Finish::UpdateFrame(const float& deltaTime)

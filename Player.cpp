@@ -22,12 +22,12 @@ namespace Tmpl8
 			static_cast<int>(loc.y - drawOffset.y - radius));
 
 		/* ======================== DEBUG ======================== */
-		for (int i = 0; i < 64; i++)
-		{
-			float r1 = static_cast<float>(i) * PI / 32, r2 = static_cast<float>(i + 1) * PI / 32;
-			screen_in->Line(loc.x - drawOffset.x - radius * sinf(r1), loc.y - drawOffset.y - radius * cosf(r1),
-				loc.x - drawOffset.x - radius * sinf(r2), loc.y - drawOffset.y - radius * cosf(r2), 0xff0000);
-		}
+		//for (int i = 0; i < 64; i++)
+		//{
+		//	float r1 = static_cast<float>(i) * PI / 32, r2 = static_cast<float>(i + 1) * PI / 32;
+		//	screen_in->Line(loc.x - drawOffset.x - radius * sinf(r1), loc.y - drawOffset.y - radius * cosf(r1),
+		//		loc.x - drawOffset.x - radius * sinf(r2), loc.y - drawOffset.y - radius * cosf(r2), 0xff0000);
+		//}
 		/* ======================================================= */
 	}
 
@@ -73,6 +73,7 @@ namespace Tmpl8
 	void Player::Reset()
 	{
 		speed = { 0.0f, 0.0f };
+		playBounceFX = false;
 	}
 
 	void Player::BounceFX(Surface* screen, const float& deltaTime, const Location& drawOffset)
