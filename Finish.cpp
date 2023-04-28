@@ -9,10 +9,11 @@ namespace Tmpl8
 		:flag(new Surface("assets/Objects/flag.png"), 9)
 	{}
 
-	void Finish::Draw(Surface* screen, const int tilex, const int tiley, const float& dt)
+	void Finish::Draw(Surface* screen, const int tilex, const int tiley, const float& dt, const Location& drawOffset)
 	{
 		UpdateFrame(dt);
-		flag.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
+		flag.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x),
+			tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 	}
 
 	void Finish::Trigger(MenuManager& menu, LevelManager& level)

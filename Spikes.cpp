@@ -9,21 +9,24 @@ namespace Tmpl8
 		:spikesSprite(new Surface("assets/Enemies/spikes.png"), 4)
 	{}
 
-	void Spikes::Draw(Surface* screen, const int tilex, const int tiley, const Type type)
+	void Spikes::Draw(Surface* screen, const int tilex, const int tiley, const Type type, const Location& drawOffset)
 	{
 		switch (type)
 		{
 		case Type::Big:
 			spikesSprite.SetFrame(0);
-			spikesSprite.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
+			spikesSprite.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x), 
+				tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 			break;
 		case Type::Medium:
 			spikesSprite.SetFrame(1);
-			spikesSprite.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
+			spikesSprite.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x),
+				tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 			break;
 		case Type::Small:
 			spikesSprite.SetFrame(2);
-			spikesSprite.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
+			spikesSprite.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x),
+				tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 			break;
 		default:
 			std::cout << "Unknown spike type." << std::endl;

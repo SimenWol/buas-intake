@@ -16,7 +16,7 @@ namespace Tmpl8
 		}
 
 
-		std::cout << "Offset: " << offset.x << ", " << offset.y << std::endl;
+		//std::cout << "Offset: " << offset.x << ", " << offset.y << std::endl;
 	}
 
 	Location Camera::GetOffset() { return offset; }

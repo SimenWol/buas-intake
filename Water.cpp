@@ -9,10 +9,11 @@ namespace Tmpl8
 		:water(new Surface("assets/Enemies/water.png"), 8)
 	{}
 
-	void Water::Draw(Surface* screen, const int tilex, const int tiley, const float& deltaTime)
+	void Water::Draw(Surface* screen, const int tilex, const int tiley, const float& deltaTime, const Location& drawOffset)
 	{
 		UpdateFrame(deltaTime);
-		water.Draw(screen, tilex * LevelManager::tileSize, tiley * LevelManager::tileSize);
+		water.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x), 
+			tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 	}
 
 	void Water::Trigger(LevelManager& level, Player& player, MenuManager& menu)
