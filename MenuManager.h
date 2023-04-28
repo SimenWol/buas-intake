@@ -3,6 +3,7 @@
 #include "surface.h"
 #include "game.h"
 #include "Button.h"
+#include "Timer.h"
 
 namespace Tmpl8
 {
@@ -21,8 +22,8 @@ namespace Tmpl8
 		};
 	public:
 		MenuManager();
-		void Draw(Surface* screen_in, Game& game_in, LevelManager& level);
-		void Tick(Game& game_in, LevelManager& level_in, Player& player);
+		void Draw(Surface* screen_in, Game& game_in, LevelManager& level, Timer& timer);
+		void Tick(Game& game_in, LevelManager& level_in, Player& player, Timer& timer);
 		void SetMenuState(MenuState state_in);
 		MenuState GetMenuState();
 	private:

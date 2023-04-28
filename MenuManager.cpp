@@ -40,7 +40,7 @@ namespace Tmpl8
 		,menuSmallButton(225, 219, menuSmallButtonSprite)
 	{}
 
-	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in) // Function that draws the required menu to the screen.
+	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in, Timer& timer) // Function that draws the required menu to the screen.
 	{
 
 		switch (menuState)
@@ -88,6 +88,7 @@ namespace Tmpl8
 		case Playing:
 			// Draw UI Elements
 			pauseButton.Draw(screen_in, game_in);
+			timer.Draw();
 			// Timer
 			// Anything else UI
 			break;
@@ -104,7 +105,7 @@ namespace Tmpl8
 		}
 	}
 
-	void MenuManager::Tick(Game& game_in, LevelManager& level_in, Player& player)
+	void MenuManager::Tick(Game& game_in, LevelManager& level_in, Player& player, Timer& timer)
 	{
 		switch (menuState)
 		{
@@ -112,7 +113,7 @@ namespace Tmpl8
 			// Button Logic
 			if (retryButton.IsPressed(game_in))
 			{
-				level_in.LoadLevel(level_in.GetCurrentLevel(), player);
+				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
 				SetMenuState(Playing);
 			}
 			if (nextLevelButton.IsPressed(game_in)) { std::cout << "Next Level!" << std::endl; } // TODO: NEXT LEVEL!
@@ -126,7 +127,7 @@ namespace Tmpl8
 			// Button Logic
 			if (retryButton.IsPressed(game_in))
 			{
-				level_in.LoadLevel(level_in.GetCurrentLevel(), player);
+				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
 				SetMenuState(Playing);
 			}
 			if (menuSmallButton.IsPressed(game_in))
@@ -141,7 +142,7 @@ namespace Tmpl8
 			if (level_in.GetLevelState(1) != LevelManager::LevelState::Closed
 				&& levelOneButton.IsPressed(game_in))
 			{
-				level_in.LoadLevel(1, player);
+				level_in.LoadLevel(1, player, timer);
 				game_in.SetState(game_in.PLAYING);
 				SetMenuState(Playing);
 			}
@@ -162,10 +163,10 @@ namespace Tmpl8
 			}
 			if (restartButton.IsPressed(game_in))
 			{
-				level_in.LoadLevel(level_in.GetCurrentLevel(), player);
+				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
 				SetMenuState(Playing);
 			}
-			if (restartButton.IsPressed(game_in)) { level_in.LoadLevel(level_in.GetCurrentLevel(), player); }
+			if (restartButton.IsPressed(game_in)) { level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer); }
 			break;
 		case Tmpl8::MenuManager::Playing:
 			// Button Logic

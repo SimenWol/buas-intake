@@ -3,6 +3,7 @@
 #include "surface.h"
 #include "Location.h"
 #include "Player.h"
+#include "Timer.h"
 #include "Obstacle.h"
 #include "WoodStakes.h"
 #include "Spikes.h"
@@ -35,7 +36,7 @@ namespace Tmpl8
 		};
 	public: // PUblic Functions //
 		LevelManager();
-		void LoadLevel(const int level, Player& player);
+		void LoadLevel(const int level, Player& player, Timer& timer);
 		void DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		void Death(Player& player, class MenuManager& menu);

@@ -41,12 +41,12 @@ namespace Tmpl8
 		{
 		case MENU:
 			// Draw Functions //
-			menu->Tick(*this, level, player);
-			menu->Draw(screen, *this, level);
+			menu->Tick(*this, level, player, timer);
+			menu->Draw(screen, *this, level, timer);
 			break;
 		case PLAYING:
 			// Game Logic //
-			menu->Tick(*this, level, player);
+			menu->Tick(*this, level, player, timer);
 
 			if (menu->GetMenuState() == MenuManager::MenuState::Playing)
 			{
@@ -60,7 +60,7 @@ namespace Tmpl8
 				camera.Tick(screen, player.GetLoc());
 
 				// Update Timer
-				timer.Tick(deltaTime);
+				timer.Tick(deltaTime, level, player, *menu);
 			}
 
 			// Draw Functions //
@@ -68,7 +68,7 @@ namespace Tmpl8
 			if (level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
 			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
 			player.Draw(screen, camera.GetOffset());
-			menu->Draw(screen, *this, level);
+			menu->Draw(screen, *this, level, timer);
 			break;
 		}
 

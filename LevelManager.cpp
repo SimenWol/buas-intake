@@ -16,7 +16,7 @@ namespace Tmpl8
 		state[0] = LevelState::Open;
 	}
 
-	void LevelManager::LoadLevel(const int level, Player& player)
+	void LevelManager::LoadLevel(const int level, Player& player, Timer& timer)
 	{
 		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
 		else
@@ -28,6 +28,7 @@ namespace Tmpl8
 			{
 			case 1:
 				player.SetLoc(startLoc1);
+				timer.SetTime(10.0f);
 			default:
 				break;
 			}
