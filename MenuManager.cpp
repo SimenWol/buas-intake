@@ -88,8 +88,7 @@ namespace Tmpl8
 		case Playing:
 			// Draw UI Elements
 			pauseButton.Draw(screen_in, game_in);
-			timer.Draw();
-			// Timer
+			timer.Draw(screen_in, screen_in->GetWidth() / 2, 10);
 			// Anything else UI
 			break;
 		case Settings:

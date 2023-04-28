@@ -28,7 +28,7 @@ namespace Tmpl8
 			{
 			case 1:
 				player.SetLoc(startLoc1);
-				timer.SetTime(10.0f);
+				timer.SetTime(25.0f);
 			default:
 				break;
 			}
