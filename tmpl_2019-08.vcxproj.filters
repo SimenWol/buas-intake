@@ -17,6 +17,7 @@
     <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="Water.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Spikes.h" />
     <ClInclude Include="Water.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

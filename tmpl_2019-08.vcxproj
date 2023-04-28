@@ -232,6 +232,7 @@
     <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
+    <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Water.cpp" />
     <ClCompile Include="WoodStakes.cpp" />
   </ItemGroup>
@@ -248,6 +249,7 @@
     <ClInclude Include="Spikes.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
+    <ClInclude Include="Timer.h" />
     <ClInclude Include="Water.h" />
     <ClInclude Include="WoodStakes.h" />
   </ItemGroup>

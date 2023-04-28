@@ -3,6 +3,7 @@
 #include "LevelManager.h"
 #include "Location.h"
 #include "Camera.h"
+#include "Timer.h"
 
 namespace Tmpl8 {
 
@@ -44,6 +45,7 @@ private:
 	Surface* screen;
 	MenuManager* menu;
 	LevelManager level;
+	Timer timer;
 	Player player;
 
 	Camera camera;

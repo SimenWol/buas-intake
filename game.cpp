@@ -55,6 +55,9 @@ namespace Tmpl8
 
 				// Update Camera Offset
 				camera.Tick(screen, player.GetLoc());
+
+				// Update Timer
+				timer.Tick(deltaTime);
 			}
 
 			// Draw Functions //
