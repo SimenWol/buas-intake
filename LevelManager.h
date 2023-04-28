@@ -36,7 +36,7 @@ namespace Tmpl8
 	public: // PUblic Functions //
 		LevelManager();
 		void LoadLevel(const int level, Player& player);
-		void DrawLevel(Surface* screen, const int level, const float& dt);
+		void DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		void Death(Player& player, class MenuManager& menu);
 	public: // Getters & Setters //
@@ -47,7 +47,7 @@ namespace Tmpl8
 		int GetCurrentLevel() const;
 		bool GetIsDead() const;
 	private: // Private Functions //
-		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoc);
+		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoct);
 		void Reset(const int level, Player& player);
 	public: // Public Variables //
 		static constexpr int tileSize = 48; // Width & Height for each tile
@@ -75,7 +75,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"------cbcb--cbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"--------cb--cbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcb----cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
@@ -86,7 +86,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"SscooAoooooFoooooooooooooooooooooooooooo",
+			"SscXoAoooooFoooooooooooooooooooooooooooo",
 			"-------WW-------------------------------",
 		};
 	};

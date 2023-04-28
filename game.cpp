@@ -52,13 +52,16 @@ namespace Tmpl8
 				else if (movingLeft) { delta_loc = { -1.0f, 0.0f }; }
 				else if (movingRight) { delta_loc = { 1.0f, 0.0f }; }
 				player.Move(deltaTime, delta_loc, level, *menu);
+
+				// Update Camera Offset
+				camera.Tick(screen, player.GetLoc());
 			}
 
 			// Draw Functions //
-			level.DrawLevel(screen, 1, deltaTime);
-			if (level.GetIsDead()) { player.Death(screen, deltaTime); }
-			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime); }
-			player.Draw(screen);
+			level.DrawLevel(screen, 1, deltaTime, camera.GetOffset());
+			if (level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
+			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
+			player.Draw(screen, camera.GetOffset());
 			menu->Draw(screen, *this, level, player);
 			break;
 		}

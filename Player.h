@@ -9,14 +9,14 @@ namespace Tmpl8
 	{
 	public: // Public Functions //
 		Player();
-		void Draw(Surface* screen_in);								// Draw player
+		void Draw(Surface* screen_in, const Location& drawOffset);	// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
 		void Move(const float& dt_in, const Location& delta_loc, class LevelManager& levelmanager, class MenuManager& menu);	// Move Player
 		void Reset();
-		void BounceFX(Surface* screen, const float& deltaTime);
+		void BounceFX(Surface* screen, const float& deltaTime, const Location& drawOffset);
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
-		void Death(Surface* screen, const float& deltaTime);
+		void DeathFX(Surface* screen, const float& deltaTime, const Location& drawOffset);
 	public: // Getters & Setters //
 		Location GetLoc();
 		float GetRadius();

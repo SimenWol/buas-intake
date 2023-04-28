@@ -16,16 +16,17 @@ namespace Tmpl8
 		radius = static_cast<float>(player.GetWidth()) / 2.0f;
 	}
 
-	void Player::Draw(Surface* screen_in)
+	void Player::Draw(Surface* screen_in, const Location& drawOffset)
 	{
-		player.Draw(screen_in, static_cast<int>(loc.x - radius), static_cast<int>(loc.y - radius));
+		player.Draw(screen_in, static_cast<int>(loc.x - drawOffset.x - radius), 
+			static_cast<int>(loc.y - drawOffset.y - radius));
 
 		/* ======================== DEBUG ======================== */
 		for (int i = 0; i < 64; i++)
 		{
 			float r1 = static_cast<float>(i) * PI / 32, r2 = static_cast<float>(i + 1) * PI / 32;
-			screen_in->Line(loc.x - radius * sinf(r1), loc.y - radius * cosf(r1),
-				loc.x - radius * sinf(r2), loc.y - radius * cosf(r2), 0xff0000);
+			screen_in->Line(loc.x - drawOffset.x - radius * sinf(r1), loc.y - drawOffset.y - radius * cosf(r1),
+				loc.x - drawOffset.x - radius * sinf(r2), loc.y - drawOffset.y - radius * cosf(r2), 0xff0000);
 		}
 		/* ======================================================= */
 	}
@@ -74,7 +75,7 @@ namespace Tmpl8
 		speed = { 0.0f, 0.0f };
 	}
 
-	void Player::BounceFX(Surface* screen, const float& deltaTime)
+	void Player::BounceFX(Surface* screen, const float& deltaTime, const Location& drawOffset)
 	{
 		bounceTimer -= deltaTime;
 		if (bounceTimer < 0)
@@ -83,10 +84,11 @@ namespace Tmpl8
 			bounceFX.SetFrame(bounceFrame);
 			if (++bounceFrame == 8) { bounceFrame = 0; playBounceFX = false; }
 		}
-		bounceFX.Draw(screen, static_cast<int>(bounceLoc.x), static_cast<int>(bounceLoc.y));
+		bounceFX.Draw(screen, static_cast<int>(bounceLoc.x - drawOffset.x), 
+			static_cast<int>(bounceLoc.y - drawOffset.y));
 	}
 
-	void Player::Death(Surface* screen, const float& deltaTime)
+	void Player::DeathFX(Surface* screen, const float& deltaTime, const Location& drawOffset)
 	{
 			deathTimer -= deltaTime;
 			if (deathTimer < 0)
@@ -95,7 +97,8 @@ namespace Tmpl8
 				if (++deathFrame > 4) { deathFrame = 0; deathTimer += 1; }
 				deathFX.SetFrame(deathFrame);
 			}
-		deathFX.Draw(screen, static_cast<int>(loc.x - radius - 13.5f), static_cast<int>(loc.y - radius - 13.5f));
+		deathFX.Draw(screen, static_cast<int>(loc.x - drawOffset.x - radius - 13.5f),
+			static_cast<int>(loc.y - drawOffset.y - radius - 13.5f));
 	}
 
 	void Player::CheckCollision(LevelManager& levelmanager, MenuManager& menu)

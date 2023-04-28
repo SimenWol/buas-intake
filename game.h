@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "LevelManager.h"
 #include "Location.h"
+#include "Camera.h"
 
 namespace Tmpl8 {
 
@@ -44,6 +45,8 @@ private:
 	MenuManager* menu;
 	LevelManager level;
 	Player player;
+
+	Camera camera;
 
 	GameState state = GameState::MENU;
 	

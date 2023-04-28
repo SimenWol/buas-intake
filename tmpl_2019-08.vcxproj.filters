@@ -16,6 +16,7 @@
     <ClCompile Include="WoodStakes.cpp" />
     <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="Water.cpp" />
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -35,6 +36,7 @@
     <ClInclude Include="WoodStakes.h" />
     <ClInclude Include="Spikes.h" />
     <ClInclude Include="Water.h" />
+    <ClInclude Include="Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

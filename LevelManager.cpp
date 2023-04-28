@@ -30,7 +30,7 @@ namespace Tmpl8
 		}
 	}
 
-	void LevelManager::DrawLevel(Surface* screen, const int level, const float& dt)
+	void LevelManager::DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset)
 	{
 		for (int y = 0; y < 8; y++)
 		{
@@ -40,7 +40,9 @@ namespace Tmpl8
 				{
 					float tx = static_cast<float>(map[y][x * 2] - 'a');
 					float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
-					DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, { tx, ty });
+
+					DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x), 
+						static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
 				}
 			}
 
@@ -48,7 +50,11 @@ namespace Tmpl8
 			{
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
-					if (GetContents(x, y) == TileContents::ArrowSign) { arrowSign.Draw(screen, x * tileSize, y * tileSize); }
+					if (GetContents(x, y) == TileContents::ArrowSign) 
+					{ 
+						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x), 
+							y * tileSize - static_cast<int>(drawOffset.y)); 
+					}
 					if (GetContents(x, y) == TileContents::Water) { water.Draw(screen, x, y, dt); }
 					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y); }
 					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big); }
@@ -205,13 +211,15 @@ namespace Tmpl8
 
 		for (int i = 0; i < tileSize; i++, src += tiles.GetWidth(), dst += screen->GetWidth()) // y
 		{
-			if (loc.y + i > screen->GetHeight()) { return; } // Stop drawing offscreen.
-
-			for (int j = 0; j < tileSize; j++) // x
+			if (loc.y + i + 1 <= screen->GetHeight() && loc.y + i >= 0) // Stop drawing offscreen.
 			{
-				if ((loc.x + j + 1) <= screen->GetWidth()) // Stop drawing offscreen.
+				for (int j = 0; j < tileSize; j++) // x
 				{
-					dst[j] = src[j];
+
+					if ((loc.x + j + 1) <= screen->GetWidth() && loc.x + j >= 0) // Stop drawing offscreen.
+					{
+						dst[j] = src[j];
+					}
 				}
 			}
 		}
