@@ -34,7 +34,7 @@ namespace Tmpl8
 	{
 		for (int y = 0; y < 8; y++)
 		{
-			for (int x = 0; x < 80; x++)
+			for (int x = 0; x < 40; x++)
 			{
 				if (!(map[y][x * 2] == '-') || !(map[y][x * 2 + 1] == '-'))
 				{
