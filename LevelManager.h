@@ -48,7 +48,7 @@ namespace Tmpl8
 		bool GetIsDead() const;
 	private: // Private Functions //
 		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoct);
-		void Reset(const int level, Player& player);
+		void Reset(Player& player);
 	public: // Public Variables //
 		static constexpr int tileSize = 48; // Width & Height for each tile
 		static constexpr int numLevels = 1;

@@ -9,9 +9,6 @@ namespace Tmpl8
 {
 	Surface tiles("assets/Tilesets/tileset_forest.png");
 
-	// TODO: https://github.com/nlohmann/json JSON LEVEL LOADING --> level definitions --> Data Driven!!
-	// ASEPRITE? -> SPRITE DRAWIN
-
 	LevelManager::LevelManager()
 		:arrowSign(new Surface("assets/Objects/sign_arrow.png"), 1)
 	{
@@ -21,12 +18,19 @@ namespace Tmpl8
 
 	void LevelManager::LoadLevel(const int level, Player& player)
 	{
-		currentLevel = level;
-
 		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
 		else
 		{
-			Reset(level, player);
+			currentLevel = level;
+			Reset(player);
+
+			switch (level)
+			{
+			case 1:
+				player.SetLoc(startLoc1);
+			default:
+				break;
+			}
 		}
 	}
 
@@ -225,22 +229,11 @@ namespace Tmpl8
 		}
 	}
 
-	void LevelManager::Reset(const int level, Player& player)
+	void LevelManager::Reset(Player& player)
 	{
-		switch (level)
-		{
-		case 1:
 			player.Reset();
-			player.SetLoc(startLoc1);
-			break;
-		default:
-			std::cout << "Unable to reset specified level." << std::endl;
-			break;
-		}
 
-		isDead = false;
-		// Reset Timer
-		// Reset whatever else needed
+			isDead = false;
 	}
 
 };

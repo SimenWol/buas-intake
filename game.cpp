@@ -41,10 +41,13 @@ namespace Tmpl8
 		{
 		case MENU:
 			// Draw Functions //
-			menu->Draw(screen, *this, level, player);
+			menu->Tick(*this, level, player);
+			menu->Draw(screen, *this, level);
 			break;
 		case PLAYING:
 			// Game Logic //
+			menu->Tick(*this, level, player);
+
 			if (menu->GetMenuState() == MenuManager::MenuState::Playing)
 			{
 				// Define moving direction from keyboard inputs
@@ -65,7 +68,7 @@ namespace Tmpl8
 			if (level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
 			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
 			player.Draw(screen, camera.GetOffset());
-			menu->Draw(screen, *this, level, player);
+			menu->Draw(screen, *this, level);
 			break;
 		}
 
