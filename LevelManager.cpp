@@ -13,6 +13,7 @@ namespace Tmpl8
 	// ASEPRITE? -> SPRITE DRAWIN
 
 	LevelManager::LevelManager()
+		:arrowSign(new Surface("assets/Objects/sign_arrow.png"), 1)
 	{
 		finish = new Finish;
 		state[0] = LevelState::Open;
@@ -47,6 +48,7 @@ namespace Tmpl8
 			{
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
+					if (GetContents(x, y) == TileContents::ArrowSign) { arrowSign.Draw(screen, x * tileSize, y * tileSize); }
 					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y); }
 					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big); }
 					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium); }
@@ -112,6 +114,9 @@ namespace Tmpl8
 		case 'o':
 			return TileContents::Empty;
 			break;
+		case 'A':
+			return TileContents::ArrowSign;
+			break;
 		case '-':
 			return TileContents::Obstacle;
 			break;
@@ -148,6 +153,9 @@ namespace Tmpl8
 		{
 		case 'o':
 			return TileContents::Empty;
+			break;
+		case 'A':
+			return TileContents::ArrowSign;
 			break;
 		case '-':
 			return TileContents::Obstacle;

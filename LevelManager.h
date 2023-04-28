@@ -23,6 +23,7 @@ namespace Tmpl8
 		enum class TileContents
 		{
 			Empty,
+			ArrowSign,
 			Obstacle,
 			Finish,
 			WoodStakes,
@@ -34,8 +35,8 @@ namespace Tmpl8
 		LevelManager();
 		void LoadLevel(const int level, Player& player);
 		void DrawLevel(Surface* screen, const int level, const float& dt);
-		void CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu);
-		void Death(Player& player, MenuManager& menu);
+		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
+		void Death(Player& player, class MenuManager& menu);
 	public: // Getters & Setters //
 		LevelState GetLevelState(const int level) const;
 		void SetLevelState(const int level, const LevelState state_in);
@@ -62,6 +63,8 @@ namespace Tmpl8
 		Spikes spikes;
 		Finish* finish;
 
+		Sprite arrowSign;
+
 		char map[8][81] = {
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
@@ -69,7 +72,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"------cbcbcbcbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"------cbcb--cbcbcbcbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
@@ -80,7 +83,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"SscooooooooFoooooooooooooooooooooooooooo",
+			"SscooAoooooFoooooooooooooooooooooooooooo",
 			"----------------------------------------",
 		};
 	};
