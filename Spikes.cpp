@@ -36,6 +36,9 @@ namespace Tmpl8
 
 	void Spikes::Trigger(LevelManager& level, Player& player, MenuManager& menu, const Type type, const Location& tileLoc)
 	{
+		Location topLeft = { 0.0f, 0.0f };
+		Location bottomRight = { 0.0f, 0.0f };
+
 		bottomRight.x = tileLoc.x + static_cast<float>(level.tileSize) / 2;
 		bottomRight.y = tileLoc.y + static_cast<float>(level.tileSize) / 2;
 		topLeft.x = tileLoc.x - static_cast<float>(level.tileSize) / 2;

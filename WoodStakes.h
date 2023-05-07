@@ -11,7 +11,7 @@ namespace Tmpl8
 	public:
 		WoodStakes();
 		void Draw(Surface* screen, const int tilex, const int tiley, const Location& drawOffset);
-		void Trigger(class LevelManager& level, Player& player, class MenuManager& menu);
+		void Trigger(class LevelManager& level, Player& player, class MenuManager& menu, const Location& tileLoc);
 	private:
 		Sprite stakes;
 	};

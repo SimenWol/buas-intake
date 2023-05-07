@@ -11,7 +11,7 @@ namespace Tmpl8
 	public:
 		Finish();
 		void Draw(Surface* screen, const int tilex, const int tiley, const float& dt, const Location& drawOffset);
-		void Trigger(MenuManager& menu, class LevelManager& level);
+		void Trigger(MenuManager& menu, class LevelManager& level, Player& player, const Location& tileLoc);
 	private:
 		void UpdateFrame(const float& deltaTime);
 	private:

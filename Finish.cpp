@@ -16,12 +16,22 @@ namespace Tmpl8
 			tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 	}
 
-	void Finish::Trigger(MenuManager& menu, LevelManager& level)
+	void Finish::Trigger(MenuManager& menu, LevelManager& level, Player& player, const Location& tileLoc)
 	{
-		level.SetLevelState(level.GetCurrentLevel(), LevelManager::LevelState::Completed);
-		menu.SetMenuState(MenuManager::MenuState::LevelComplete);
-		
-		std::cout << "Finish triggered!" << std::endl;
+		Location topLeft = { 0.0f, 0.0f };
+		Location bottomRight = { 0.0f, 0.0f };
+
+		bottomRight.x = tileLoc.x - 27 + static_cast<float>(level.tileSize) / 2;
+		bottomRight.y = tileLoc.y + static_cast<float>(level.tileSize) / 2;
+		topLeft.x = tileLoc.x + 9 - static_cast<float>(level.tileSize) / 2;
+		topLeft.y = tileLoc.y + 15 - static_cast<float>(level.tileSize) / 2;
+
+		if (player.CheckCollision(topLeft, bottomRight))
+		{
+			level.SetLevelState(level.GetCurrentLevel(), LevelManager::LevelState::Completed);
+			menu.SetMenuState(MenuManager::MenuState::LevelComplete);
+			std::cout << "Finish triggered!" << std::endl;
+		}
 	}
 
 	void Finish::UpdateFrame(const float& deltaTime)

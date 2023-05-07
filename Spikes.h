@@ -21,7 +21,5 @@ namespace Tmpl8
 		void Trigger(class LevelManager& level, Player& player, class MenuManager& menu, const Type type, const Location& tileLoc);
 	private:
 		Sprite spikesSprite;
-		Location topLeft = { 0.0f, 0.0f };
-		Location bottomRight = { 0.0f, 0.0f };
 	};
 };

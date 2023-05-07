@@ -81,13 +81,13 @@ namespace Tmpl8
 			obstacle.Trigger(tile, player);
 			break;
 		case TileContents::Finish:
-			finish->Trigger(menu, *this);
+			finish->Trigger(menu, *this, player, tile);
 			break;
 		case TileContents::Water:
-			water.Trigger(*this, player, menu);
+			water.Trigger(*this, player, menu, tile);
 			break;
 		case TileContents::WoodStakes:
-			woodstakes.Trigger(*this, player, menu);
+			woodstakes.Trigger(*this, player, menu, tile);
 			break;
 		case TileContents::SpikesBig:
 			spikes.Trigger(*this, player, menu, Spikes::Type::Big, tile);

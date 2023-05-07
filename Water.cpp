@@ -16,11 +16,21 @@ namespace Tmpl8
 			tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 	}
 
-	void Water::Trigger(LevelManager& level, Player& player, MenuManager& menu)
+	void Water::Trigger(LevelManager& level, Player& player, MenuManager& menu, const Location& tileLoc)
 	{
-		level.Death(player, menu);
+		Location topLeft = { 0.0f, 0.0f };
+		Location bottomRight = { 0.0f, 0.0f };
 
-		std::cout << "Water triggered!" << std::endl;
+		bottomRight.x = tileLoc.x + static_cast<float>(level.tileSize) / 2;
+		bottomRight.y = tileLoc.y + static_cast<float>(level.tileSize) / 2;
+		topLeft.x = tileLoc.x - static_cast<float>(level.tileSize) / 2;
+		topLeft.y = tileLoc.y + 7 - static_cast<float>(level.tileSize) / 2;
+
+		if (player.CheckCollision(topLeft, bottomRight))
+		{
+			level.Death(player, menu);
+			std::cout << "Water triggered!" << std::endl;
+		}
 	}
 
 	void Water::UpdateFrame(const float& deltaTime)
