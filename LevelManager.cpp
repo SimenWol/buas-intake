@@ -37,7 +37,7 @@ namespace Tmpl8
 
 	void LevelManager::DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset)
 	{
-		for (int y = 0; y < 8; y++)
+		for (int y = 0; y < 11; y++)
 		{
 			for (int x = 0; x < 40; x++)
 			{
@@ -107,7 +107,6 @@ namespace Tmpl8
 	{
 		isDead = true;
 		menu.SetMenuState(MenuManager::MenuState::LevelFailed);
-		// Stop Timer
 	}
 
 	// Sends the state of the specified level
@@ -118,9 +117,9 @@ namespace Tmpl8
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
-		if ((int(loc.x) > 40 * tileSize) || (int(loc.y) > 8 * tileSize)) { return TileContents::Empty; }
+		if ((static_cast<int>(loc.x) > 40 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
 
-		char content = collisionMap[int(loc.y) / tileSize][int(loc.x) / tileSize];
+		char content = collisionMap[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 		// std::cout << "TileContent: " << content << std::endl;
 
 		switch (content)
@@ -161,7 +160,7 @@ namespace Tmpl8
 
 	LevelManager::TileContents LevelManager::GetContents(const int x, const int y) const
 	{
-		if ((x > 40) || (y > 8)) { return TileContents::Empty; }
+		if ((x > 40) || (y > 11)) { return TileContents::Empty; }
 
 		char content = collisionMap[y][x];
 		// std::cout << "TileContent: " << content << std::endl;
