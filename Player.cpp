@@ -168,17 +168,28 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
-	Location Player::GetLoc() { return loc; }
+	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
+	bool Player::CheckCollision(const Location& topLeft, const Location& bottomRight) const
+	{
+		Location half = { (bottomRight.x - topLeft.x) / 2, (bottomRight.y - topLeft.y) / 2 };
+		Location center = { topLeft.x + half.x, topLeft.y + half.y };
 
-	float Player::GetRadius() { return radius; }
+		return CircleToAABBCollision(center, half);
+	}
 
-	bool Player::GetBounceFX() { return playBounceFX; }
+	Location Player::GetLoc() const { return loc; }
+
+	float Player::GetRadius() const { return radius; }
+
+	bool Player::GetBounceFX() const { return playBounceFX; }
 
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
-	bool Player::CircleToAABBCollision(const Location& tile, const float half)
+	bool Player::CircleToAABBCollision(const Location& tile, const float half) const
 	{
 		// Get distance vector between both centers
 		Location distance = { (loc.x - tile.x), (loc.y - tile.y) };
+		if (distance.x < 0.0f) { distance.x = -distance.x; }
+		if (distance.y < 0.0f) { distance.y = -distance.y; }
 
 		if (distance.x > (half + radius)) { return false; }
 		if (distance.y > (half + radius)) { return false; }
@@ -187,6 +198,25 @@ namespace Tmpl8
 		if (distance.y <= half) { return true; }
 
 		float cDist_sq = (distance.x - half) * (distance.x - half) + (distance.y - half) * (distance.y - half);
+
+		return (cDist_sq <= (radius * radius));
+	}
+
+	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
+	bool Player::CircleToAABBCollision(const Location& center, const Location& half) const
+	{
+		// Get distance vector between both centers
+		Location distance = { (loc.x - center.x), (loc.y - center.y) };
+		if (distance.x < 0.0f) { distance.x = -distance.x; }
+		if (distance.y < 0.0f) { distance.y = -distance.y; }
+
+		if (distance.x > (half.x + radius)) { return false; }
+		if (distance.y > (half.y + radius)) { return false; }
+
+		if (distance.x <= half.x) { return true; }
+		if (distance.y <= half.y) { return true; }
+
+		float cDist_sq = (distance.x - half.x) * (distance.x - half.x) + (distance.y - half.y) * (distance.y - half.y);
 
 		return (cDist_sq <= (radius * radius));
 	}

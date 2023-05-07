@@ -76,7 +76,7 @@ namespace Tmpl8
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"--------cb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb----cb",
+			"------cbcb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb----cb",
 			"cbcbcbcbcbcbcb----cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
 
@@ -87,7 +87,7 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
-			"SscXoAoooooooooooooooooooooooooooooooFFo",
+			"SscooAoooooooooooooooooooooooooooooooFFo",
 			"-------WW-------------------------------",
 		};
 	};

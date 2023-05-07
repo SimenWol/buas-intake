@@ -17,14 +17,16 @@ namespace Tmpl8
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
 		void DeathFX(Surface* screen, const float& deltaTime, const Location& drawOffset);
+		bool CheckCollision(const Location& topLeft, const Location& bottomRight) const;
 	public: // Getters & Setters //
-		Location GetLoc();
-		float GetRadius();
-		bool GetBounceFX();
+		Location GetLoc() const;
+		float GetRadius() const;
+		bool GetBounceFX() const;
 	private: // Private Functions //
 		void CheckCollision(class LevelManager& levelmanager, class MenuManager& menu);
 	private: // Other Functions //
-		bool CircleToAABBCollision(const Location& tile, const float half);
+		bool CircleToAABBCollision(const Location& tile, const float half) const;
+		bool CircleToAABBCollision(const Location& center, const Location& half) const;
 	private: // Private Variables //
 		Location loc = { 220.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player

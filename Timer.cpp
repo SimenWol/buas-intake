@@ -50,11 +50,12 @@ namespace Tmpl8
 			TimeUp(level, player, menu);
 		}
 
-		std::cout << "Timer: " << time << std::endl;
+		// std::cout << "Timer: " << time << std::endl;
 	}
 
 	void Timer::TimeUp(LevelManager& level, Player& player, MenuManager& menu)
 	{
+		std::cout << "Time's up!" << std::endl;
 		level.Death(player, menu);
 	}
 };

@@ -34,10 +34,20 @@ namespace Tmpl8
 		}
 	}
 
-	void Spikes::Trigger(LevelManager& level, Player& player, MenuManager& menu, const Type type)
+	void Spikes::Trigger(LevelManager& level, Player& player, MenuManager& menu, const Type type, const Location& tileLoc)
 	{
-		level.Death(player, menu);
+		bottomRight.x = tileLoc.x + static_cast<float>(level.tileSize) / 2;
+		bottomRight.y = tileLoc.y + static_cast<float>(level.tileSize) / 2;
+		topLeft.x = tileLoc.x - static_cast<float>(level.tileSize) / 2;
 
-		std::cout << "Spikes triggered!" << std::endl;
+		if (type == Type::Small) { topLeft.y = tileLoc.y + 30 - static_cast<float>(level.tileSize) / 2; }
+		if (type == Type::Medium) { topLeft.y = tileLoc.y + 18 - static_cast<float>(level.tileSize) / 2; }
+		if (type == Type::Big) { topLeft.y = tileLoc.y + 9 - static_cast<float>(level.tileSize) / 2; }
+
+		if (player.CheckCollision(topLeft, bottomRight))
+		{
+			level.Death(player, menu);
+			std::cout << "Spikes triggered!" << std::endl;
+		}
 	}
 };

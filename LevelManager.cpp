@@ -90,13 +90,13 @@ namespace Tmpl8
 			woodstakes.Trigger(*this, player, menu);
 			break;
 		case TileContents::SpikesBig:
-			spikes.Trigger(*this, player, menu, Spikes::Type::Big);
+			spikes.Trigger(*this, player, menu, Spikes::Type::Big, tile);
 			break;
 		case TileContents::SpikesMedium:
-			spikes.Trigger(*this, player, menu, Spikes::Type::Medium);
+			spikes.Trigger(*this, player, menu, Spikes::Type::Medium, tile);
 			break;
 		case TileContents::SpikesSmall:
-			spikes.Trigger(*this, player, menu, Spikes::Type::Small);
+			spikes.Trigger(*this, player, menu, Spikes::Type::Small, tile);
 			break;
 		default:
 			break;
