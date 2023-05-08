@@ -29,6 +29,11 @@ namespace Tmpl8
 			case 1:
 				player.SetLoc(startLoc1);
 				timer.SetTime(25.0f);
+				break;
+			case 2:
+				player.SetLoc(startLoc2);
+				timer.SetTime(20.0f);
+				break;
 			default:
 				break;
 			}
@@ -37,28 +42,67 @@ namespace Tmpl8
 
 	void LevelManager::DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset)
 	{
-		for (int y = 0; y < 11; y++)
+		int loopY = 0, loopX = 0;
+
+		if (level > numLevels || level <= 0)
 		{
-			for (int x = 0; x < 40; x++)
+			std::cout << "Level cannot be found or does not exist." << std::endl;
+			return;
+		}
+
+		// Set loop values for each level.
+		switch (level)
+		{
+		case 1:
+			loopY = 11;
+			loopX = 40;
+			break;
+		case 2:
+			loopY = 11;
+			loopX = 20;
+			break;
+		default:
+			break;
+		}
+
+		for (int y = 0; y < loopY; y++)
+		{
+			for (int x = 0; x < loopX; x++)
 			{
-				if (!(map[y][x * 2] == '-') || !(map[y][x * 2 + 1] == '-'))
+				// Tilemap drawing
+				switch (level)
 				{
-					float tx = static_cast<float>(map[y][x * 2] - 'a');
-					float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
+				case 1:
+					if (!(levelOne[y][x * 2] == '-') || !(levelOne[y][x * 2 + 1] == '-'))
+					{
+						float tx = static_cast<float>(levelOne[y][x * 2] - 'a');
+						float ty = static_cast<float>(levelOne[y][x * 2 + 1] - 'a');
 
-					DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x), 
-						static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
+							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+					}
+					break;
+				case 2:
+					if (!(levelTwo[y][x * 2] == '-') || !(levelTwo[y][x * 2 + 1] == '-'))
+					{
+						float tx = static_cast<float>(levelTwo[y][x * 2] - 'a');
+						float ty = static_cast<float>(levelTwo[y][x * 2 + 1] - 'a');
+
+						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
+							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+					}
+					break;
+				default:
+					break;
 				}
-			}
 
-			for (int x = 0; x < 40; x++)
-			{
+				// Collision map drawing
 				if (!(GetContents(x, y) == TileContents::Empty))
 				{
-					if (GetContents(x, y) == TileContents::ArrowSign) 
-					{ 
-						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x), 
-							y * tileSize - static_cast<int>(drawOffset.y)); 
+					if (GetContents(x, y) == TileContents::ArrowSign)
+					{
+						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x),
+							y * tileSize - static_cast<int>(drawOffset.y));
 					}
 					if (GetContents(x, y) == TileContents::Water) { water.Draw(screen, x, y, dt, drawOffset); }
 					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
@@ -117,10 +161,23 @@ namespace Tmpl8
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
-		if ((static_cast<int>(loc.x) > 40 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+		char content = 'o';
 
-		char content = collisionMap[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
-		// std::cout << "TileContent: " << content << std::endl;
+		switch (currentLevel)
+		{
+		case 1:
+			if ((static_cast<int>(loc.x) > 40 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			content = levelOneColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
+			break;
+		case 2:
+			if ((static_cast<int>(loc.x) > 20 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			content = levelTwoColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
+			break;
+		default:
+			break;
+		}
+		
+		//std::cout << "TileContent: " << content << std::endl;
 
 		switch (content)
 		{
@@ -160,9 +217,22 @@ namespace Tmpl8
 
 	LevelManager::TileContents LevelManager::GetContents(const int x, const int y) const
 	{
-		if ((x > 40) || (y > 11)) { return TileContents::Empty; }
+		char content = 'o';
 
-		char content = collisionMap[y][x];
+		switch (currentLevel)
+		{
+		case 1:
+			if (x > 40 || x < 0 || y > 11 || y < 0) { return TileContents::Empty; }
+			else { content = levelOneColl[y][x]; }
+			break;
+		case 2:
+			if (x > 20 || x < 0 || y > 11 || y < 0) { return TileContents::Empty; }
+			else { content = levelTwoColl[y][x]; }
+			break;
+		default:
+			break;
+		}
+
 		// std::cout << "TileContent: " << content << std::endl;
 
 		switch (content)

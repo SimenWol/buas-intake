@@ -52,14 +52,12 @@ namespace Tmpl8
 		void Reset(Player& player);
 	public: // Public Variables //
 		static constexpr int tileSize = 48; // Width & Height for each tile
-		static constexpr int numLevels = 1;
+		static constexpr int numLevels = 2; // Total amount of levels
 	private: // Private Variables //
 		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 
 		bool isDead = false;
-
-		Location startLoc1 = {220.0f, 0.0f};
 
 		Obstacle obstacle;
 		Water water;
@@ -69,7 +67,9 @@ namespace Tmpl8
 
 		Sprite arrowSign;
 
-		char map[11][81] = {
+	private:
+		Location startLoc1 = { 220.0f, 0.0f };
+		char levelOne[11][81] = {
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
@@ -82,8 +82,7 @@ namespace Tmpl8
 			"--------cb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb----cb",
 			"cbcbcbcbcbcbcb----cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 		};
-
-		char collisionMap[11][41] = {
+		char levelOneColl[11][41] = {
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"oooooooooooooooooooooooooooooooooooooooo",
@@ -95,6 +94,36 @@ namespace Tmpl8
 			"oooooooooooooooooooooooooooooooooooooooo",
 			"SscXoAoooooooooooooooooooooooooooooooFFo",
 			"-------WW-------------------------------",
+		};
+
+		Location startLoc2 = { 220.0f, 0.0f };
+		char levelTwo[11][41] =
+		{
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+			"cbcbcbcbcb------------------------------",
+		};
+		char levelTwoColl[11][21] =
+		{
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"oooooooooooooooooooo",
+			"Fooooooooooooooooooo",
+			"-----WWWWWWWWWWWWWWW",
 		};
 	};
 

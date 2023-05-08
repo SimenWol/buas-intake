@@ -115,7 +115,11 @@ namespace Tmpl8
 				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
 				SetMenuState(Playing);
 			}
-			if (nextLevelButton.IsPressed(game_in)) { std::cout << "Next Level!" << std::endl; } // TODO: NEXT LEVEL!
+			if (nextLevelButton.IsPressed(game_in))
+			{
+				level_in.LoadLevel(2, player, timer);
+				SetMenuState(Playing);
+			}
 			if (selectLevelButton.IsPressed(game_in))
 			{
 				SetMenuState(LevelSelect);
@@ -165,7 +169,6 @@ namespace Tmpl8
 				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
 				SetMenuState(Playing);
 			}
-			if (restartButton.IsPressed(game_in)) { level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer); }
 			break;
 		case Tmpl8::MenuManager::Playing:
 			// Button Logic
