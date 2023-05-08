@@ -37,7 +37,7 @@ namespace Tmpl8
 	public: // PUblic Functions //
 		LevelManager();
 		void LoadLevel(const int level, Player& player, Timer& timer);
-		void DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset);
+		void DrawLevel(Surface* screen, const float& dt, const Location& drawOffset);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		void Death(Player& player, class MenuManager& menu);
 	public: // Getters & Setters //
@@ -48,7 +48,7 @@ namespace Tmpl8
 		int GetCurrentLevel() const;
 		bool GetIsDead() const;
 	private: // Private Functions //
-		void DrawTile(Surface* screen, const Location& loc, const Location& tileLoct);
+		void DrawTile(Surface* screen, const Location& loc, const Location& tile);
 		void Reset(Player& player);
 	public: // Public Variables //
 		static constexpr int tileSize = 48; // Width & Height for each tile

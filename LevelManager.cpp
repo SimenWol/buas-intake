@@ -40,18 +40,12 @@ namespace Tmpl8
 		}
 	}
 
-	void LevelManager::DrawLevel(Surface* screen, const int level, const float& dt, const Location& drawOffset)
+	void LevelManager::DrawLevel(Surface* screen, const float& dt, const Location& drawOffset)
 	{
 		int loopY = 0, loopX = 0;
 
-		if (level > numLevels || level <= 0)
-		{
-			std::cout << "Level cannot be found or does not exist." << std::endl;
-			return;
-		}
-
 		// Set loop values for each level.
-		switch (level)
+		switch (currentLevel)
 		{
 		case 1:
 			loopY = 11;
@@ -70,7 +64,7 @@ namespace Tmpl8
 			for (int x = 0; x < loopX; x++)
 			{
 				// Tilemap drawing
-				switch (level)
+				switch (currentLevel)
 				{
 				case 1:
 					if (!(levelOne[y][x * 2] == '-') || !(levelOne[y][x * 2 + 1] == '-'))
@@ -222,11 +216,11 @@ namespace Tmpl8
 		switch (currentLevel)
 		{
 		case 1:
-			if (x > 40 || x < 0 || y > 11 || y < 0) { return TileContents::Empty; }
+			if (x > 40 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelOneColl[y][x]; }
 			break;
 		case 2:
-			if (x > 20 || x < 0 || y > 11 || y < 0) { return TileContents::Empty; }
+			if (x > 20 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelTwoColl[y][x]; }
 			break;
 		default:

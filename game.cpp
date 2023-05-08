@@ -64,7 +64,7 @@ namespace Tmpl8
 			}
 
 			// Draw Functions //
-			level.DrawLevel(screen, level.GetCurrentLevel(), deltaTime, camera.GetOffset());
+			level.DrawLevel(screen, deltaTime, camera.GetOffset());
 			if (level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
 			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
 			player.Draw(screen, camera.GetOffset());
