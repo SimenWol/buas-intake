@@ -32,8 +32,8 @@ namespace Tmpl8
 
 	void Game::Tick(float deltaTime)
 	{
-		// Multiply deltaTime by 0.001 to get deltaTime in seconds, much easier to work with
-		// By using std::min, you prevent long frame pauses messing up the physics
+		// Multiply deltaTime by 0.001 to get deltaTime in seconds, much easier to work with.
+		// By using std::min, you prevent long frame pauses messing up the physics.
 		deltaTime = std::min(deltaTime * 0.001f, 0.05f);
 
 		const float screenHeight = static_cast<float>(screen->GetHeight());

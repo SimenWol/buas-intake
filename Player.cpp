@@ -9,9 +9,9 @@
 namespace Tmpl8
 {
 	Player::Player()
-		:player(new Surface("assets/Player/Basketball.png"), 1)
-		,deathFX(new Surface("assets/FX/hit.png"), 5)
-		,bounceFX(new Surface("assets/FX/dust.png"), 8)
+		:player(new Surface("assets/Player/basketball.png"), 1)
+		,deathFX(new Surface("assets/Player/FX/hit.png"), 5)
+		,bounceFX(new Surface("assets/Player/FX/dust.png"), 8)
 	{
 		radius = static_cast<float>(player.GetWidth()) / 2.0f;
 	}
