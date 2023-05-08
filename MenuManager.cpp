@@ -34,8 +34,8 @@ namespace Tmpl8
 		,levelOneButton(312, 219, levelOneButtonSprite)
 		,levelTwoButton(412, 219, levelTwoButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
-		,continueButton(312, 181, continueButtonSprite)
-		,restartButton(312, 283, restartButtonSprite)
+		,continueButton(473, 281, continueButtonSprite)
+		,restartButton(150, 281, restartButtonSprite)
 		,nextLevelButton(370, 322, nextLevelButtonSprite)
 		,selectLevelButton(267, 232, selectLevelButtonSprite)
 	{}
@@ -81,7 +81,7 @@ namespace Tmpl8
 			break;
 		case Paused:
 			// Set UI Elements
-			menuButton.SetLocation(312, 385);
+			menuButton.SetLocation(342, 281);
 			// Draw UI Elements
 			pauseMenu.Draw(screen_in, 0, 0);
 			continueButton.Draw(screen_in, game_in);
