@@ -1,6 +1,9 @@
 #pragma once
 #include "Player.h"
+#include "LevelManager.h"
 #include "Location.h"
+#include "Camera.h"
+#include "Timer.h"
 
 namespace Tmpl8 {
 
@@ -42,17 +45,18 @@ private:
 	Surface* screen;
 	MenuManager* menu;
 	LevelManager level;
+	Timer timer;
 	Player player;
 
-	GameState state = GameState::MENU;
-	
-	Location delta_loc;
+	Camera camera;
 
-	// TODO: REMOVE STATICS AND UPDATE BUTTON CLASS!! --> Proper Button Calls
+	GameState state = GameState::MENU;
+
 	int mousex = 0;
 	int mousey = 0;
 	bool mouseDown = false;
 
+	Location delta_loc;
 	bool movingLeft = false;
 	bool movingRight = false;
 };

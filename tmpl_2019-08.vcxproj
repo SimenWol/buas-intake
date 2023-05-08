@@ -222,22 +222,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Finish.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MenuManager.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Spikes.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
+    <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Water.cpp" />
+    <ClCompile Include="WoodStakes.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Finish.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="Location.h" />
     <ClInclude Include="MenuManager.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Spikes.h" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
+    <ClInclude Include="Timer.h" />
+    <ClInclude Include="Water.h" />
+    <ClInclude Include="WoodStakes.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="_readme.txt" />

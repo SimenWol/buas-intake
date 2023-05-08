@@ -1,55 +1,232 @@
 #include "LevelManager.h"
 #include "surface.h"
 #include "Player.h"
+#include "Finish.h"
 
 #include <iostream>
 
 namespace Tmpl8
 {
-	Surface tiles("assets/Temp/tileset_forest.png");
-
-	// TODO: https://github.com/nlohmann/json JSON LEVEL LOADING --> level definitions --> Data Driven!!
-	// ASEPRITE? -> SPRITE DRAWIN
+	Surface tiles("assets/Tilesets/tileset_forest.png");
 
 	LevelManager::LevelManager()
+		:arrowSign(new Surface("assets/Objects/sign_arrow.png"), 1)
 	{
+		finish = new Finish;
 		state[0] = LevelState::Open;
 	}
 
-	void LevelManager::LoadLevel(const int level, Player& player)
+	void LevelManager::LoadLevel(const int level, Player& player, Timer& timer)
 	{
-		currentLevel = level;
-		std::cout << level << " " << numLevels << std::endl;
-
 		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
 		else
 		{
-			Reset(level, player);
+			currentLevel = level;
+			Reset(player);
+
+			switch (level)
+			{
+			case 1:
+				player.SetLoc(startLoc1);
+				timer.SetTime(25.0f);
+				break;
+			case 2:
+				player.SetLoc(startLoc2);
+				timer.SetTime(20.0f);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
-	void LevelManager::DrawLevel(Surface* screen, const int level)
+	void LevelManager::DrawLevel(Surface* screen, const float& dt, const Location& drawOffset)
 	{
-		for (int y = 0; y < 8; y++)
+		int loopY = 0, loopX = 0;
+
+		// Set loop values for each level.
+		switch (currentLevel)
 		{
-			for (int x = 0; x < 10; x++)
+		case 1:
+			loopY = 11;
+			loopX = 40;
+			break;
+		case 2:
+			loopY = 11;
+			loopX = 20;
+			break;
+		default:
+			break;
+		}
+
+		for (int y = 0; y < loopY; y++)
+		{
+			for (int x = 0; x < loopX; x++)
 			{
-				float tx = static_cast<float>(map[y][x * 2] - 'a');
-				float ty = static_cast<float>(map[y][x * 2 + 1] - 'a');
-				DrawTile(screen, { static_cast<float>(x * tileSize), static_cast<float>(y * tileSize) }, {tx, ty});
+				// Tilemap drawing
+				switch (currentLevel)
+				{
+				case 1:
+					if (!(levelOne[y][x * 2] == '-') || !(levelOne[y][x * 2 + 1] == '-'))
+					{
+						float tx = static_cast<float>(levelOne[y][x * 2] - 'a');
+						float ty = static_cast<float>(levelOne[y][x * 2 + 1] - 'a');
+
+						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
+							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+					}
+					break;
+				case 2:
+					if (!(levelTwo[y][x * 2] == '-') || !(levelTwo[y][x * 2 + 1] == '-'))
+					{
+						float tx = static_cast<float>(levelTwo[y][x * 2] - 'a');
+						float ty = static_cast<float>(levelTwo[y][x * 2 + 1] - 'a');
+
+						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
+							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+					}
+					break;
+				default:
+					break;
+				}
+
+				// Collision map drawing
+				if (!(GetContents(x, y) == TileContents::Empty))
+				{
+					if (GetContents(x, y) == TileContents::ArrowSign)
+					{
+						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x),
+							y * tileSize - static_cast<int>(drawOffset.y));
+					}
+					if (GetContents(x, y) == TileContents::Water) { water.Draw(screen, x, y, dt, drawOffset); }
+					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small, drawOffset); }
+					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt, drawOffset); }
+				}
 			}
 		}
+	}
+
+	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu)
+	{
+		switch (content)
+		{
+		case TileContents::Empty:
+			break;
+		case TileContents::Obstacle:
+			obstacle.Trigger(tile, player);
+			break;
+		case TileContents::Finish:
+			finish->Trigger(menu, *this, player, tile);
+			break;
+		case TileContents::Water:
+			water.Trigger(*this, player, menu, tile);
+			break;
+		case TileContents::WoodStakes:
+			woodstakes.Trigger(*this, player, menu, tile);
+			break;
+		case TileContents::SpikesBig:
+			spikes.Trigger(*this, player, menu, Spikes::Type::Big, tile);
+			break;
+		case TileContents::SpikesMedium:
+			spikes.Trigger(*this, player, menu, Spikes::Type::Medium, tile);
+			break;
+		case TileContents::SpikesSmall:
+			spikes.Trigger(*this, player, menu, Spikes::Type::Small, tile);
+			break;
+		default:
+			break;
+		}
+	}
+
+	void LevelManager::Death(Player& player, MenuManager& menu)
+	{
+		isDead = true;
+		menu.SetMenuState(MenuManager::MenuState::LevelFailed);
 	}
 
 	// Sends the state of the specified level
 	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level - 1]; }
 
+	void LevelManager::SetLevelState(const int level, const LevelState state_in) { state[level - 1] = state_in; }
+
 	// Returns contents from the cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
-		if ((int(loc.x) > 10 * tileSize) || (int(loc.y) > 8 * tileSize)) { return TileContents::Empty; }
+		char content = 'o';
 
-		char content = collisionMap[int(loc.y) / tileSize][int(loc.x) / tileSize];
+		switch (currentLevel)
+		{
+		case 1:
+			if ((static_cast<int>(loc.x) > 40 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			content = levelOneColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
+			break;
+		case 2:
+			if ((static_cast<int>(loc.x) > 20 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			content = levelTwoColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
+			break;
+		default:
+			break;
+		}
+		
+		//std::cout << "TileContent: " << content << std::endl;
+
+		switch (content)
+		{
+		case 'o':
+			return TileContents::Empty;
+			break;
+		case 'A':
+			return TileContents::ArrowSign;
+			break;
+		case '-':
+			return TileContents::Obstacle;
+			break;
+		case 'F':
+			return TileContents::Finish;
+			break;
+		case 'W':
+			return TileContents::Water;
+			break;
+		case 'X':
+			return TileContents::WoodStakes;
+			break;
+		case 'S':
+			return TileContents::SpikesBig;
+			break;
+		case 's':
+			return TileContents::SpikesMedium;
+			break;
+		case 'c':
+			return TileContents::SpikesSmall;
+			break;
+		default:
+			std::cout << "Unknown content declaration, returned empty." << std::endl;
+			return TileContents::Empty;
+			break;
+		}
+	}
+
+	LevelManager::TileContents LevelManager::GetContents(const int x, const int y) const
+	{
+		char content = 'o';
+
+		switch (currentLevel)
+		{
+		case 1:
+			if (x > 40 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			else { content = levelOneColl[y][x]; }
+			break;
+		case 2:
+			if (x > 20 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			else { content = levelTwoColl[y][x]; }
+			break;
+		default:
+			break;
+		}
+
 		// std::cout << "TileContent: " << content << std::endl;
 
 		switch (content)
@@ -57,8 +234,29 @@ namespace Tmpl8
 		case 'o':
 			return TileContents::Empty;
 			break;
-		case'-':
+		case 'A':
+			return TileContents::ArrowSign;
+			break;
+		case '-':
 			return TileContents::Obstacle;
+			break;
+		case 'F':
+			return TileContents::Finish;
+			break;
+		case 'W':
+			return TileContents::Water;
+			break;
+		case 'X':
+			return TileContents::WoodStakes;
+			break;
+		case 'S':
+			return TileContents::SpikesBig;
+			break;
+		case 's':
+			return TileContents::SpikesMedium;
+			break;
+		case 'c':
+			return TileContents::SpikesSmall;
 			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;
@@ -69,34 +267,37 @@ namespace Tmpl8
 
 	int LevelManager::GetCurrentLevel() const { return currentLevel; }
 
+	bool LevelManager::GetIsDead() const { return isDead; }
+
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
-		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * 768;
-		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * 800;
+		if (loc.x > screen->GetWidth()) { return; }
+		if (loc.y > screen->GetHeight()) { return; }
 
-		for (int i = 0; i < tileSize; i++, src += 768, dst += 800)
+		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * tiles.GetWidth();
+		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * screen->GetWidth();
+
+		for (int i = 0; i < tileSize; i++, src += tiles.GetWidth(), dst += screen->GetWidth()) // y
 		{
-			for (int j = 0; j < tileSize; j++)
+			if (loc.y + i + 1 <= screen->GetHeight() && loc.y + i >= 0) // Stop drawing offscreen.
 			{
-				dst[j] = src[j];
+				for (int j = 0; j < tileSize; j++) // x
+				{
+
+					if ((loc.x + j + 1) <= screen->GetWidth() && loc.x + j >= 0) // Stop drawing offscreen.
+					{
+						dst[j] = src[j];
+					}
+				}
 			}
 		}
 	}
 
-	void LevelManager::Reset(const int level, Player& player)
+	void LevelManager::Reset(Player& player)
 	{
-		switch (level)
-		{
-		case 1:
 			player.Reset();
-			player.SetLoc(startLoc1);
-			break;
-		default:
-			std::cout << "Cannot reset specified level." << std::endl;
-			break;
-		}
-		// Reset Timer
-		// Reset whatever else needed
+
+			isDead = false;
 	}
 
 };

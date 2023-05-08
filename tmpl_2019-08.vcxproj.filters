@@ -11,6 +11,13 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MenuManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Obstacle.cpp" />
+    <ClCompile Include="Finish.cpp" />
+    <ClCompile Include="WoodStakes.cpp" />
+    <ClCompile Include="Spikes.cpp" />
+    <ClCompile Include="Water.cpp" />
+    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
@@ -25,6 +32,13 @@
     <ClInclude Include="MenuManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Location.h" />
+    <ClInclude Include="Obstacle.h" />
+    <ClInclude Include="Finish.h" />
+    <ClInclude Include="WoodStakes.h" />
+    <ClInclude Include="Spikes.h" />
+    <ClInclude Include="Water.h" />
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="template code">

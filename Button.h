@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace Tmpl8 // TODO: REMOVE LOGIC FROM ISPRESSED AND ADD PROPER FUNCTIONS FOR EACH CHECK --> UPDATE SPRITES
+namespace Tmpl8
 {
 	class Button
 	{
