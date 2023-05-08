@@ -36,8 +36,8 @@ namespace Tmpl8
 		,pauseButton(760, 15, pauseButtonSprite)
 		,continueButton(312, 181, continueButtonSprite)
 		,restartButton(312, 283, restartButtonSprite)
-		,nextLevelButton(15, 332, nextLevelButtonSprite)
-		,selectLevelButton(15, 422, selectLevelButtonSprite)
+		,nextLevelButton(370, 322, nextLevelButtonSprite)
+		,selectLevelButton(267, 232, selectLevelButtonSprite)
 	{}
 
 	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in, Timer& timer) // Function that draws the required menu to the screen.
@@ -47,7 +47,7 @@ namespace Tmpl8
 		{
 		case LevelComplete:
 			// Set UI Elements
-			retryButton.SetLocation(660, 422);
+			retryButton.SetLocation(192, 322);
 			// Draw UI Elements
 			levelCompletedMenu.Draw(screen_in, 0, 0);
 			retryButton.Draw(screen_in, game_in);
@@ -56,8 +56,8 @@ namespace Tmpl8
 			break;
 		case LevelFailed:
 			// Set UI Elements
-			retryButton.SetLocation(450, 219);
-			menuButton.SetLocation(225, 219);
+			menuButton.SetLocation(253, 277);
+			retryButton.SetLocation(418, 277);
 			// Draw UI Elements
 			levelFailedMenu.Draw(screen_in, 0, 0);
 			retryButton.Draw(screen_in, game_in);
