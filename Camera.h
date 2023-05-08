@@ -9,7 +9,7 @@ namespace Tmpl8
 	{
 	public:
 		// Camera();
-		void Tick(Surface* screen, const Location& playerLoc);
+		void Tick(Surface* screen, const Location& playerLoc, const int level);
 	public:
 		Location GetOffset();
 	private:

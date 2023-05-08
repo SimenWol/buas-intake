@@ -57,7 +57,7 @@ namespace Tmpl8
 				player.Move(deltaTime, delta_loc, level, *menu);
 
 				// Update Camera Offset
-				camera.Tick(screen, player.GetLoc());
+				camera.Tick(screen, player.GetLoc(), level.GetCurrentLevel());
 
 				// Update Timer
 				timer.Tick(deltaTime, level, player, *menu);
