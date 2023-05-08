@@ -29,6 +29,7 @@ namespace Tmpl8
 		if (player.CheckCollision(topLeft, bottomRight))
 		{
 			level.SetLevelState(level.GetCurrentLevel(), LevelManager::LevelState::Completed);
+			level.SetLevelState(level.GetCurrentLevel() + 1, LevelManager::LevelState::Open);
 			menu.SetMenuState(MenuManager::MenuState::LevelComplete);
 			std::cout << "Finish triggered!" << std::endl;
 		}

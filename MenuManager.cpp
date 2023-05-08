@@ -18,26 +18,26 @@ namespace Tmpl8
 		,settingsButtonSprite(new Surface("assets/Buttons/SettingsButton.png"), 3)
 		,quitButtonSprite(new Surface("assets/Buttons/QuitButton.png"), 3)
 		,levelOneButtonSprite(new Surface("assets/Buttons/LevelOneButton.png"), 7)
+		,levelTwoButtonSprite(new Surface("assets/Buttons/LevelTwoButton.png"), 7)
 		,pauseButtonSprite(new Surface("assets/Buttons/PauseButton.png"), 3)
 		,continueButtonSprite(new Surface("assets/Buttons/ContinueButton.png"), 3)
 		,menuButtonSprite(new Surface("assets/Buttons/MenuButton.png"), 3)
 		,restartButtonSprite(new Surface("assets/Buttons/RestartButton.png"), 3)
 		,nextLevelButtonSprite(new Surface("assets/Buttons/NextLevelButton.png"), 3)
 		,selectLevelButtonSprite(new Surface("assets/Buttons/SelectLevelButton.png"), 3)
-		,menuSmallButtonSprite(new Surface("assets/Buttons/MenuButtonSmall.png"), 3)
 		,backButton(0, 0, backButtonSprite)
+		,menuButton(0, 0, menuButtonSprite)
 		,retryButton(0, 0, retryButtonSprite)
 		,startButton(35, 312, startButtonSprite)
 		,settingsButton(35, 402, settingsButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
-		,levelOneButton(362, 218, levelOneButtonSprite)
+		,levelOneButton(312, 219, levelOneButtonSprite)
+		,levelTwoButton(412, 219, levelTwoButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
 		,continueButton(312, 181, continueButtonSprite)
-		,menuButton(312, 385, menuButtonSprite)
 		,restartButton(312, 283, restartButtonSprite)
 		,nextLevelButton(15, 332, nextLevelButtonSprite)
 		,selectLevelButton(15, 422, selectLevelButtonSprite)
-		,menuSmallButton(225, 219, menuSmallButtonSprite)
 	{}
 
 	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in, Timer& timer) // Function that draws the required menu to the screen.
@@ -57,10 +57,11 @@ namespace Tmpl8
 		case LevelFailed:
 			// Set UI Elements
 			retryButton.SetLocation(450, 219);
+			menuButton.SetLocation(225, 219);
 			// Draw UI Elements
 			levelFailedMenu.Draw(screen_in, 0, 0);
 			retryButton.Draw(screen_in, game_in);
-			menuSmallButton.Draw(screen_in, game_in);
+			menuButton.Draw(screen_in, game_in);
 			break;
 		case LevelSelect:
 			// Set UI Elements
@@ -69,7 +70,7 @@ namespace Tmpl8
 			levelSelectionMenu.Draw(screen_in, 0, 0);
 			backButton.Draw(screen_in, game_in);
 			levelOneButton.Draw(screen_in, game_in, level_in.GetLevelState(1));
-			// More Level Buttons
+			levelTwoButton.Draw(screen_in, game_in, level_in.GetLevelState(2));
 			break;
 		case Main:
 			// Draw UI Elements
@@ -79,6 +80,8 @@ namespace Tmpl8
 			quitButton.Draw(screen_in, game_in);
 			break;
 		case Paused:
+			// Set UI Elements
+			menuButton.SetLocation(312, 385);
 			// Draw UI Elements
 			pauseMenu.Draw(screen_in, 0, 0);
 			continueButton.Draw(screen_in, game_in);
@@ -133,7 +136,7 @@ namespace Tmpl8
 				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
 				SetMenuState(Playing);
 			}
-			if (menuSmallButton.IsPressed(game_in))
+			if (menuButton.IsPressed(game_in))
 			{
 				SetMenuState(Main);
 				game_in.SetState(Game::GameState::MENU);
@@ -146,6 +149,13 @@ namespace Tmpl8
 				&& levelOneButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(1, player, timer);
+				game_in.SetState(game_in.PLAYING);
+				SetMenuState(Playing);
+			}
+			if (level_in.GetLevelState(2) != LevelManager::LevelState::Closed
+				&& levelTwoButton.IsPressed(game_in))
+			{
+				level_in.LoadLevel(2, player, timer);
 				game_in.SetState(game_in.PLAYING);
 				SetMenuState(Playing);
 			}

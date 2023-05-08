@@ -35,7 +35,7 @@ namespace Tmpl8
 		const float screenHeight = static_cast<float>(screen->GetHeight());
 
 		// clear the graphics window
-		screen->Clear(200); // BLUE BG COLOUR FOR NOW!
+		screen->Clear(0);
 
 		switch (state)
 		{

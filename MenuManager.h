@@ -39,6 +39,7 @@ namespace Tmpl8
 		Sprite pauseMenu;
 		// General
 		Sprite backButtonSprite;
+		Sprite menuButtonSprite;
 		Sprite retryButtonSprite;
 		// Main Menu
 		Sprite startButtonSprite;
@@ -46,20 +47,19 @@ namespace Tmpl8
 		Sprite quitButtonSprite;
 		// Level Selection Menu
 		Sprite levelOneButtonSprite;
+		Sprite levelTwoButtonSprite;
 		// Playing UI
 		Sprite pauseButtonSprite;
 		// Pause Menu
 		Sprite continueButtonSprite;
-		Sprite menuButtonSprite;
 		Sprite restartButtonSprite;
 		// Level Completed Menu
 		Sprite nextLevelButtonSprite;
 		Sprite selectLevelButtonSprite;
-		// Level Failed Menu
-		Sprite menuSmallButtonSprite;
 
 		// Buttons //
 		Button backButton;
+		Button menuButton;
 		Button retryButton;
 		// Main Menu
 		Button startButton;
@@ -67,17 +67,15 @@ namespace Tmpl8
 		Button quitButton;
 		// Level Selection Menu
 		Button levelOneButton;
+		Button levelTwoButton;
 		// Playing UI
 		Button pauseButton;
 		// Pause Menu
 		Button continueButton;
-		Button menuButton;
 		Button restartButton;
 		// Level Completed Menu
 		Button nextLevelButton;
 		Button selectLevelButton;
-		// Level Failed Menu
-		Button menuSmallButton;
 	};
 
 };
