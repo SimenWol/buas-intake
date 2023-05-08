@@ -31,8 +31,8 @@ namespace Tmpl8
 		,startButton(35, 312, startButtonSprite)
 		,settingsButton(35, 402, settingsButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
-		,levelOneButton(312, 219, levelOneButtonSprite)
-		,levelTwoButton(412, 219, levelTwoButtonSprite)
+		,levelOneButton(313, 232, levelOneButtonSprite)
+		,levelTwoButton(413, 232, levelTwoButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
 		,continueButton(473, 281, continueButtonSprite)
 		,restartButton(150, 281, restartButtonSprite)
@@ -65,7 +65,7 @@ namespace Tmpl8
 			break;
 		case LevelSelect:
 			// Set UI Elements
-			backButton.SetLocation(25, 412);
+			backButton.SetLocation(351, 332);
 			// Draw UI Elements
 			levelSelectionMenu.Draw(screen_in, 0, 0);
 			backButton.Draw(screen_in, game_in);
