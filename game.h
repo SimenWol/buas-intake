@@ -20,6 +20,9 @@ public:
 		PLAYING
 	};
 public:
+	// Constructor //
+	Game();
+
 	// Setters //
 	void SetTarget( Surface* surface ) { screen = surface; }
 	void SetState(GameState state_in) { state = state_in; }
@@ -60,6 +63,8 @@ private:
 	Location delta_loc;
 	bool movingLeft = false;
 	bool movingRight = false;
+
+	Sprite background;
 };
 
 }; // namespace Tmpl8

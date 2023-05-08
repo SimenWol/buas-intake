@@ -11,6 +11,10 @@
 
 namespace Tmpl8
 {
+	Game::Game()
+		:background(new Surface("assets/Background/background.png"), 1)
+	{}
+
 	void Game::Init()
 	{
 		// Menu //
@@ -36,6 +40,7 @@ namespace Tmpl8
 
 		// clear the graphics window
 		screen->Clear(0);
+		background.Draw(screen, 0, 0);
 
 		switch (state)
 		{
