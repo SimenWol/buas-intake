@@ -25,9 +25,10 @@ public:
 	void SetState(GameState state_in) { state = state_in; }
 
 	// Getters //
-	int GetMouseX() { return mousex; }
-	int GetMouseY() { return mousey; }
-	bool GetMouseDown() { return mouseDown; }
+	int GetMouseX() const { return mousex; }
+	int GetMouseY() const { return mousey; }
+	bool GetMouseDown() const { return mouseDown; }
+	GameState GetGameState() const { return state; }
 
 	// Main Game Functions //
 	void Init();

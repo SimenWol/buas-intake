@@ -36,7 +36,7 @@ namespace Tmpl8
 		,pauseButton(760, 15, pauseButtonSprite)
 		,continueButton(473, 281, continueButtonSprite)
 		,restartButton(150, 281, restartButtonSprite)
-		,nextLevelButton(370, 322, nextLevelButtonSprite)
+		,nextLevelButton(357, 322, nextLevelButtonSprite)
 		,selectLevelButton(267, 232, selectLevelButtonSprite)
 	{}
 
@@ -47,7 +47,7 @@ namespace Tmpl8
 		{
 		case LevelComplete:
 			// Set UI Elements
-			retryButton.SetLocation(192, 322);
+			retryButton.SetLocation(213, 322);
 			// Draw UI Elements
 			levelCompletedMenu.Draw(screen_in, 0, 0);
 			retryButton.Draw(screen_in, game_in);
@@ -120,8 +120,12 @@ namespace Tmpl8
 			}
 			if (nextLevelButton.IsPressed(game_in))
 			{
-				level_in.LoadLevel(2, player, timer);
-				SetMenuState(Playing);
+				if (level_in.GetCurrentLevel() == 2) { SetMenuState(LevelSelect); }
+				else
+				{
+					level_in.LoadLevel(level_in.GetCurrentLevel() + 1, player, timer);
+					SetMenuState(Playing);
+				}
 			}
 			if (selectLevelButton.IsPressed(game_in))
 			{
@@ -144,7 +148,11 @@ namespace Tmpl8
 			break;
 		case Tmpl8::MenuManager::LevelSelect:
 			// Button Logic
-			if (backButton.IsPressed(game_in)) { SetMenuState(Main); }
+			if (backButton.IsPressed(game_in))
+			{
+				if (game_in.GetGameState() == Game::GameState::PLAYING) { SetMenuState(LevelComplete); }
+				else { SetMenuState(Main); }
+			}
 			if (level_in.GetLevelState(1) != LevelManager::LevelState::Closed
 				&& levelOneButton.IsPressed(game_in))
 			{
