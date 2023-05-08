@@ -60,7 +60,7 @@ private:
 	int mousey = 0;
 	bool mouseDown = false;
 
-	Location delta_loc;
+	Location delta_loc = { 0.0f, 0.0f };
 	bool movingLeft = false;
 	bool movingRight = false;
 
