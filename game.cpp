@@ -66,8 +66,11 @@ namespace Tmpl8
 				timer.Tick(deltaTime, level, player, *menu);
 			}
 
+			// Update animations
+			level.UpdateAnimations(deltaTime);
+
 			// Draw Functions //
-			level.DrawLevel(screen, deltaTime, camera.GetOffset());
+			level.DrawLevel(screen, camera.GetOffset());
 			if (level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
 			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
 			player.Draw(screen, camera.GetOffset());

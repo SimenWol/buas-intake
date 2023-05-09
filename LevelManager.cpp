@@ -41,7 +41,7 @@ namespace Tmpl8
 		}
 	}
 
-	void LevelManager::DrawLevel(Surface* screen, const float& dt, const Location& drawOffset)
+	void LevelManager::DrawLevel(Surface* screen, const Location& drawOffset)
 	{
 		int loopY = 0, loopX = 0;
 
@@ -73,13 +73,13 @@ namespace Tmpl8
 							y * tileSize - static_cast<int>(drawOffset.y));
 					}
 					if (GetContents(x, y) == TileContents::Water || GetContents(x, y) == TileContents::FakeWater)
-						{ water.Draw(screen, x, y, dt, drawOffset); }
+						{ water.Draw(screen, x, y, drawOffset); }
 					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
 					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big, drawOffset); }
 					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium, drawOffset); }
 					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small, drawOffset); }
 					if (GetContents(x, y) == TileContents::SpikesFloor) { spikes.Draw(screen, x, y, Spikes::Type::Floor, drawOffset); }
-					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt, drawOffset); }
+					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, drawOffset); }
 				}
 
 				// Tilemap drawing
@@ -110,6 +110,12 @@ namespace Tmpl8
 				}
 			}
 		}
+	}
+
+	void LevelManager::UpdateAnimations(const float& deltaTime)
+	{
+		water.UpdateFrame(deltaTime);
+		finish->UpdateFrame(deltaTime);
 	}
 
 	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu)

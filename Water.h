@@ -10,10 +10,9 @@ namespace Tmpl8
 	{
 	public:
 		Water();
-		void Draw(Surface* screen, const int tilex, const int tiley, const float& deltaTime, const Location& drawOffset);
-		void Trigger(class LevelManager& level, Player& player, class MenuManager& menu, const Location& tileLoc);
-	private:
+		void Draw(Surface* screen, const int tilex, const int tiley, const Location& drawOffset);
 		void UpdateFrame(const float& deltaTime);
+		void Trigger(class LevelManager& level, Player& player, class MenuManager& menu, const Location& tileLoc);
 	private:
 		int frame = 0;
 		float timer = 0.2f;

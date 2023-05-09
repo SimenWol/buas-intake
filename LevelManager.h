@@ -36,10 +36,11 @@ namespace Tmpl8
 			SpikesSmall,
 			SpikesFloor, // Only the purple floor from spikes.
 		};
-	public: // PUblic Functions //
+	public: // Public Functions //
 		LevelManager();
 		void LoadLevel(const int level, Player& player, Timer& timer);
-		void DrawLevel(Surface* screen, const float& dt, const Location& drawOffset);
+		void DrawLevel(Surface* screen, const Location& drawOffset);
+		void UpdateAnimations(const float& deltaTime);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		void Death(Player& player, class MenuManager& menu);
 	public: // Getters & Setters //
@@ -124,27 +125,27 @@ namespace Tmpl8
 			"----------------------------------------------------------------------------------------------------",
 			"----------------------------------------------------------------------------------------------------",
 			"--------------------idjdkd--------------------------------------------------------------------------",
+			"----------------------------------------------------idjdjdkd----------------------------------------",
+			"----------------------------------------------idkd--------------------------------------------------",
+			"----------------------------------idkd--------------------------------------------------------------",
 			"----------------------------------------------------------------------------------------------------",
 			"----------------------------------------------------------------------------------------------------",
 			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------cbfb----------------------",
 		};
 		const char levelTwoColl[11][51] =
 		{
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-ooooooooooAooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooo---oooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooo---oooooooooooooccooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooo----ooooooooooooooooooo-",
+			"-oooooooooooooooooooooo--oooooooooooooooooooooooo-",
+			"-oooooooooooooooo--oooooooooooooooooooooooooooooo-",
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW--WWWWWWWWWWW",
 		};
 	};
 
