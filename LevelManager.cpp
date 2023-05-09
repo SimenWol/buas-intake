@@ -67,7 +67,7 @@ namespace Tmpl8
 				switch (currentLevel)
 				{
 				case 1:
-					if (!(levelOne[y][x * 2] == '-') || !(levelOne[y][x * 2 + 1] == '-'))
+					if (!(levelOne[y][x * 2] == '-') && !(levelOne[y][x * 2 + 1] == '-'))
 					{
 						float tx = static_cast<float>(levelOne[y][x * 2] - 'a');
 						float ty = static_cast<float>(levelOne[y][x * 2 + 1] - 'a');
@@ -77,7 +77,7 @@ namespace Tmpl8
 					}
 					break;
 				case 2:
-					if (!(levelTwo[y][x * 2] == '-') || !(levelTwo[y][x * 2 + 1] == '-'))
+					if (!(levelTwo[y][x * 2] == '-') && !(levelTwo[y][x * 2 + 1] == '-'))
 					{
 						float tx = static_cast<float>(levelTwo[y][x * 2] - 'a');
 						float ty = static_cast<float>(levelTwo[y][x * 2 + 1] - 'a');
@@ -283,10 +283,12 @@ namespace Tmpl8
 			{
 				for (int j = 0; j < tileSize; j++) // x
 				{
-
 					if ((loc.x + j + 1) <= screen->GetWidth() && loc.x + j >= 0) // Stop drawing offscreen.
 					{
-						dst[j] = src[j];
+						// Check for black parts & remove these from drawing.
+						// Found in Sprite::Draw() code in Tmpl8.
+						const Pixel c1 = *(src + j);
+						if (c1 & 0xffffff) { dst[j] = src[j]; }
 					}
 				}
 			}
