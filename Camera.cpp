@@ -10,9 +10,9 @@ namespace Tmpl8
 		if (playerLoc.x > (screen->GetWidth() / 2.0f))
 		{
 			offset.x = playerLoc.x - screen->GetWidth() / 2.0f;
-			if (level == 1 && offset.x > 40 * LevelManager::tileSize - screen->GetWidth())
+			if (level == 1 && offset.x > 50 * LevelManager::tileSize - screen->GetWidth())
 			{
-				offset.x = static_cast<float>(40 * LevelManager::tileSize - screen->GetWidth());
+				offset.x = static_cast<float>(50 * LevelManager::tileSize - screen->GetWidth());
 			}
 			else if (level == 2 && offset.x > 20 * LevelManager::tileSize - screen->GetWidth())
 			{

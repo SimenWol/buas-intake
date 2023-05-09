@@ -68,36 +68,53 @@ namespace Tmpl8
 		Sprite arrowSign;
 
 	private:
-		Location startLoc1 = { 220.0f, 0.0f };
-		char levelOne[11][81] = {
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"--------cb--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb----cb",
-			"cbcbcbcbcbcbcb----cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
+		// CollMap codes //
+		// o: empty
+		// A: arrow
+		// -: Obstacle
+		// F: Finish
+		// W: Water
+		// X: WoodStakes
+		// S: SpikesBig
+		// s: SpikesMedium
+		// c: SpikesSmall
+
+		// LEVEL 1 //
+		const Location startLoc1 = { 432.0f, 384.0f };
+		const float time1 = 10.0f;
+
+		const char levelOne[11][101] = {
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------cbebdbebdbfb--------cbebdbebdbebdbebdbebdbebdbebdbebdbebdbebdbebdb",
+			"----------------cbdbebdbebdbebdbebccedcdedededececedededecedcdedededecedededecedecedededcdedecededed",
 		};
-		char levelOneColl[11][41] = {
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"oooooooooooooooooooooooooooooooooooooooo",
-			"SscXoAoooooooooooooooooooooooooooooooFFo",
-			"-------WW-------------------------------",
+		const char levelOneColl[11][51] = {
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooccooccoooooFooXXXXXXX",
+			"-ooooooooooAooooo------SSSS-----------------------",
+			"WWWWWWWW------------------------------------------",
 		};
 
-		Location startLoc2 = { 220.0f, 0.0f };
-		char levelTwo[11][41] =
+		// LEVEL 2 //
+		const Location startLoc2 = { 220.0f, 0.0f };
+		const float time2 = 99.0f;
+
+		const char levelTwo[11][41] =
 		{
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
@@ -111,7 +128,7 @@ namespace Tmpl8
 			"--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
 			"cbcbcbcbcb------------------------------",
 		};
-		char levelTwoColl[11][21] =
+		const char levelTwoColl[11][21] =
 		{
 			"oooooooooooooooooooo",
 			"oooooooooooooooooooo",

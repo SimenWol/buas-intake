@@ -28,11 +28,11 @@ namespace Tmpl8
 			{
 			case 1:
 				player.SetLoc(startLoc1);
-				timer.SetTime(25.0f);
+				timer.SetTime(time1);
 				break;
 			case 2:
 				player.SetLoc(startLoc2);
-				timer.SetTime(20.0f);
+				timer.SetTime(time2);
 				break;
 			default:
 				break;
@@ -49,7 +49,7 @@ namespace Tmpl8
 		{
 		case 1:
 			loopY = 11;
-			loopX = 40;
+			loopX = 50;
 			break;
 		case 2:
 			loopY = 11;
@@ -160,7 +160,7 @@ namespace Tmpl8
 		switch (currentLevel)
 		{
 		case 1:
-			if ((static_cast<int>(loc.x) > 40 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			if ((static_cast<int>(loc.x) > 50 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
 			content = levelOneColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		case 2:
@@ -216,7 +216,7 @@ namespace Tmpl8
 		switch (currentLevel)
 		{
 		case 1:
-			if (x > 40 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			if (x > 50 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelOneColl[y][x]; }
 			break;
 		case 2:
