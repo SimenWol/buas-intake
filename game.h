@@ -33,7 +33,7 @@ public:
 	bool GetMouseDown() const { return mouseDown; }
 	GameState GetGameState() const { return state; }
 
-	// Main Game Functions //
+	// Main Functions //
 	void Init();
 	void Shutdown();
 	void Tick( float deltaTime );

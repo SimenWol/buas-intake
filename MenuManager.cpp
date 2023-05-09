@@ -5,6 +5,7 @@
 
 namespace Tmpl8
 {
+	// Initialise all UI.
 	MenuManager::MenuManager()
 		:mainMenu(new Surface("assets/UI/Menus/title.png"), 1)
 		,howToPlayMenu(new Surface("assets/UI/Menus/how_to_play.png"), 1)
@@ -43,12 +44,13 @@ namespace Tmpl8
 		,selectLevelButton(267, 232, selectLevelButtonSprite)
 	{}
 
-	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in, Timer& timer) // Function that draws the required menu to the screen.
+	// Function that draws the required menu (and contents) to the screen.
+	void MenuManager::Draw(Surface* screen_in, Game& game_in, LevelManager& level_in, Timer& timer)
 	{
 
 		switch (menuState)
 		{
-		case LevelComplete:
+		case MenuState::LevelComplete:
 			// Set UI Elements
 			retryButton.SetLocation(213, 322);
 			// Draw UI Elements
@@ -57,7 +59,7 @@ namespace Tmpl8
 			nextLevelButton.Draw(screen_in, game_in);
 			selectLevelButton.Draw(screen_in, game_in);
 			break;
-		case LevelFailed:
+		case MenuState::LevelFailed:
 			// Set UI Elements
 			menuButton.SetLocation(253, 277);
 			retryButton.SetLocation(418, 277);
@@ -66,7 +68,7 @@ namespace Tmpl8
 			retryButton.Draw(screen_in, game_in);
 			menuButton.Draw(screen_in, game_in);
 			break;
-		case LevelSelect:
+		case MenuState::LevelSelect:
 			// Set UI Elements
 			backButton.SetLocation(350, 332);
 			// Draw UI Elements
@@ -75,14 +77,14 @@ namespace Tmpl8
 			levelOneButton.Draw(screen_in, game_in, level_in.GetLevelState(1));
 			levelTwoButton.Draw(screen_in, game_in, level_in.GetLevelState(2));
 			break;
-		case Main:
+		case MenuState::Main:
 			// Draw UI Elements
 			mainMenu.Draw(screen_in, 0, 0);
 			startButton.Draw(screen_in, game_in);
 			howToPlayButton.Draw(screen_in, game_in);
 			quitButton.Draw(screen_in, game_in);
 			break;
-		case Paused:
+		case MenuState::Paused:
 			// Set UI Elements
 			menuButton.SetLocation(342, 281);
 			// Draw UI Elements
@@ -91,13 +93,12 @@ namespace Tmpl8
 			menuButton.Draw(screen_in, game_in);
 			restartButton.Draw(screen_in, game_in);
 			break;
-		case Playing:
+		case MenuState::Playing:
 			// Draw UI Elements
 			pauseButton.Draw(screen_in, game_in);
 			timer.Draw(screen_in, screen_in->GetWidth() / 2, 10);
-			// Anything else UI
 			break;
-		case HowToPlay:
+		case MenuState::HowToPlay:
 			// Set UI Elements
 			backButton.SetLocation(10, 426);
 			// Draw UI Elements
@@ -105,7 +106,7 @@ namespace Tmpl8
 			backButton.Draw(screen_in, game_in);
 			controlsButton.Draw(screen_in, game_in);
 			break;
-		case Controls:
+		case MenuState::Controls:
 			// Set UI Elements
 			backButton.SetLocation(10, 426);
 			// Draw UI Elements
@@ -117,106 +118,103 @@ namespace Tmpl8
 		}
 	}
 
+	// Function that checks for button presses and calls the required function upon button release.
 	void MenuManager::Tick(Game& game_in, LevelManager& level_in, Player& player, Timer& timer)
 	{
 		switch (menuState)
 		{
-		case LevelComplete:
+		case MenuState::LevelComplete:
 			// Button Logic
 			if (retryButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
-				SetMenuState(Playing);
+				SetMenuState(MenuState::Playing);
 			}
 			if (nextLevelButton.IsPressed(game_in))
 			{
-				if (level_in.GetCurrentLevel() == 2) { SetMenuState(LevelSelect); }
+				if (level_in.GetCurrentLevel() == 2) { SetMenuState(MenuState::LevelSelect); }
 				else
 				{
 					level_in.LoadLevel(level_in.GetCurrentLevel() + 1, player, timer);
-					SetMenuState(Playing);
+					SetMenuState(MenuState::Playing);
 				}
 			}
 			if (selectLevelButton.IsPressed(game_in))
 			{
-				SetMenuState(LevelSelect);
+				SetMenuState(MenuState::LevelSelect);
 				game_in.SetState(Game::GameState::MENU);
 			}
 			break;
-		case LevelFailed:
+		case MenuState::LevelFailed:
 			// Button Logic
 			if (retryButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
-				SetMenuState(Playing);
+				SetMenuState(MenuState::Playing);
 			}
 			if (menuButton.IsPressed(game_in))
 			{
-				SetMenuState(Main);
+				SetMenuState(MenuState::Main);
 				game_in.SetState(Game::GameState::MENU);
 			}
 			break;
-		case LevelSelect:
+		case MenuState::LevelSelect:
 			// Button Logic
 			if (backButton.IsPressed(game_in))
 			{
-				if (game_in.GetGameState() == Game::GameState::PLAYING) { SetMenuState(LevelComplete); }
-				else { SetMenuState(Main); }
+				if (game_in.GetGameState() == Game::GameState::PLAYING) { SetMenuState(MenuState::LevelComplete); }
+				else { SetMenuState(MenuState::Main); }
 			}
 			if (level_in.GetLevelState(1) != LevelManager::LevelState::Closed
 				&& levelOneButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(1, player, timer);
 				game_in.SetState(game_in.PLAYING);
-				SetMenuState(Playing);
+				SetMenuState(MenuState::Playing);
 			}
 			if (level_in.GetLevelState(2) != LevelManager::LevelState::Closed
 				&& levelTwoButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(2, player, timer);
 				game_in.SetState(game_in.PLAYING);
-				SetMenuState(Playing);
+				SetMenuState(MenuState::Playing);
 			}
 			break;
-		case Main:
+		case MenuState::Main:
 			// Button Logic
-			if (startButton.IsPressed(game_in)) { SetMenuState(LevelSelect); }
-			if (howToPlayButton.IsPressed(game_in)) { SetMenuState(HowToPlay); }
+			if (startButton.IsPressed(game_in)) { SetMenuState(MenuState::LevelSelect); }
+			if (howToPlayButton.IsPressed(game_in)) { SetMenuState(MenuState::HowToPlay); }
 			if (quitButton.IsPressed(game_in)) { game_in.Shutdown(); }
 			break;
-		case Paused:
+		case MenuState::Paused:
 			// Button Logic
-			if (continueButton.IsPressed(game_in)) { SetMenuState(Playing); }
+			if (continueButton.IsPressed(game_in)) { SetMenuState(MenuState::Playing); }
 			if (menuButton.IsPressed(game_in))
 			{
-				SetMenuState(Main);
+				SetMenuState(MenuState::Main);
 				game_in.SetState(Game::GameState::MENU);
 			}
 			if (restartButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(level_in.GetCurrentLevel(), player, timer);
-				SetMenuState(Playing);
+				SetMenuState(MenuState::Playing);
 			}
 			break;
-		case Playing:
+		case MenuState::Playing:
 			// Button Logic
-			if (pauseButton.IsPressed(game_in)) { SetMenuState(Paused); }
+			if (pauseButton.IsPressed(game_in)) { SetMenuState(MenuState::Paused); }
 			break;
-		case HowToPlay:
+		case MenuState::HowToPlay:
 			// Button Logic
-			if (backButton.IsPressed(game_in)) { SetMenuState(Main); }
-			if (controlsButton.IsPressed(game_in)) { SetMenuState(Controls); }
+			if (backButton.IsPressed(game_in)) { SetMenuState(MenuState::Main); }
+			if (controlsButton.IsPressed(game_in)) { SetMenuState(MenuState::Controls); }
 			break;
-		case Controls:
+		case MenuState::Controls:
 			// Button Logic
-			if (backButton.IsPressed(game_in)) { SetMenuState(HowToPlay); }
+			if (backButton.IsPressed(game_in)) { SetMenuState(MenuState::HowToPlay); }
 			break;
 		default:
 			break;
 		}
 	}
-
-	void MenuManager::SetMenuState(MenuState state_in) { menuState = state_in; } // Function MenuState setter.
-
-	MenuManager::MenuState MenuManager::GetMenuState() { return menuState; }
 };
