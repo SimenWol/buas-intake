@@ -119,33 +119,33 @@ namespace Tmpl8
 		const Location startLoc2 = { 528.0f, 48.0f };
 		const float time2 = 99.0f;
 
-		const char levelTwo[11][101] =
+		const char levelTwo[11][111] =
 		{
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"--------------------idjdkd--------------------------------------------------------------------------",
-			"----------------------------------------------------idjdjdkd----------------------------------------",
-			"----------------------------------------------idkd--------------------------------------------------",
-			"----------------------------------idkd--------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"----------------------------------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------cbfb----------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------idjdkd------------------------------------------------------------------------------------",
+			"----------------------------------------------------idjdjdkd--------------------------------------------------",
+			"----------------------------------------------idkd------------------------------------------------------------",
+			"----------------------------------idkd------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------cbfb------ib--------ib--------------",
 		};
-		const char levelTwoColl[11][51] =
+		const char levelTwoColl[11][56] =
 		{
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooooAooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooo---oooooooooooooccooooooooooooooooooooo-",
-			"-ooooooooooooooooooooooooo----ooooooooooooooooooo-",
-			"-oooooooooooooooooooooo--oooooooooooooooooooooooo-",
-			"-oooooooooooooooo--oooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW--WWWWWWWWWWW",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooAoooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooo---oooooooooooooccoooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooo----oooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooo--ooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooo--ooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooFoooooo-",
+			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWwwWWWwWWWWwWWWWWWW",
 		};
 	};
 

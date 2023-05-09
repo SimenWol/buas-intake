@@ -14,9 +14,9 @@ namespace Tmpl8
 			{
 				offset.x = static_cast<float>(50 * LevelManager::tileSize - screen->GetWidth());
 			}
-			else if (level == 2 && offset.x > 50 * LevelManager::tileSize - screen->GetWidth())
+			else if (level == 2 && offset.x > 55 * LevelManager::tileSize - screen->GetWidth())
 			{
-				offset.x = static_cast<float>(50 * LevelManager::tileSize - screen->GetWidth());
+				offset.x = static_cast<float>(55 * LevelManager::tileSize - screen->GetWidth());
 			}
 
 			// Add 1 for casting to int.
