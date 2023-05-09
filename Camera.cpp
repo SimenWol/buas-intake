@@ -18,6 +18,9 @@ namespace Tmpl8
 			{
 				offset.x = static_cast<float>(20 * LevelManager::tileSize - screen->GetWidth());
 			}
+
+			// Add 1 for casting to int.
+			offset.x += 1;
 		}
 		else
 		{
@@ -35,22 +38,14 @@ namespace Tmpl8
 			{
 				offset.y = static_cast<float>(11 * LevelManager::tileSize - screen->GetHeight());
 			}
+
+			// Add 1 for casting to int.
+			offset.y += 1;
 		}
 		else
 		{
 			offset.y = 0.0f;
 		}
-
-		//if (playerLoc.y > (screen->GetHeight() / 2.0f))
-		//{
-		//	offset.y = playerLoc.x - screen->GetHeight() / 2.0f;
-		//}
-		//else
-		//{
-		//	offset.y = 0.0f;
-		//}
-
-		//std::cout << "Offset: " << offset.x << ", " << offset.y << std::endl;
 	}
 
 	Location Camera::GetOffset() { return offset; }

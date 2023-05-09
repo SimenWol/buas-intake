@@ -29,10 +29,12 @@ namespace Tmpl8
 			Obstacle,
 			Finish,
 			Water,
+			FakeWater, // Water that doesn't do collision detection.
 			WoodStakes,
 			SpikesBig,
 			SpikesMedium,
 			SpikesSmall,
+			SpikesFloor, // Only the purple floor from spikes.
 		};
 	public: // PUblic Functions //
 		LevelManager();
@@ -74,10 +76,12 @@ namespace Tmpl8
 		// -: Obstacle
 		// F: Finish
 		// W: Water
+		// w: FakeWater
 		// X: WoodStakes
 		// S: SpikesBig
 		// s: SpikesMedium
 		// c: SpikesSmall
+		// C: SpikesFloor
 
 		// LEVEL 1 //
 		const Location startLoc1 = { 432.0f, 384.0f };
@@ -106,8 +110,8 @@ namespace Tmpl8
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-ooooooooooooooooooooooooooooccooccoooooFooXXXXXXX",
-			"-ooooooooooAooooo------SSSS-----------------------",
-			"WWWWWWWW------------------------------------------",
+			"-ooooooooooAooooo-----CSSSSC----------------------",
+			"WWWWWWWWw-----------------------------------------",
 		};
 
 		// LEVEL 2 //

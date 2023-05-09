@@ -28,6 +28,11 @@ namespace Tmpl8
 			spikesSprite.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x),
 				tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
 			break;
+		case Type::Floor:
+			spikesSprite.SetFrame(3);
+			spikesSprite.Draw(screen, tilex * LevelManager::tileSize - static_cast<int>(drawOffset.x),
+				tiley * LevelManager::tileSize - static_cast<int>(drawOffset.y));
+			break;
 		default:
 			std::cout << "Unknown spike type." << std::endl;
 			break;
@@ -43,6 +48,7 @@ namespace Tmpl8
 		bottomRight.y = tileLoc.y + static_cast<float>(level.tileSize) / 2;
 		topLeft.x = tileLoc.x - static_cast<float>(level.tileSize) / 2;
 
+		if (type == Type::Floor) { return; }
 		if (type == Type::Small) { topLeft.y = tileLoc.y + 30 - static_cast<float>(level.tileSize) / 2; }
 		if (type == Type::Medium) { topLeft.y = tileLoc.y + 18 - static_cast<float>(level.tileSize) / 2; }
 		if (type == Type::Big) { topLeft.y = tileLoc.y + 9 - static_cast<float>(level.tileSize) / 2; }

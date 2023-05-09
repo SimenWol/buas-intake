@@ -63,6 +63,24 @@ namespace Tmpl8
 		{
 			for (int x = 0; x < loopX; x++)
 			{
+				// Collision map drawing
+				if (!(GetContents(x, y) == TileContents::Empty))
+				{
+					if (GetContents(x, y) == TileContents::ArrowSign)
+					{
+						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x),
+							y * tileSize - static_cast<int>(drawOffset.y));
+					}
+					if (GetContents(x, y) == TileContents::Water || GetContents(x, y) == TileContents::FakeWater)
+						{ water.Draw(screen, x, y, dt, drawOffset); }
+					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesFloor) { spikes.Draw(screen, x, y, Spikes::Type::Floor, drawOffset); }
+					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt, drawOffset); }
+				}
+
 				// Tilemap drawing
 				switch (currentLevel)
 				{
@@ -89,22 +107,6 @@ namespace Tmpl8
 				default:
 					break;
 				}
-
-				// Collision map drawing
-				if (!(GetContents(x, y) == TileContents::Empty))
-				{
-					if (GetContents(x, y) == TileContents::ArrowSign)
-					{
-						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x),
-							y * tileSize - static_cast<int>(drawOffset.y));
-					}
-					if (GetContents(x, y) == TileContents::Water) { water.Draw(screen, x, y, dt, drawOffset); }
-					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
-					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big, drawOffset); }
-					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium, drawOffset); }
-					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small, drawOffset); }
-					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt, drawOffset); }
-				}
 			}
 		}
 	}
@@ -115,6 +117,8 @@ namespace Tmpl8
 		{
 		case TileContents::Empty:
 			break;
+		case TileContents::FakeWater:
+		case TileContents::SpikesFloor:
 		case TileContents::Obstacle:
 			obstacle.Trigger(tile, player);
 			break;
@@ -190,6 +194,9 @@ namespace Tmpl8
 		case 'W':
 			return TileContents::Water;
 			break;
+		case 'w':
+			return TileContents::FakeWater;
+			break;
 		case 'X':
 			return TileContents::WoodStakes;
 			break;
@@ -201,6 +208,9 @@ namespace Tmpl8
 			break;
 		case 'c':
 			return TileContents::SpikesSmall;
+			break;
+		case 'C':
+			return TileContents::SpikesFloor;
 			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;
@@ -246,6 +256,9 @@ namespace Tmpl8
 		case 'W':
 			return TileContents::Water;
 			break;
+		case 'w':
+			return TileContents::FakeWater;
+			break;
 		case 'X':
 			return TileContents::WoodStakes;
 			break;
@@ -257,6 +270,9 @@ namespace Tmpl8
 			break;
 		case 'c':
 			return TileContents::SpikesSmall;
+			break;
+		case 'C':
+			return TileContents::SpikesFloor;
 			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;

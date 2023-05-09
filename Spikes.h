@@ -14,6 +14,7 @@ namespace Tmpl8
 			Big,
 			Medium,
 			Small,
+			Floor,
 		};
 	public:
 		Spikes();
