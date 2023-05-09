@@ -18,6 +18,10 @@ namespace Tmpl8
 			{
 				offset.x = static_cast<float>(55 * LevelManager::tileSize - screen->GetWidth());
 			}
+			else if (level == 3 && offset.x > 55 * LevelManager::tileSize - screen->GetWidth())
+			{
+				offset.x = static_cast<float>(55 * LevelManager::tileSize - screen->GetWidth());
+			}
 
 			// Add 1 for casting to int.
 			offset.x += 1;
@@ -34,7 +38,11 @@ namespace Tmpl8
 			{
 				offset.y = static_cast<float>(11 * LevelManager::tileSize - screen->GetHeight());
 			}
-			if (level == 2 && offset.y > 11 * LevelManager::tileSize - screen->GetHeight())
+			else if (level == 2 && offset.y > 11 * LevelManager::tileSize - screen->GetHeight())
+			{
+				offset.y = static_cast<float>(11 * LevelManager::tileSize - screen->GetHeight());
+			}
+			else if (level == 3 && offset.y > 11 * LevelManager::tileSize - screen->GetHeight())
 			{
 				offset.y = static_cast<float>(11 * LevelManager::tileSize - screen->GetHeight());
 			}

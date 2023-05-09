@@ -63,6 +63,7 @@ namespace Tmpl8
 		// Level Selection Menu
 		Sprite levelOneButtonSprite;
 		Sprite levelTwoButtonSprite;
+		Sprite levelThreeButtonSprite;
 
 		// Playing UI
 		Sprite pauseButtonSprite;
@@ -92,6 +93,7 @@ namespace Tmpl8
 		// Level Selection Menu
 		Button levelOneButton;
 		Button levelTwoButton;
+		Button levelThreeButton;
 
 		// Playing UI
 		Button pauseButton;

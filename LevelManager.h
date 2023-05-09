@@ -55,7 +55,7 @@ namespace Tmpl8
 		void Reset(Player& player);
 	public: // Public Variables //
 		static constexpr int tileSize = 48; // Width & Height for each tile
-		static constexpr int numLevels = 2; // Total amount of levels
+		static constexpr int numLevels = 3; // Total amount of levels
 	private: // Private Variables //
 		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
@@ -117,7 +117,7 @@ namespace Tmpl8
 
 		// LEVEL 2 //
 		const Location startLoc2 = { 528.0f, 48.0f };
-		const float time2 = 99.0f;
+		const float time2 = 12.0f;
 
 		const char levelTwo[11][111] =
 		{
@@ -134,6 +134,41 @@ namespace Tmpl8
 			"--------------------------------------------------------------------------cbfb------ib--------ib--------------",
 		};
 		const char levelTwoColl[11][56] =
+		{
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooAoooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooo---oooooooooooooccoooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooo----oooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooo--ooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooo--ooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooFoooooo-",
+			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWwwWWWwWWWWwWWWWWWW",
+		};
+
+		// LEVEL 3 //
+		const Location startLoc3 = { 528.0f, 48.0f };
+		const float time3 = 12.0f;
+
+		// CAVE
+
+		const char levelThree[11][111] =
+		{
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------idjdkd------------------------------------------------------------------------------------",
+			"----------------------------------------------------idjdjdkd--------------------------------------------------",
+			"----------------------------------------------idkd------------------------------------------------------------",
+			"----------------------------------idkd------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------------------------------------------",
+			"--------------------------------------------------------------------------cbfb------ib--------ib--------------",
+		};
+		const char levelThreeColl[11][56] =
 		{
 			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",

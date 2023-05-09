@@ -22,6 +22,7 @@ namespace Tmpl8
 		,controlsButtonSprite(new Surface("assets/UI/Buttons/controls.png"), 3)
 		,levelOneButtonSprite(new Surface("assets/UI/Buttons/level_one.png"), 7)
 		,levelTwoButtonSprite(new Surface("assets/UI/Buttons/level_two.png"), 7)
+		,levelThreeButtonSprite(new Surface("assets/UI/Buttons/level_three.png"), 7)
 		,pauseButtonSprite(new Surface("assets/UI/Buttons/pause.png"), 3)
 		,continueButtonSprite(new Surface("assets/UI/Buttons/continue.png"), 3)
 		,menuButtonSprite(new Surface("assets/UI/Buttons/menu.png"), 3)
@@ -37,6 +38,7 @@ namespace Tmpl8
 		,controlsButton(306, 408, controlsButtonSprite)
 		,levelOneButton(313, 232, levelOneButtonSprite)
 		,levelTwoButton(413, 232, levelTwoButtonSprite)
+		,levelThreeButton(513, 232, levelThreeButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
 		,continueButton(473, 281, continueButtonSprite)
 		,restartButton(150, 281, restartButtonSprite)
@@ -76,6 +78,7 @@ namespace Tmpl8
 			backButton.Draw(screen_in, game_in);
 			levelOneButton.Draw(screen_in, game_in, level_in.GetLevelState(1));
 			levelTwoButton.Draw(screen_in, game_in, level_in.GetLevelState(2));
+			levelThreeButton.Draw(screen_in, game_in, level_in.GetLevelState(3));
 			break;
 		case MenuState::Main:
 			// Draw UI Elements
@@ -132,7 +135,7 @@ namespace Tmpl8
 			}
 			if (nextLevelButton.IsPressed(game_in))
 			{
-				if (level_in.GetCurrentLevel() == 2) { SetMenuState(MenuState::LevelSelect); }
+				if (level_in.GetCurrentLevel() == LevelManager::numLevels) { SetMenuState(MenuState::LevelSelect); }
 				else
 				{
 					level_in.LoadLevel(level_in.GetCurrentLevel() + 1, player, timer);
@@ -176,6 +179,13 @@ namespace Tmpl8
 				&& levelTwoButton.IsPressed(game_in))
 			{
 				level_in.LoadLevel(2, player, timer);
+				game_in.SetState(game_in.PLAYING);
+				SetMenuState(MenuState::Playing);
+			}
+			if (level_in.GetLevelState(3) != LevelManager::LevelState::Closed
+				&& levelThreeButton.IsPressed(game_in))
+			{
+				level_in.LoadLevel(3, player, timer);
 				game_in.SetState(game_in.PLAYING);
 				SetMenuState(MenuState::Playing);
 			}

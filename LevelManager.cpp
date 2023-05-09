@@ -15,6 +15,7 @@ namespace Tmpl8
 		finish = new Finish;
 		state[0] = LevelState::Open;
 		state[1] = LevelState::Open;
+		state[2] = LevelState::Open;
 	}
 
 	void LevelManager::LoadLevel(const int level, Player& player, Timer& timer)
@@ -35,6 +36,10 @@ namespace Tmpl8
 				player.SetLoc(startLoc2);
 				timer.SetTime(time2);
 				break;
+			case 3:
+				player.SetLoc(startLoc3);
+				timer.SetTime(time3);
+				break;
 			default:
 				break;
 			}
@@ -53,6 +58,10 @@ namespace Tmpl8
 			loopX = 50;
 			break;
 		case 2:
+			loopY = 11;
+			loopX = 55;
+			break;
+		case 3:
 			loopY = 11;
 			loopX = 55;
 			break;
@@ -100,6 +109,16 @@ namespace Tmpl8
 					{
 						float tx = static_cast<float>(levelTwo[y][x * 2] - 'a');
 						float ty = static_cast<float>(levelTwo[y][x * 2 + 1] - 'a');
+
+						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
+							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+					}
+					break;
+				case 3:
+					if (!(levelThree[y][x * 2] == '-') && !(levelThree[y][x * 2 + 1] == '-'))
+					{
+						float tx = static_cast<float>(levelThree[y][x * 2] - 'a');
+						float ty = static_cast<float>(levelThree[y][x * 2 + 1] - 'a');
 
 						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
 							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
@@ -178,6 +197,10 @@ namespace Tmpl8
 			if ((static_cast<int>(loc.x) > 55 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
 			content = levelTwoColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
+		case 3:
+			if ((static_cast<int>(loc.x) > 55 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			content = levelThreeColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
+			break;
 		default:
 			break;
 		}
@@ -239,6 +262,10 @@ namespace Tmpl8
 		case 2:
 			if (x > 55 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelTwoColl[y][x]; }
+			break;
+		case 3:
+			if (x > 55 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			else { content = levelThreeColl[y][x]; }
 			break;
 		default:
 			break;
