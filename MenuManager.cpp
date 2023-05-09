@@ -7,7 +7,8 @@ namespace Tmpl8
 {
 	MenuManager::MenuManager()
 		:mainMenu(new Surface("assets/UI/Menus/title.png"), 1)
-		,settingsMenu(new Surface("assets/UI/Menus/settings.png"), 1)
+		,howToPlayMenu(new Surface("assets/UI/Menus/how_to_play.png"), 1)
+		,controlsMenu(new Surface("assets/UI/Menus/controls.png"), 1)
 		,levelSelectionMenu(new Surface("assets/UI/Menus/level_select.png"), 1)
 		,levelCompletedMenu(new Surface("assets/UI/Menus/level_completed.png"), 1)
 		,levelFailedMenu(new Surface("assets/UI/Menus/level_failed.png"), 1)
@@ -15,8 +16,9 @@ namespace Tmpl8
 		,backButtonSprite(new Surface("assets/UI/Buttons/back.png"), 3)
 		,retryButtonSprite(new Surface("assets/UI/Buttons/retry.png"), 3)
 		,startButtonSprite(new Surface("assets/UI/Buttons/start.png"), 3)
-		,settingsButtonSprite(new Surface("assets/UI/Buttons/settings.png"), 3)
+		,howToPlayButtonSprite(new Surface("assets/UI/Buttons/how_to_play.png"), 3)
 		,quitButtonSprite(new Surface("assets/UI/Buttons/quit.png"), 3)
+		,controlsButtonSprite(new Surface("assets/UI/Buttons/controls.png"), 3)
 		,levelOneButtonSprite(new Surface("assets/UI/Buttons/level_one.png"), 7)
 		,levelTwoButtonSprite(new Surface("assets/UI/Buttons/level_two.png"), 7)
 		,pauseButtonSprite(new Surface("assets/UI/Buttons/pause.png"), 3)
@@ -29,8 +31,9 @@ namespace Tmpl8
 		,menuButton(0, 0, menuButtonSprite)
 		,retryButton(0, 0, retryButtonSprite)
 		,startButton(35, 312, startButtonSprite)
-		,settingsButton(35, 402, settingsButtonSprite)
+		,howToPlayButton(35, 402, howToPlayButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
+		,controlsButton(306, 408, controlsButtonSprite)
 		,levelOneButton(313, 232, levelOneButtonSprite)
 		,levelTwoButton(413, 232, levelTwoButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
@@ -65,7 +68,7 @@ namespace Tmpl8
 			break;
 		case LevelSelect:
 			// Set UI Elements
-			backButton.SetLocation(351, 332);
+			backButton.SetLocation(350, 332);
 			// Draw UI Elements
 			levelSelectionMenu.Draw(screen_in, 0, 0);
 			backButton.Draw(screen_in, game_in);
@@ -76,7 +79,7 @@ namespace Tmpl8
 			// Draw UI Elements
 			mainMenu.Draw(screen_in, 0, 0);
 			startButton.Draw(screen_in, game_in);
-			settingsButton.Draw(screen_in, game_in);
+			howToPlayButton.Draw(screen_in, game_in);
 			quitButton.Draw(screen_in, game_in);
 			break;
 		case Paused:
@@ -94,13 +97,20 @@ namespace Tmpl8
 			timer.Draw(screen_in, screen_in->GetWidth() / 2, 10);
 			// Anything else UI
 			break;
-		case Settings:
+		case HowToPlay:
 			// Set UI Elements
-			backButton.SetLocation(25, 412);
+			backButton.SetLocation(10, 426);
 			// Draw UI Elements
-			settingsMenu.Draw(screen_in, 0, 0);
+			howToPlayMenu.Draw(screen_in, 0, 0);
 			backButton.Draw(screen_in, game_in);
-			// Options
+			controlsButton.Draw(screen_in, game_in);
+			break;
+		case Controls:
+			// Set UI Elements
+			backButton.SetLocation(10, 426);
+			// Draw UI Elements
+			controlsMenu.Draw(screen_in, 0, 0);
+			backButton.Draw(screen_in, game_in);
 			break;
 		default:
 			break;
@@ -111,7 +121,7 @@ namespace Tmpl8
 	{
 		switch (menuState)
 		{
-		case Tmpl8::MenuManager::LevelComplete:
+		case LevelComplete:
 			// Button Logic
 			if (retryButton.IsPressed(game_in))
 			{
@@ -133,7 +143,7 @@ namespace Tmpl8
 				game_in.SetState(Game::GameState::MENU);
 			}
 			break;
-		case Tmpl8::MenuManager::LevelFailed:
+		case LevelFailed:
 			// Button Logic
 			if (retryButton.IsPressed(game_in))
 			{
@@ -146,7 +156,7 @@ namespace Tmpl8
 				game_in.SetState(Game::GameState::MENU);
 			}
 			break;
-		case Tmpl8::MenuManager::LevelSelect:
+		case LevelSelect:
 			// Button Logic
 			if (backButton.IsPressed(game_in))
 			{
@@ -168,13 +178,13 @@ namespace Tmpl8
 				SetMenuState(Playing);
 			}
 			break;
-		case Tmpl8::MenuManager::Main:
+		case Main:
 			// Button Logic
 			if (startButton.IsPressed(game_in)) { SetMenuState(LevelSelect); }
-			if (settingsButton.IsPressed(game_in)) { SetMenuState(Settings); }
+			if (howToPlayButton.IsPressed(game_in)) { SetMenuState(HowToPlay); }
 			if (quitButton.IsPressed(game_in)) { game_in.Shutdown(); }
 			break;
-		case Tmpl8::MenuManager::Paused:
+		case Paused:
 			// Button Logic
 			if (continueButton.IsPressed(game_in)) { SetMenuState(Playing); }
 			if (menuButton.IsPressed(game_in))
@@ -188,13 +198,18 @@ namespace Tmpl8
 				SetMenuState(Playing);
 			}
 			break;
-		case Tmpl8::MenuManager::Playing:
+		case Playing:
 			// Button Logic
 			if (pauseButton.IsPressed(game_in)) { SetMenuState(Paused); }
 			break;
-		case Tmpl8::MenuManager::Settings:
+		case HowToPlay:
 			// Button Logic
 			if (backButton.IsPressed(game_in)) { SetMenuState(Main); }
+			if (controlsButton.IsPressed(game_in)) { SetMenuState(Controls); }
+			break;
+		case Controls:
+			// Button Logic
+			if (backButton.IsPressed(game_in)) { SetMenuState(HowToPlay); }
 			break;
 		default:
 			break;

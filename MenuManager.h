@@ -18,7 +18,8 @@ namespace Tmpl8
 			Main,			// Main Menu
 			Paused,			// Pause Menu
 			Playing,		// Playing UI (pause button, etc.)
-			Settings		// Settings Menu
+			HowToPlay,		// How To Play Menu
+			Controls,		// Controls Menu
 		};
 	public:
 		MenuManager();
@@ -32,7 +33,8 @@ namespace Tmpl8
 
 		// Sprites //
 		Sprite mainMenu;
-		Sprite settingsMenu;
+		Sprite howToPlayMenu;
+		Sprite controlsMenu;
 		Sprite levelSelectionMenu;
 		Sprite levelCompletedMenu;
 		Sprite levelFailedMenu;
@@ -43,8 +45,10 @@ namespace Tmpl8
 		Sprite retryButtonSprite;
 		// Main Menu
 		Sprite startButtonSprite;
-		Sprite settingsButtonSprite;
+		Sprite howToPlayButtonSprite;
 		Sprite quitButtonSprite;
+		// How To Play Menu
+		Sprite controlsButtonSprite;
 		// Level Selection Menu
 		Sprite levelOneButtonSprite;
 		Sprite levelTwoButtonSprite;
@@ -63,8 +67,10 @@ namespace Tmpl8
 		Button retryButton;
 		// Main Menu
 		Button startButton;
-		Button settingsButton;
+		Button howToPlayButton;
 		Button quitButton;
+		// How To Play Menu
+		Button controlsButton;
 		// Level Selection Menu
 		Button levelOneButton;
 		Button levelTwoButton;
