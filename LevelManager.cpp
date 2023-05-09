@@ -14,6 +14,7 @@ namespace Tmpl8
 	{
 		finish = new Finish;
 		state[0] = LevelState::Open;
+		state[1] = LevelState::Open;
 	}
 
 	void LevelManager::LoadLevel(const int level, Player& player, Timer& timer)
@@ -53,7 +54,7 @@ namespace Tmpl8
 			break;
 		case 2:
 			loopY = 11;
-			loopX = 20;
+			loopX = 50;
 			break;
 		default:
 			break;
@@ -168,7 +169,7 @@ namespace Tmpl8
 			content = levelOneColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		case 2:
-			if ((static_cast<int>(loc.x) > 20 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			if ((static_cast<int>(loc.x) > 50 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
 			content = levelTwoColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		default:
@@ -230,7 +231,7 @@ namespace Tmpl8
 			else { content = levelOneColl[y][x]; }
 			break;
 		case 2:
-			if (x > 20 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			if (x > 50 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelTwoColl[y][x]; }
 			break;
 		default:

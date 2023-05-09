@@ -115,36 +115,36 @@ namespace Tmpl8
 		};
 
 		// LEVEL 2 //
-		const Location startLoc2 = { 220.0f, 0.0f };
+		const Location startLoc2 = { 528.0f, 48.0f };
 		const float time2 = 99.0f;
 
-		const char levelTwo[11][41] =
+		const char levelTwo[11][101] =
 		{
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"--cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb",
-			"cbcbcbcbcb------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"--------------------idjdkd--------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
+			"----------------------------------------------------------------------------------------------------",
 		};
-		const char levelTwoColl[11][21] =
+		const char levelTwoColl[11][51] =
 		{
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"oooooooooooooooooooo",
-			"Fooooooooooooooooooo",
-			"-----WWWWWWWWWWWWWWW",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooooAooooooooooooooooooooooooooooooooooooo-",
+			"-ooooooooo---oooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"-oooooooooooooooooooooooooooooooooooooooooooooooo-",
+			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
 		};
 	};
 

@@ -41,18 +41,16 @@ namespace Tmpl8
 		// clear the graphics window
 		screen->Clear(0);
 		background.Draw(screen, 0, 0);
+		menu->Tick(*this, level, player, timer);
 
 		switch (state)
 		{
 		case MENU:
 			// Draw Functions //
-			menu->Tick(*this, level, player, timer);
 			menu->Draw(screen, *this, level, timer);
 			break;
 		case PLAYING:
 			// Game Logic //
-			menu->Tick(*this, level, player, timer);
-
 			if (menu->GetMenuState() == MenuManager::MenuState::Playing)
 			{
 				// Define moving direction from keyboard inputs
