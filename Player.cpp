@@ -8,14 +8,16 @@
 
 namespace Tmpl8
 {
+	// Constructor //
 	Player::Player()
-		:player(new Surface("assets/Player/Basketball.png"), 1)
-		,deathFX(new Surface("assets/FX/hit.png"), 5)
-		,bounceFX(new Surface("assets/FX/dust.png"), 8)
+		:player(new Surface("assets/Player/basketball.png"), 1)
+		,deathFX(new Surface("assets/Player/FX/hit.png"), 5)
+		,bounceFX(new Surface("assets/Player/FX/dust.png"), 8)
 	{
 		radius = static_cast<float>(player.GetWidth()) / 2.0f;
 	}
 
+	// Drawing function
 	void Player::Draw(Surface* screen_in, const Location& drawOffset)
 	{
 		player.Draw(screen_in, static_cast<int>(loc.x - drawOffset.x - radius), 
@@ -31,12 +33,14 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
+	// Player Location Setter
 	void Player::SetLoc(const Location& loc_in)
 	{
 		loc.x = loc_in.x;
 		loc.y = loc_in.y;
 	}
 
+	// Function that calculates new player position and then calls collision checks.
 	void Player::Move(const float& deltaTime, const Location& delta_loc, LevelManager& levelmanager, MenuManager& menu)
 	{
 		// Update player location //
@@ -61,6 +65,7 @@ namespace Tmpl8
 		// Calculate new Y speed //
 		speed.y += (gravity * 1000.0f) * deltaTime;
 
+		// Check for collisions
 		CheckCollision(levelmanager, menu);
 
 		/* ======================== DEBUG ======================== */
@@ -70,12 +75,14 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
+	// Function that resets player information.
 	void Player::Reset()
 	{
 		speed = { 0.0f, 0.0f };
 		playBounceFX = false;
 	}
 
+	// Function that plays bounce effects
 	void Player::BounceFX(Surface* screen, const float& deltaTime, const Location& drawOffset)
 	{
 		bounceTimer -= deltaTime;
@@ -89,6 +96,7 @@ namespace Tmpl8
 			static_cast<int>(bounceLoc.y - drawOffset.y));
 	}
 
+	// Function that plays death effects.
 	void Player::DeathFX(Surface* screen, const float& deltaTime, const Location& drawOffset)
 	{
 			deathTimer -= deltaTime;
@@ -102,6 +110,8 @@ namespace Tmpl8
 			static_cast<int>(loc.y - drawOffset.y - radius - 13.5f));
 	}
 
+	// Function that checks in which tiles the player is. Then calls more precise checks.
+	// After that, it sends the gathered information to another function IF there is a collision.
 	void Player::CheckCollision(LevelManager& levelmanager, MenuManager& menu)
 	{
 		// Calculate center of which tiles to check
@@ -145,6 +155,7 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
+	// Function that deflects the player in the X direction
 	void Player::DeflectX(const float offset)
 	{
 		loc.x = (loc.x + offset);
@@ -155,6 +166,7 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
+	// Function that deflects the player in the Y direction
 	void Player::DeflectY(const float offset)
 	{
 		loc.y = (loc.y + offset);
@@ -168,7 +180,7 @@ namespace Tmpl8
 		/* ======================================================= */
 	}
 
-	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
+	// Function that checks collision with certain tiles by calling checks.
 	bool Player::CheckCollision(const Location& topLeft, const Location& bottomRight) const
 	{
 		Location half = { (bottomRight.x - topLeft.x) / 2, (bottomRight.y - topLeft.y) / 2 };
@@ -177,12 +189,7 @@ namespace Tmpl8
 		return CircleToAABBCollision(center, half);
 	}
 
-	Location Player::GetLoc() const { return loc; }
-
-	float Player::GetRadius() const { return radius; }
-
-	bool Player::GetBounceFX() const { return playBounceFX; }
-
+	// Function that checks circle to rectangle collision
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
 	bool Player::CircleToAABBCollision(const Location& tile, const float half) const
 	{
@@ -201,7 +208,10 @@ namespace Tmpl8
 
 		return (cDist_sq <= (radius * radius));
 	}
+	/////////////////////////////////////////////////
 
+	// Function Overload //
+	// Function that checks circle to rectangle collision
 	// Collision check from: https://www.gamedevelopment.blog/collision-detection-circles-rectangles-and-polygons/
 	bool Player::CircleToAABBCollision(const Location& center, const Location& half) const
 	{
@@ -220,4 +230,5 @@ namespace Tmpl8
 
 		return (cDist_sq <= (radius * radius));
 	}
+	/////////////////////////////////////////////////
 };

@@ -7,7 +7,8 @@ namespace Tmpl8
 {
 	class Player
 	{
-	public: // Public Functions //
+	public:
+		// Constructor //
 		Player();
 		void Draw(Surface* screen_in, const Location& drawOffset);	// Draw player
 		void SetLoc(const Location& loc_in);						// Set player starting position
@@ -17,17 +18,18 @@ namespace Tmpl8
 		void DeflectX(const float offset);
 		void DeflectY(const float offset);
 		void DeathFX(Surface* screen, const float& deltaTime, const Location& drawOffset);
-		bool CheckCollision(const Location& topLeft, const Location& bottomRight) const;
-	public: // Getters & Setters //
-		Location GetLoc() const;
-		float GetRadius() const;
-		bool GetBounceFX() const;
-	private: // Private Functions //
+		bool CheckCollision(const Location& topLeft, const Location& bottomRight) const; // Public collision detection.
+	public:
+		// Getters //
+		Location GetLoc() const { return loc; }
+		float GetRadius() const { return radius; }
+		bool GetBounceFX() const { return playBounceFX; }
+	private:
+		// Collision Detection //
 		void CheckCollision(class LevelManager& levelmanager, class MenuManager& menu);
-	private: // Other Functions //
 		bool CircleToAABBCollision(const Location& tile, const float half) const;
 		bool CircleToAABBCollision(const Location& center, const Location& half) const;
-	private: // Private Variables //
+	private:
 		Location loc = { 220.0f, 400.0f };			// Current location of the player
 		Location speed = { 0.0f, 0.0f };			// Current speed of the player
 
@@ -38,6 +40,7 @@ namespace Tmpl8
 		static constexpr float playerSpeed = 1.0f;		// Level of player speed
 		static constexpr float maxPlayerSpeed = 500.0f;	// Maximum allowed player speed (X direction only)
 
+		// Animations //
 		bool playBounceFX = false;
 		Location bounceLoc = { 0.0f, 0.0f };
 

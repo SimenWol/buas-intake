@@ -7,15 +7,17 @@
 
 namespace Tmpl8
 {
-	Surface tiles("assets/Tilesets/tileset_forest.png");
-
+	// Constructor //
 	LevelManager::LevelManager()
 		:arrowSign(new Surface("assets/Objects/sign_arrow.png"), 1)
+		,tiles("assets/Tilesets/tileset_forest.png")
 	{
-		finish = new Finish;
-		state[0] = LevelState::Open;
+		finish = new Finish; // Creating a 'real' finish object.
+		state[0] = LevelState::Open; // Open first level.
 	}
 
+	// Main Functions //
+	// Function that resets everything and then loads the requested level.
 	void LevelManager::LoadLevel(const int level, Player& player, Timer& timer)
 	{
 		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
@@ -28,11 +30,15 @@ namespace Tmpl8
 			{
 			case 1:
 				player.SetLoc(startLoc1);
-				timer.SetTime(25.0f);
+				timer.SetTime(time1);
 				break;
 			case 2:
 				player.SetLoc(startLoc2);
-				timer.SetTime(20.0f);
+				timer.SetTime(time2);
+				break;
+			case 3:
+				player.SetLoc(startLoc3);
+				timer.SetTime(time3);
 				break;
 			default:
 				break;
@@ -40,7 +46,8 @@ namespace Tmpl8
 		}
 	}
 
-	void LevelManager::DrawLevel(Surface* screen, const float& dt, const Location& drawOffset)
+	// Function that calls the required draw functions.
+	void LevelManager::DrawLevel(Surface* screen, const Location& drawOffset)
 	{
 		int loopY = 0, loopX = 0;
 
@@ -49,11 +56,15 @@ namespace Tmpl8
 		{
 		case 1:
 			loopY = 11;
-			loopX = 40;
+			loopX = 50;
 			break;
 		case 2:
 			loopY = 11;
-			loopX = 20;
+			loopX = 55;
+			break;
+		case 3:
+			loopY = 18;
+			loopX = 55;
 			break;
 		default:
 			break;
@@ -63,11 +74,29 @@ namespace Tmpl8
 		{
 			for (int x = 0; x < loopX; x++)
 			{
+				// Collision map drawing
+				if (!(GetContents(x, y) == TileContents::Empty))
+				{
+					if (GetContents(x, y) == TileContents::ArrowSign)
+					{
+						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x),
+							y * tileSize - static_cast<int>(drawOffset.y));
+					}
+					if (GetContents(x, y) == TileContents::Water || GetContents(x, y) == TileContents::FakeWater)
+						{ water.Draw(screen, x, y, drawOffset); }
+					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small, drawOffset); }
+					if (GetContents(x, y) == TileContents::SpikesFloor) { spikes.Draw(screen, x, y, Spikes::Type::Floor, drawOffset); }
+					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, drawOffset); }
+				}
+
 				// Tilemap drawing
 				switch (currentLevel)
 				{
 				case 1:
-					if (!(levelOne[y][x * 2] == '-') || !(levelOne[y][x * 2 + 1] == '-'))
+					if (!(levelOne[y][x * 2] == '-') && !(levelOne[y][x * 2 + 1] == '-'))
 					{
 						float tx = static_cast<float>(levelOne[y][x * 2] - 'a');
 						float ty = static_cast<float>(levelOne[y][x * 2 + 1] - 'a');
@@ -77,7 +106,7 @@ namespace Tmpl8
 					}
 					break;
 				case 2:
-					if (!(levelTwo[y][x * 2] == '-') || !(levelTwo[y][x * 2 + 1] == '-'))
+					if (!(levelTwo[y][x * 2] == '-') && !(levelTwo[y][x * 2 + 1] == '-'))
 					{
 						float tx = static_cast<float>(levelTwo[y][x * 2] - 'a');
 						float ty = static_cast<float>(levelTwo[y][x * 2 + 1] - 'a');
@@ -86,35 +115,39 @@ namespace Tmpl8
 							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
 					}
 					break;
+				case 3:
+					if (!(levelThree[y][x * 2] == '-') && !(levelThree[y][x * 2 + 1] == '-'))
+					{
+						float tx = static_cast<float>(levelThree[y][x * 2] - 'a');
+						float ty = static_cast<float>(levelThree[y][x * 2 + 1] - 'a');
+
+						DrawTile(screen, { static_cast<float>(x * tileSize - drawOffset.x),
+							static_cast<float>(y * tileSize - drawOffset.y) }, { tx, ty });
+					}
+					break;
 				default:
 					break;
-				}
-
-				// Collision map drawing
-				if (!(GetContents(x, y) == TileContents::Empty))
-				{
-					if (GetContents(x, y) == TileContents::ArrowSign)
-					{
-						arrowSign.Draw(screen, x * tileSize - static_cast<int>(drawOffset.x),
-							y * tileSize - static_cast<int>(drawOffset.y));
-					}
-					if (GetContents(x, y) == TileContents::Water) { water.Draw(screen, x, y, dt, drawOffset); }
-					if (GetContents(x, y) == TileContents::WoodStakes) { woodstakes.Draw(screen, x, y, drawOffset); }
-					if (GetContents(x, y) == TileContents::SpikesBig) { spikes.Draw(screen, x, y, Spikes::Type::Big, drawOffset); }
-					if (GetContents(x, y) == TileContents::SpikesMedium) { spikes.Draw(screen, x, y, Spikes::Type::Medium, drawOffset); }
-					if (GetContents(x, y) == TileContents::SpikesSmall) { spikes.Draw(screen, x, y, Spikes::Type::Small, drawOffset); }
-					if (GetContents(x, y) == TileContents::Finish) { finish->Draw(screen, x, y, dt, drawOffset); }
 				}
 			}
 		}
 	}
 
+	// Function that updates all tile animations.
+	void LevelManager::UpdateAnimations(const float& deltaTime)
+	{
+		water.UpdateFrame(deltaTime);
+		finish->UpdateFrame(deltaTime);
+	}
+
+	// Function that calls tile triggers when a player touches that tile.
 	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu)
 	{
 		switch (content)
 		{
 		case TileContents::Empty:
 			break;
+		case TileContents::FakeWater:
+		case TileContents::SpikesFloor:
 		case TileContents::Obstacle:
 			obstacle.Trigger(tile, player);
 			break;
@@ -141,18 +174,14 @@ namespace Tmpl8
 		}
 	}
 
+	// Function that runs everything necessary on death.
 	void LevelManager::Death(Player& player, MenuManager& menu)
 	{
 		isDead = true;
 		menu.SetMenuState(MenuManager::MenuState::LevelFailed);
 	}
 
-	// Sends the state of the specified level
-	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level - 1]; }
-
-	void LevelManager::SetLevelState(const int level, const LevelState state_in) { state[level - 1] = state_in; }
-
-	// Returns contents from the cell.
+	// Returns contents from the called cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
 		char content = 'o';
@@ -160,18 +189,24 @@ namespace Tmpl8
 		switch (currentLevel)
 		{
 		case 1:
-			if ((static_cast<int>(loc.x) > 40 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			if ((static_cast<int>(loc.x) > 50 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
 			content = levelOneColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		case 2:
-			if ((static_cast<int>(loc.x) > 20 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			if ((static_cast<int>(loc.x) > 55 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
 			content = levelTwoColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
+			break;
+		case 3:
+			if ((static_cast<int>(loc.x) > 55 * tileSize) || (static_cast<int>(loc.y) > 18 * tileSize)) { return TileContents::Empty; }
+			content = levelThreeColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		default:
 			break;
 		}
 		
-		//std::cout << "TileContent: " << content << std::endl;
+		/* ======================== DEBUG ======================== */
+		// std::cout << "TileContent: " << content << std::endl;
+		/* ======================================================= */
 
 		switch (content)
 		{
@@ -190,6 +225,9 @@ namespace Tmpl8
 		case 'W':
 			return TileContents::Water;
 			break;
+		case 'w':
+			return TileContents::FakeWater;
+			break;
 		case 'X':
 			return TileContents::WoodStakes;
 			break;
@@ -202,6 +240,9 @@ namespace Tmpl8
 		case 'c':
 			return TileContents::SpikesSmall;
 			break;
+		case 'C':
+			return TileContents::SpikesFloor;
+			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;
 			return TileContents::Empty;
@@ -209,6 +250,8 @@ namespace Tmpl8
 		}
 	}
 
+	// Function overload //
+	// Returns content from the called cell.
 	LevelManager::TileContents LevelManager::GetContents(const int x, const int y) const
 	{
 		char content = 'o';
@@ -216,18 +259,24 @@ namespace Tmpl8
 		switch (currentLevel)
 		{
 		case 1:
-			if (x > 40 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			if (x > 50 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelOneColl[y][x]; }
 			break;
 		case 2:
-			if (x > 20 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			if (x > 55 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
 			else { content = levelTwoColl[y][x]; }
+			break;
+		case 3:
+			if (x > 55 || x < 0 || y > 17 || y < 0) { return TileContents::Empty; }
+			else { content = levelThreeColl[y][x]; }
 			break;
 		default:
 			break;
 		}
 
+		/* ======================== DEBUG ======================== */
 		// std::cout << "TileContent: " << content << std::endl;
+		/* ======================================================= */
 
 		switch (content)
 		{
@@ -246,6 +295,9 @@ namespace Tmpl8
 		case 'W':
 			return TileContents::Water;
 			break;
+		case 'w':
+			return TileContents::FakeWater;
+			break;
 		case 'X':
 			return TileContents::WoodStakes;
 			break;
@@ -258,6 +310,9 @@ namespace Tmpl8
 		case 'c':
 			return TileContents::SpikesSmall;
 			break;
+		case 'C':
+			return TileContents::SpikesFloor;
+			break;
 		default:
 			std::cout << "Unknown content declaration, returned empty." << std::endl;
 			return TileContents::Empty;
@@ -265,15 +320,14 @@ namespace Tmpl8
 		}
 	}
 
-	int LevelManager::GetCurrentLevel() const { return currentLevel; }
-
-	bool LevelManager::GetIsDead() const { return isDead; }
-
+	// Function that draws the requested tile to the requested location.
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
+		// Checks if location is on the screen.
 		if (loc.x > screen->GetWidth()) { return; }
 		if (loc.y > screen->GetHeight()) { return; }
 
+		// Get locations on buffers.
 		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * tiles.GetWidth();
 		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * screen->GetWidth();
 
@@ -283,16 +337,20 @@ namespace Tmpl8
 			{
 				for (int j = 0; j < tileSize; j++) // x
 				{
-
 					if ((loc.x + j + 1) <= screen->GetWidth() && loc.x + j >= 0) // Stop drawing offscreen.
 					{
-						dst[j] = src[j];
+						// Check for black parts & remove these from drawing.
+						// Found in Sprite::Draw() code in Tmpl8.
+						const Pixel c1 = *(src + j);
+						if (c1 & 0xffffff) { dst[j] = src[j]; }
+						//////////////////////////////////////////////
 					}
 				}
 			}
 		}
 	}
 
+	// Function that calls everything that must be reset upon (re)loading a level.
 	void LevelManager::Reset(Player& player)
 	{
 			player.Reset();

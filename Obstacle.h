@@ -8,6 +8,7 @@ namespace Tmpl8
 	class Obstacle
 	{
 	public:
+		// Main Functions //
 		void Trigger(const Location& tile, Player& player);
 	};
 };
