@@ -5,10 +5,12 @@
 
 namespace Tmpl8
 {
+	// Constructor //
 	Timer::Timer()
 		:numbers(new Surface("assets/UI/numbers.png"), 10)
 	{}
 
+	// Function that calculates each individual digit and then draws it to the screen.
 	void Timer::Draw(Surface* screen, const int center_x, const int y)
 	{
 		if (time == 0)
@@ -38,9 +40,12 @@ namespace Tmpl8
 			numbers.Draw(screen, center_x + 1, y);
 		}
 
+		/* ======================== DEBUG ======================== */
 		// std::cout << "Time left: " << firstDigit << lastDigit << std::endl;
+		/* ======================================================= */
 	}
 
+	// Function that updates the time.
 	void Timer::Tick(const float& deltaTime, LevelManager& level, Player& player, MenuManager& menu)
 	{
 		time -= deltaTime;
@@ -50,12 +55,18 @@ namespace Tmpl8
 			TimeUp(level, player, menu);
 		}
 
+		/* ======================== DEBUG ======================== */
 		// std::cout << "Timer: " << time << std::endl;
+		/* ======================================================= */
 	}
 
+	// Function that triggers upon the timer reaching zero.
 	void Timer::TimeUp(LevelManager& level, Player& player, MenuManager& menu)
 	{
-		std::cout << "Time's up!" << std::endl;
 		level.Death(player, menu);
+
+		/* ======================== DEBUG ======================== */
+		std::cout << "Time's up!" << std::endl;
+		/* ======================================================= */
 	}
 };

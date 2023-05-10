@@ -5,10 +5,12 @@
 
 namespace Tmpl8
 {
+	// Function that updates camera position.
 	void Camera::Tick(Surface* screen, const Location& playerLoc, const int level)
 	{
-		if (playerLoc.x > (screen->GetWidth() / 2.0f))
+		if (playerLoc.x > (screen->GetWidth() / 2.0f)) // x
 		{
+			// Make sure that the camera offset does not go too far (per level)
 			offset.x = playerLoc.x - screen->GetWidth() / 2.0f;
 			if (level == 1 && offset.x > 50 * LevelManager::tileSize - screen->GetWidth())
 			{
@@ -26,13 +28,11 @@ namespace Tmpl8
 			// Add 1 for casting to int.
 			offset.x += 1;
 		}
-		else
-		{
-			offset.x = 0.0f;
-		}
+		else { offset.x = 0.0f; }
 
-		if (playerLoc.y > (screen->GetHeight() / 2.0f))
+		if (playerLoc.y > (screen->GetHeight() / 2.0f)) // y
 		{
+			// Make sure that the camera offset does not go too far (per level)
 			offset.y = playerLoc.y - screen->GetHeight() / 2.0f;
 			if (level == 1 && offset.y > 11 * LevelManager::tileSize - screen->GetHeight())
 			{
@@ -50,9 +50,6 @@ namespace Tmpl8
 			// Add 1 for casting to int.
 			offset.y += 1;
 		}
-		else
-		{
-			offset.y = 0.0f;
-		}
+		else { offset.y = 0.0f; }
 	}
 };

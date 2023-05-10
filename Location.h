@@ -1,6 +1,7 @@
 #pragma once
 
-// The idea for a Location class (& the code for it) from https://www.youtube.com/@ChiliTomatoNoodle
+// The idea for a Location class (& the code for it) from https://www.youtube.com/@ChiliTomatoNoodle C++ series.
+// Specifically from the snek (snake) game.
 namespace Tmpl8
 {
 	// An all purpose location class //
@@ -19,3 +20,4 @@ namespace Tmpl8
 		float y;
 	};
 };
+/////////////////////////////////////////
