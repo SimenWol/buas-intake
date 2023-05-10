@@ -106,7 +106,7 @@ namespace Tmpl8
 		case MenuState::Playing:
 			// Draw UI Elements
 			pauseButton.Draw(screen_in, game_in);
-			timer.Draw(screen_in, screen_in->GetWidth() / 2, 10);
+			timer.Draw(screen_in, 50, 10);
 			break;
 		case MenuState::HowToPlay:
 			// Set UI Elements

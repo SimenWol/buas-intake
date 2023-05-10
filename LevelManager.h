@@ -158,38 +158,50 @@ namespace Tmpl8
 		};
 
 		// LEVEL 3 //
-		const Location startLoc3 = { 528.0f, 48.0f };
-		const float time3 = 12.0f;
+		const Location startLoc3 = { 144.0f, 48.0f };
+		const float time3 = 25.0f;
 
-		// CAVE
-
-		const char levelThree[11][111] =
+		const char levelThree[18][111] =
 		{
-			"--------------------------------------------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------------------------------------------",
-			"--------------------idjdkd------------------------------------------------------------------------------------",
-			"----------------------------------------------------idjdjdkd--------------------------------------------------",
-			"----------------------------------------------idkd------------------------------------------------------------",
-			"----------------------------------idkd------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------------------------------------------",
-			"--------------------------------------------------------------------------cbfb------ib--------ib--------------",
+			"gc----------------------------------------------------------------------------------------------------------bd",
+			"gd----------------------------------------------------------------------------------------------------------bd",
+			"gd----------------------------------------------------------------------------------------------------------bd",
+			"fcdbebdbebdbebdbebdbebdbebdbebdbebdbfb--------cbebfb----------cbebfb----------cbebdbebdbebdbfb------cbdbebdbcc",
+			"edfdededdcedededddededededededfdededgd--------bdedfcdbebdbebdbccfdfcdbebdbebdbccededededecedgd------bdedededdc",
+			"ededededededededededededddededededecgd--------bdededededededededecededededddededededfdedededgd------bddcededed",
+			"ededededededededededededededededededfcdbebdbebccedededededddededededededededededdcededededddgd------bdededdded",
+			"ededddedededededddedededecedededededededededddededededededededdcedededededededddedededecededgd------bdedededed",
+			"ecedededdcedededededededededededddededecededededededededededededededededededededededededededgd------bdedededec",
+			"ddededededededddededededddedededededededededdcedededededededededededededddedededededddedededgd------bdededdced",
+			"fecedeeefecedeeefecedeeefecedeeefecedeeefecedeeefecedeeefecedeeefecedeeecedeeefecedeeefecedege------bddcededed",
+			"----------------------------------------------------------------------------------------------------bdedededed",
+			"----------------------------------------------------------------------------------------------------bdedddeded",
+			"----------------------------------------------------------------------------------------------------bdedededed",
+			"gc----------------------------------------------------------------------ib--------------------------bdeddceded",
+			"gd------------------------------------------------------------------------------ib------------------bdedededed",
+			"gd----------------------------------------------------ib----------------------------------bcebdbebdbccedededed",
+			"fcdbebdbfb------bcfb------bcfb------bcdbebdbebdbfb----------------------------------------bdededddedededededdd",
 		};
-		const char levelThreeColl[11][56] =
+		const char levelThreeColl[18][56] =
 		{
 			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
 			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooooAoooooooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooo---oooooooooooooccoooooooooooooooooooooooooo-",
-			"-ooooooooooooooooooooooooo----oooooooooooooooooooooooo-",
-			"-oooooooooooooooooooooo--ooooooooooooooooooooooooooooo-",
-			"-oooooooooooooooo--ooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooooooooooooooooooooooooooooooooooooooooooooooo-",
-			"-ooooooooooooooooooooooooooooooooooooooooooooooFoooooo-",
-			"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWwwWWWwWWWWwWWWWWWW",
+			"-oooAoosSsoosSsoooooooooooooooooooooooooooooooooooXXXX-",
+			"-------------------oooo--CcccccC-CcccccC-------ooo-----",
+			"-------------------oooo------------------------ooo-----",
+			"------------------CSSSSC-----------------------ooo-----",
+			"-----------------------------------------------ooo-----",
+			"-----------------------------------------------ooo-----",
+			"-----------------------------------------------ooo-----",
+			"-----------------------------------------------ooo-----",
+			"-----------------------------------------------ooo-----",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooo-----",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooo-----",
+			"-ooooooooooooooooooooooooooooooooooooooooooooooooo-----",
+			"-ooooooooooooooooooooooooooooooooooo-ooooooooooooo-----",
+			"-ooooooooooooooooooooooooooooooooooooooo-ooooooooo-----",
+			"-oFoooooooooooooooooooossoo-ooooooooooooooooo----------",
+			"----CSSSCCSSSCCSSSC-----CSSSSSSSSSSSSSSSSSSSSC---------",
 		};
 	};
 

@@ -63,7 +63,7 @@ namespace Tmpl8
 			loopX = 55;
 			break;
 		case 3:
-			loopY = 11;
+			loopY = 18;
 			loopX = 55;
 			break;
 		default:
@@ -197,7 +197,7 @@ namespace Tmpl8
 			content = levelTwoColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		case 3:
-			if ((static_cast<int>(loc.x) > 55 * tileSize) || (static_cast<int>(loc.y) > 11 * tileSize)) { return TileContents::Empty; }
+			if ((static_cast<int>(loc.x) > 55 * tileSize) || (static_cast<int>(loc.y) > 18 * tileSize)) { return TileContents::Empty; }
 			content = levelThreeColl[static_cast<int>(loc.y) / tileSize][static_cast<int>(loc.x) / tileSize];
 			break;
 		default:
@@ -267,7 +267,7 @@ namespace Tmpl8
 			else { content = levelTwoColl[y][x]; }
 			break;
 		case 3:
-			if (x > 55 || x < 0 || y > 10 || y < 0) { return TileContents::Empty; }
+			if (x > 55 || x < 0 || y > 17 || y < 0) { return TileContents::Empty; }
 			else { content = levelThreeColl[y][x]; }
 			break;
 		default:
