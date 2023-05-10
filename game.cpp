@@ -11,16 +11,30 @@
 
 namespace Tmpl8
 {
+	// Constructor //
 	Game::Game()
 		:background(new Surface("assets/Background/background.png"), 1)
 	{}
 
+	// Set all levels to open, only being able to fire once through menumanager.
+	void Game::UnLockLevels()
+	{
+		for (int i = 0; i < level.numLevels; i++)
+		{
+			if (level.GetLevelState(i + 1) == LevelManager::LevelState::Closed)
+				{ level.SetLevelState(i + 1, LevelManager::LevelState::Open); }
+		}
+		unlockAllLevels = true;
+	}
+
+	// Game init
 	void Game::Init()
 	{
 		// Menu //
 		menu = new MenuManager;
 	}
 	
+	// Game shutdown
 	void Game::Shutdown()
 	{
 		// Thanks to MAX in the 3dgep.com discord for sharing this code snippet.
@@ -28,8 +42,10 @@ namespace Tmpl8
 		SDL_Event user_event;
 		user_event.type = SDL_QUIT;
 		SDL_PushEvent(&user_event);
+		/////////////////////////////
 	}
 
+	// Main Game Function //
 	void Game::Tick(float deltaTime)
 	{
 		// Multiply deltaTime by 0.001 to get deltaTime in seconds, much easier to work with.
@@ -38,9 +54,11 @@ namespace Tmpl8
 
 		const float screenHeight = static_cast<float>(screen->GetHeight());
 
-		// clear the graphics window
+		// Reset window for new frame
 		screen->Clear(0);
 		background.Draw(screen, 0, 0);
+
+		// Update menu
 		menu->Tick(*this, level, player, timer);
 
 		switch (state)
@@ -66,13 +84,13 @@ namespace Tmpl8
 				timer.Tick(deltaTime, level, player, *menu);
 			}
 
-			// Update animations
-			level.UpdateAnimations(deltaTime);
+			// Update tile animations
+			if (animations) { level.UpdateAnimations(deltaTime); }
 
 			// Draw Functions //
 			level.DrawLevel(screen, camera.GetOffset());
-			if (level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
-			if (player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
+			if (animations && level.GetIsDead()) { player.DeathFX(screen, deltaTime, camera.GetOffset()); }
+			if (animations && player.GetBounceFX()) { player.BounceFX(screen, deltaTime, camera.GetOffset()); }
 			player.Draw(screen, camera.GetOffset());
 			menu->Draw(screen, *this, level, timer);
 			break;
@@ -86,20 +104,25 @@ namespace Tmpl8
 	}
 
 	// MOUSE FUNCTIONS //
-	void Game::MouseUp(int button) // Changes mouseDown to false if left mouse button is not being pressed.
+	// Changes mouseDown to false if left mouse button is not being pressed.
+	void Game::MouseUp(int button)
 	{
 		if (button == 1) { Game::mouseDown = false; }
 	}
 
-	void Game::MouseDown(int button) // Changes mouseDown to true if left mouse button is being pressed.
+	// Changes mouseDown to true if left mouse button is being pressed.
+	void Game::MouseDown(int button) 
 	{
 		if (button == 1) { Game::mouseDown = true; }
 	}
 
-	void Game::MouseMove(int x, int y) { mousex = x, mousey = y; } // Changes mousex and mousey to (current) absolute mouse position.
+	// Changes mousex and mousey to (current) absolute mouse position.
+	void Game::MouseMove(int x, int y) { mousex = x, mousey = y; } 
 
 	// KEYBOARD FUNCTIONS //
 	// https://wiki.libsdl.org/SDL2/SDL_Scancode
+
+	// Checks if a key is released to stop moving in that direction.
 	void Game::KeyUp(int key)
 	{
 		switch (key)
@@ -121,6 +144,7 @@ namespace Tmpl8
 		}
 	}
 
+	// Checks if a key is pressed to start moving in that direction.
 	void Game::KeyDown(int key)
 	{
 		switch (key)

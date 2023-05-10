@@ -7,17 +7,17 @@
 
 namespace Tmpl8
 {
-	Surface tiles("assets/Tilesets/tileset_forest.png");
-
+	// Constructor //
 	LevelManager::LevelManager()
 		:arrowSign(new Surface("assets/Objects/sign_arrow.png"), 1)
+		,tiles("assets/Tilesets/tileset_forest.png")
 	{
-		finish = new Finish;
-		state[0] = LevelState::Open;
-		state[1] = LevelState::Open;
-		state[2] = LevelState::Open;
+		finish = new Finish; // Creating a 'real' finish object.
+		state[0] = LevelState::Open; // Open first level.
 	}
 
+	// Main Functions //
+	// Function that resets everything and then loads the requested level.
 	void LevelManager::LoadLevel(const int level, Player& player, Timer& timer)
 	{
 		if (level > numLevels || level <= 0) { std::cout << "Level cannot be found or does not exist." << std::endl; }
@@ -46,6 +46,7 @@ namespace Tmpl8
 		}
 	}
 
+	// Function that calls the required draw functions.
 	void LevelManager::DrawLevel(Surface* screen, const Location& drawOffset)
 	{
 		int loopY = 0, loopX = 0;
@@ -131,12 +132,14 @@ namespace Tmpl8
 		}
 	}
 
+	// Function that updates all tile animations.
 	void LevelManager::UpdateAnimations(const float& deltaTime)
 	{
 		water.UpdateFrame(deltaTime);
 		finish->UpdateFrame(deltaTime);
 	}
 
+	// Function that calls tile triggers when a player touches that tile.
 	void LevelManager::CallTrigger(const TileContents& content, const Location& tile, Player& player, MenuManager& menu)
 	{
 		switch (content)
@@ -171,18 +174,14 @@ namespace Tmpl8
 		}
 	}
 
+	// Function that runs everything necessary on death.
 	void LevelManager::Death(Player& player, MenuManager& menu)
 	{
 		isDead = true;
 		menu.SetMenuState(MenuManager::MenuState::LevelFailed);
 	}
 
-	// Sends the state of the specified level
-	LevelManager::LevelState LevelManager::GetLevelState(const int level) const { return state[level - 1]; }
-
-	void LevelManager::SetLevelState(const int level, const LevelState state_in) { state[level - 1] = state_in; }
-
-	// Returns contents from the cell.
+	// Returns contents from the called cell.
 	LevelManager::TileContents LevelManager::GetContents(const Location& loc) const
 	{
 		char content = 'o';
@@ -205,7 +204,9 @@ namespace Tmpl8
 			break;
 		}
 		
-		//std::cout << "TileContent: " << content << std::endl;
+		/* ======================== DEBUG ======================== */
+		// std::cout << "TileContent: " << content << std::endl;
+		/* ======================================================= */
 
 		switch (content)
 		{
@@ -249,6 +250,8 @@ namespace Tmpl8
 		}
 	}
 
+	// Function overload //
+	// Returns content from the called cell.
 	LevelManager::TileContents LevelManager::GetContents(const int x, const int y) const
 	{
 		char content = 'o';
@@ -271,7 +274,9 @@ namespace Tmpl8
 			break;
 		}
 
+		/* ======================== DEBUG ======================== */
 		// std::cout << "TileContent: " << content << std::endl;
+		/* ======================================================= */
 
 		switch (content)
 		{
@@ -315,15 +320,14 @@ namespace Tmpl8
 		}
 	}
 
-	int LevelManager::GetCurrentLevel() const { return currentLevel; }
-
-	bool LevelManager::GetIsDead() const { return isDead; }
-
+	// Function that draws the requested tile to the requested location.
 	void LevelManager::DrawTile(Surface* screen, const Location& loc, const Location& tile)
 	{
+		// Checks if location is on the screen.
 		if (loc.x > screen->GetWidth()) { return; }
 		if (loc.y > screen->GetHeight()) { return; }
 
+		// Get locations on buffers.
 		Pixel* src = tiles.GetBuffer() + static_cast<int>(tile.x) * tileSize + (static_cast<int>(tile.y) * tileSize) * tiles.GetWidth();
 		Pixel* dst = screen->GetBuffer() + static_cast<int>(loc.x) + static_cast<int>(loc.y) * screen->GetWidth();
 
@@ -339,12 +343,14 @@ namespace Tmpl8
 						// Found in Sprite::Draw() code in Tmpl8.
 						const Pixel c1 = *(src + j);
 						if (c1 & 0xffffff) { dst[j] = src[j]; }
+						//////////////////////////////////////////////
 					}
 				}
 			}
 		}
 	}
 
+	// Function that calls everything that must be reset upon (re)loading a level.
 	void LevelManager::Reset(Player& player)
 	{
 			player.Reset();

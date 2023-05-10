@@ -11,7 +11,8 @@ namespace Tmpl8
 	class Button
 	{
 	public:
-		Button(int x_in, int y_in, Sprite& sprite_in) // Button Constructor
+		// Constructor //
+		Button(int x_in, int y_in, Sprite& sprite_in)
 			:
 			x(x_in)
 			,y(y_in)
@@ -21,20 +22,23 @@ namespace Tmpl8
 			width = sprite.GetWidth();
 		};
 
+		// Setters //
 		void SetLocation(int x_in, int y_in)
 		{
 			x = x_in;
 			y = y_in;
 		}
 
+		// Main Functions //
+		// Function that checks if a button has been pressed.
 		bool IsPressed(Game& game)
 		{
-			if (CheckMousePos(game) == false)
+			if (CheckMousePos(game) == false) // Check mouse pos
 			{
 				prevMouseDown = false;
 				return false;
 			}
-			if (CheckMouseDown(game) == false) { return false; }
+			if (CheckMouseDown(game) == false) { return false; } // Check mouse down
 
 			/* ======================== DEBUG ======================== */
 			std::cout << "Button has been pressed at " << x << "," << y << std::endl;
@@ -43,7 +47,9 @@ namespace Tmpl8
 			return true; // Returns true if all of the above checks out
 		};
 
-		void Draw(Surface* screen, Game& game) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
+		// Draw Functions //
+		// Draw function for 'normal' buttons.
+		void Draw(Surface* screen, Game& game) 
 		{
 			if (sprite.Frames() == 3)
 			{
@@ -59,7 +65,8 @@ namespace Tmpl8
 			/* ======================================================= */
 		}
 
-		void Draw(Surface* screen, Game& game, LevelManager::LevelState state) // Draw button outlines (for debugging purposes). TODO: Draw correct button depending on mousehover state
+		// Draw function for Level Buttons.
+		void Draw(Surface* screen, Game& game, LevelManager::LevelState state)
 		{
 			if (sprite.Frames() == 7) // Level Buttons
 			{
@@ -88,8 +95,26 @@ namespace Tmpl8
 			/* ======================================================= */
 		}
 
+		// Draw function for settings buttons.
+		void Draw(Surface* screen, Game& game, bool turnedOn) 
+		{
+			if (sprite.Frames() == 2) // Level Buttons
+			{
+				if (turnedOn)
+				{ sprite.SetFrame(0); }
+				else { sprite.SetFrame(1); }
+			}
+
+			sprite.Draw(screen, x, y);
+
+			/* ======================== DEBUG ======================== */
+			//screen->Box(x, y, x + width, y + height, 0x00ff00);
+			/* ======================================================= */
+		}
+
 	private:
-		bool CheckMousePos(Game& game) const // Checks if mouse is in boundaries
+		// Function that checks if the mouse is in boundaries of the button.
+		bool CheckMousePos(Game& game) const
 		{
 			if (game.GetMouseX() < x || game.GetMouseX() > (x + width)) { return false; }
 			if (game.GetMouseY() < y || game.GetMouseY() > (y + height)) { return false; }
@@ -97,6 +122,7 @@ namespace Tmpl8
 			return true;
 		}
 
+		// Function that checks if a button is released after being pressed, then returns true.
 		bool CheckMouseDown(Game& game)
 		{
 			if (game.GetMouseDown() == true)
@@ -124,7 +150,9 @@ namespace Tmpl8
 	private:
 		int x, y;
 		int width, height;
+
 		bool prevMouseDown = false;
+
 		Sprite& sprite;
 	};
 

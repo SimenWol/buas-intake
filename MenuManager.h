@@ -10,6 +10,7 @@ namespace Tmpl8
 	class MenuManager
 	{
 	public:
+		// All Menus //
 		enum class MenuState
 		{
 			LevelComplete,	// Menu that pops up after player completes a level
@@ -18,6 +19,7 @@ namespace Tmpl8
 			Main,			// Main Menu
 			Paused,			// Pause Menu
 			Playing,		// Playing UI (pause button, etc.)
+			Settings,		// Settings Menu
 			HowToPlay,		// How To Play Menu
 			Controls,		// Controls Menu
 		};
@@ -40,6 +42,7 @@ namespace Tmpl8
 
 		// Sprites //
 		Sprite mainMenu;
+		Sprite settingsMenu;
 		Sprite howToPlayMenu;
 		Sprite controlsMenu;
 		Sprite levelSelectionMenu;
@@ -54,8 +57,12 @@ namespace Tmpl8
 
 		// Main Menu
 		Sprite startButtonSprite;
+		Sprite settingsButtonSprite;
 		Sprite howToPlayButtonSprite;
 		Sprite quitButtonSprite;
+
+		// Settings Menu
+		Sprite onOffButtonSprite;
 
 		// How To Play Menu
 		Sprite controlsButtonSprite;
@@ -84,8 +91,13 @@ namespace Tmpl8
 
 		// Main Menu
 		Button startButton;
+		Button settingsButton;
 		Button howToPlayButton;
 		Button quitButton;
+		
+		// Settings Menu
+		Button onOff1Button;
+		Button onOff2Button;
 
 		// How To Play Menu
 		Button controlsButton;

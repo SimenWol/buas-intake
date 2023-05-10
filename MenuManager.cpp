@@ -5,9 +5,10 @@
 
 namespace Tmpl8
 {
-	// Initialise all UI.
+	// Initialise all UI //
 	MenuManager::MenuManager()
 		:mainMenu(new Surface("assets/UI/Menus/title.png"), 1)
+		,settingsMenu(new Surface("assets/UI/Menus/settings.png"), 1)
 		,howToPlayMenu(new Surface("assets/UI/Menus/how_to_play.png"), 1)
 		,controlsMenu(new Surface("assets/UI/Menus/controls.png"), 1)
 		,levelSelectionMenu(new Surface("assets/UI/Menus/level_select.png"), 1)
@@ -17,8 +18,10 @@ namespace Tmpl8
 		,backButtonSprite(new Surface("assets/UI/Buttons/back.png"), 3)
 		,retryButtonSprite(new Surface("assets/UI/Buttons/retry.png"), 3)
 		,startButtonSprite(new Surface("assets/UI/Buttons/start.png"), 3)
+		,settingsButtonSprite(new Surface("assets/UI/Buttons/settings.png"), 3)
 		,howToPlayButtonSprite(new Surface("assets/UI/Buttons/how_to_play.png"), 3)
 		,quitButtonSprite(new Surface("assets/UI/Buttons/quit.png"), 3)
+		,onOffButtonSprite(new Surface("assets/UI/Buttons/on_off.png"), 2)
 		,controlsButtonSprite(new Surface("assets/UI/Buttons/controls.png"), 3)
 		,levelOneButtonSprite(new Surface("assets/UI/Buttons/level_one.png"), 7)
 		,levelTwoButtonSprite(new Surface("assets/UI/Buttons/level_two.png"), 7)
@@ -32,9 +35,12 @@ namespace Tmpl8
 		,backButton(0, 0, backButtonSprite)
 		,menuButton(0, 0, menuButtonSprite)
 		,retryButton(0, 0, retryButtonSprite)
-		,startButton(35, 312, startButtonSprite)
+		,startButton(35, 222, startButtonSprite)
+		,settingsButton(35, 312, settingsButtonSprite)
 		,howToPlayButton(35, 402, howToPlayButtonSprite)
 		,quitButton(665, 402, quitButtonSprite)
+		,onOff1Button(559, 257, onOffButtonSprite)
+		,onOff2Button(559, 323, onOffButtonSprite)
 		,controlsButton(306, 408, controlsButtonSprite)
 		,levelOneButton(313, 232, levelOneButtonSprite)
 		,levelTwoButton(413, 232, levelTwoButtonSprite)
@@ -85,6 +91,7 @@ namespace Tmpl8
 			mainMenu.Draw(screen_in, 0, 0);
 			startButton.Draw(screen_in, game_in);
 			howToPlayButton.Draw(screen_in, game_in);
+			settingsButton.Draw(screen_in, game_in);
 			quitButton.Draw(screen_in, game_in);
 			break;
 		case MenuState::Paused:
@@ -115,6 +122,17 @@ namespace Tmpl8
 			// Draw UI Elements
 			controlsMenu.Draw(screen_in, 0, 0);
 			backButton.Draw(screen_in, game_in);
+			break;
+		case MenuState::Settings:
+			// Set UI Elements
+			backButton.SetLocation(10, 426);
+			// Draw UI Elements
+			settingsMenu.Draw(screen_in, 0, 0);
+			backButton.Draw(screen_in, game_in);
+			if (game_in.GetAnimations()) { onOff1Button.Draw(screen_in, game_in, true); }
+			else { onOff1Button.Draw(screen_in, game_in, false); }
+			if (game_in.GetUnlockLevels()) { onOff2Button.Draw(screen_in, game_in, true); }
+			else { onOff2Button.Draw(screen_in, game_in, false); }
 			break;
 		default:
 			break;
@@ -194,6 +212,7 @@ namespace Tmpl8
 			// Button Logic
 			if (startButton.IsPressed(game_in)) { SetMenuState(MenuState::LevelSelect); }
 			if (howToPlayButton.IsPressed(game_in)) { SetMenuState(MenuState::HowToPlay); }
+			if (settingsButton.IsPressed(game_in)) { SetMenuState(MenuState::Settings); }
 			if (quitButton.IsPressed(game_in)) { game_in.Shutdown(); }
 			break;
 		case MenuState::Paused:
@@ -222,6 +241,16 @@ namespace Tmpl8
 		case MenuState::Controls:
 			// Button Logic
 			if (backButton.IsPressed(game_in)) { SetMenuState(MenuState::HowToPlay); }
+			break;
+		case MenuState::Settings:
+			// Button Logic
+			if (backButton.IsPressed(game_in)) { SetMenuState(MenuState::Main); }
+			if (onOff1Button.IsPressed(game_in))
+			{
+				if (game_in.GetAnimations()) { game_in.SetAnimations(false); }
+				else { game_in.SetAnimations(true); }
+			}
+			if (!game_in.GetUnlockLevels() && onOff2Button.IsPressed(game_in)) { game_in.UnLockLevels(); }
 			break;
 		default:
 			break;

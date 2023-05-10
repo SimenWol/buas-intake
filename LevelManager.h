@@ -36,31 +36,38 @@ namespace Tmpl8
 			SpikesSmall,
 			SpikesFloor, // Only the purple floor from spikes.
 		};
-	public: // Public Functions //
+	public:
+		// Constructor //
 		LevelManager();
+
+		// Main Functions //
 		void LoadLevel(const int level, Player& player, Timer& timer);
 		void DrawLevel(Surface* screen, const Location& drawOffset);
 		void UpdateAnimations(const float& deltaTime);
 		void CallTrigger(const TileContents& content, const Location& tile, Player& player, class MenuManager& menu);
 		void Death(Player& player, class MenuManager& menu);
-	public: // Getters & Setters //
-		LevelState GetLevelState(const int level) const;
-		void SetLevelState(const int level, const LevelState state_in);
+
+		// Getters //
+		LevelState GetLevelState(const int level) const { return state[level - 1]; }
 		TileContents GetContents(const Location& loc) const;
 		TileContents GetContents(const int x, const int y) const;
-		int GetCurrentLevel() const;
-		bool GetIsDead() const;
-	private: // Private Functions //
+		int GetCurrentLevel() const { return currentLevel; }
+		bool GetIsDead() const { return isDead; }
+
+		// Setters //
+		void SetLevelState(const int level, const LevelState state_in) { state[level - 1] = state_in; }
+	private:
+		// Main (private) Functions
 		void DrawTile(Surface* screen, const Location& loc, const Location& tile);
 		void Reset(Player& player);
-	public: // Public Variables //
+	public:
 		static constexpr int tileSize = 48; // Width & Height for each tile
 		static constexpr int numLevels = 3; // Total amount of levels
-	private: // Private Variables //
+	private:
 		int currentLevel = 0;
 		LevelState state[numLevels] = { LevelState::Closed }; // Using an array to store level states. Defaults to closed.
 
-		bool isDead = false;
+		bool isDead = false; // Used for animation detection
 
 		Obstacle obstacle;
 		Water water;
@@ -69,8 +76,10 @@ namespace Tmpl8
 		Finish* finish;
 
 		Sprite arrowSign;
+		Surface tiles;
 
-	private:
+	private: // LEVEL STORAGE //
+
 		// CollMap codes //
 		// o: empty
 		// A: arrow
