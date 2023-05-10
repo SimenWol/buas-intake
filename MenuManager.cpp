@@ -5,7 +5,8 @@
 
 namespace Tmpl8
 {
-	// Initialise all UI //
+	// Initialise all UI
+	// Constructor //
 	MenuManager::MenuManager()
 		:mainMenu(new Surface("assets/UI/Menus/title.png"), 1)
 		,settingsMenu(new Surface("assets/UI/Menus/settings.png"), 1)
@@ -42,9 +43,9 @@ namespace Tmpl8
 		,onOff1Button(559, 257, onOffButtonSprite)
 		,onOff2Button(559, 323, onOffButtonSprite)
 		,controlsButton(306, 408, controlsButtonSprite)
-		,levelOneButton(313, 232, levelOneButtonSprite)
-		,levelTwoButton(413, 232, levelTwoButtonSprite)
-		,levelThreeButton(513, 232, levelThreeButtonSprite)
+		,levelOneButton(262, 232, levelOneButtonSprite)
+		,levelTwoButton(362, 232, levelTwoButtonSprite)
+		,levelThreeButton(462, 232, levelThreeButtonSprite)
 		,pauseButton(760, 15, pauseButtonSprite)
 		,continueButton(473, 281, continueButtonSprite)
 		,restartButton(150, 281, restartButtonSprite)
@@ -78,7 +79,7 @@ namespace Tmpl8
 			break;
 		case MenuState::LevelSelect:
 			// Set UI Elements
-			backButton.SetLocation(350, 332);
+			backButton.SetLocation(346, 332);
 			// Draw UI Elements
 			levelSelectionMenu.Draw(screen_in, 0, 0);
 			backButton.Draw(screen_in, game_in);
